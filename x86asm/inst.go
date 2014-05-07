@@ -118,6 +118,8 @@ func (op Op) String() string {
 	return opNames[i]
 }
 
+var opNames []string // TODO REMOVE
+
 // An Args holds the instruction arguments.
 // If an instruction does has fewer than 4 arguments,
 // the final elements in the array are nil.
