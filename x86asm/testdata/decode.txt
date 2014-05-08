@@ -1,0 +1,2493 @@
+000511223344|556677885f5f5f5f5f5f	gnu	add %al,0x44332211
+000511223344|556677885f5f5f5f5f5f	intel	add byte ptr [0x44332211], al
+00240511223344|556677885f5f5f5f5f	gnu	add %ah,0x44332211(,%eax,1)
+00240511223344|556677885f5f5f5f5f	intel	add byte ptr [eax*1+0x44332211], ah
+002420|11223344556677885f5f5f5f5f	gnu	add %ah,(%eax,%eiz,1)
+002420|11223344556677885f5f5f5f5f	intel	add byte ptr [eax], ah
+004011|223344556677885f5f5f5f5f5f	gnu	add %al,0x11(%eax)
+004011|223344556677885f5f5f5f5f5f	intel	add byte ptr [eax+0x11], al
+00c0|11223344556677885f5f5f5f5f5f	gnu	add %al,%al
+00c0|11223344556677885f5f5f5f5f5f	intel	add al, al
+0100|11223344556677885f5f5f5f5f5f	gnu	add %eax,(%eax)
+0100|11223344556677885f5f5f5f5f5f	intel	add dword ptr [eax], eax
+0211|223344556677885f5f5f5f5f5f5f	gnu	add (%ecx),%dl
+0211|223344556677885f5f5f5f5f5f5f	intel	add dl, byte ptr [ecx]
+0311|223344556677885f5f5f5f5f5f5f	gnu	add (%ecx),%edx
+0311|223344556677885f5f5f5f5f5f5f	intel	add edx, dword ptr [ecx]
+0411|223344556677885f5f5f5f5f5f5f	gnu	add $0x11,%al
+0411|223344556677885f5f5f5f5f5f5f	intel	add al, 0x11
+0511223344|556677885f5f5f5f5f5f5f	gnu	add $0x44332211,%eax
+0511223344|556677885f5f5f5f5f5f5f	intel	add eax, 0x44332211
+06|11223344556677885f5f5f5f5f5f5f	gnu	push %es
+06|11223344556677885f5f5f5f5f5f5f	intel	push es
+07|11223344556677885f5f5f5f5f5f5f	gnu	pop %es
+07|11223344556677885f5f5f5f5f5f5f	intel	pop es
+0811|223344556677885f5f5f5f5f5f5f	gnu	or %dl,(%ecx)
+0811|223344556677885f5f5f5f5f5f5f	intel	or byte ptr [ecx], dl
+0911|223344556677885f5f5f5f5f5f5f	gnu	or %edx,(%ecx)
+0911|223344556677885f5f5f5f5f5f5f	intel	or dword ptr [ecx], edx
+0a11|223344556677885f5f5f5f5f5f5f	gnu	or (%ecx),%dl
+0a11|223344556677885f5f5f5f5f5f5f	intel	or dl, byte ptr [ecx]
+0b11|223344556677885f5f5f5f5f5f5f	gnu	or (%ecx),%edx
+0b11|223344556677885f5f5f5f5f5f5f	intel	or edx, dword ptr [ecx]
+0c11|223344556677885f5f5f5f5f5f5f	gnu	or $0x11,%al
+0c11|223344556677885f5f5f5f5f5f5f	intel	or al, 0x11
+0d11223344|556677885f5f5f5f5f5f5f	gnu	or $0x44332211,%eax
+0d11223344|556677885f5f5f5f5f5f5f	intel	or eax, 0x44332211
+0e|11223344556677885f5f5f5f5f5f5f	gnu	push %cs
+0e|11223344556677885f5f5f5f5f5f5f	intel	push cs
+0f0000|11223344556677885f5f5f5f5f	gnu	sldt (%eax)
+0f0000|11223344556677885f5f5f5f5f	intel	sldt word ptr [eax]
+0f0008|11223344556677885f5f5f5f5f	gnu	str (%eax)
+0f0008|11223344556677885f5f5f5f5f	intel	str word ptr [eax]
+0f0011|223344556677885f5f5f5f5f5f	gnu	lldt (%ecx)
+0f0011|223344556677885f5f5f5f5f5f	intel	lldt word ptr [ecx]
+0f0018|11223344556677885f5f5f5f5f	gnu	ltr (%eax)
+0f0018|11223344556677885f5f5f5f5f	intel	ltr word ptr [eax]
+0f0020|11223344556677885f5f5f5f5f	gnu	verr (%eax)
+0f0020|11223344556677885f5f5f5f5f	intel	verr word ptr [eax]
+0f0028|11223344556677885f5f5f5f5f	gnu	verw (%eax)
+0f0028|11223344556677885f5f5f5f5f	intel	verw word ptr [eax]
+0f0030|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f0030|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f0100|11223344556677885f5f5f5f5f	gnu	sgdtl (%eax)
+0f0100|11223344556677885f5f5f5f5f	intel	sgdt ptr [eax]
+0f0108|11223344556677885f5f5f5f5f	gnu	sidtl (%eax)
+0f0108|11223344556677885f5f5f5f5f	intel	sidt ptr [eax]
+0f0111|223344556677885f5f5f5f5f5f	gnu	lgdtl (%ecx)
+0f0111|223344556677885f5f5f5f5f5f	intel	lgdt ptr [ecx]
+0f0118|11223344556677885f5f5f5f5f	gnu	lidtl (%eax)
+0f0118|11223344556677885f5f5f5f5f	intel	lidt ptr [eax]
+0f0120|11223344556677885f5f5f5f5f	gnu	smsw (%eax)
+0f0120|11223344556677885f5f5f5f5f	intel	smsw word ptr [eax]
+0f0130|11223344556677885f5f5f5f5f	gnu	lmsw (%eax)
+0f0130|11223344556677885f5f5f5f5f	intel	lmsw word ptr [eax]
+0f0138|11223344556677885f5f5f5f5f	gnu	invlpg (%eax)
+0f0138|11223344556677885f5f5f5f5f	intel	invlpg byte ptr [eax]
+0f01c8|11223344556677885f5f5f5f5f	gnu	monitor %eax,%ecx,%edx
+0f01c8|11223344556677885f5f5f5f5f	intel	monitor
+0f01c9|11223344556677885f5f5f5f5f	gnu	mwait %eax,%ecx
+0f01c9|11223344556677885f5f5f5f5f	intel	mwait
+0f01d0|11223344556677885f5f5f5f5f	gnu	xgetbv
+0f01d0|11223344556677885f5f5f5f5f	intel	xgetbv
+0f01d1|11223344556677885f5f5f5f5f	gnu	xsetbv
+0f01d1|11223344556677885f5f5f5f5f	intel	xsetbv
+0f01d5|11223344556677885f5f5f5f5f	gnu	xend
+0f01d5|11223344556677885f5f5f5f5f	intel	xend
+0f01d6|11223344556677885f5f5f5f5f	gnu	xtest
+0f01d6|11223344556677885f5f5f5f5f	intel	xtest
+0f01f8|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f01f8|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f01f9|11223344556677885f5f5f5f5f	gnu	rdtscp
+0f01f9|11223344556677885f5f5f5f5f	intel	rdtscp
+0f0211|223344556677885f5f5f5f5f5f	gnu	lar (%ecx),%edx
+0f0211|223344556677885f5f5f5f5f5f	intel	lar edx, word ptr [ecx]
+0f0311|223344556677885f5f5f5f5f5f	gnu	lsl (%ecx),%edx
+0f0311|223344556677885f5f5f5f5f5f	intel	lsl edx, word ptr [ecx]
+0f04|11223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0f04|11223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0f05|11223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0f05|11223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0f06|11223344556677885f5f5f5f5f5f	gnu	clts
+0f06|11223344556677885f5f5f5f5f5f	intel	clts
+0f07|11223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0f07|11223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0f08|11223344556677885f5f5f5f5f5f	gnu	invd
+0f08|11223344556677885f5f5f5f5f5f	intel	invd
+0f09|11223344556677885f5f5f5f5f5f	gnu	wbinvd
+0f09|11223344556677885f5f5f5f5f5f	intel	wbinvd
+0f0b|11223344556677885f5f5f5f5f5f	gnu	ud2
+0f0b|11223344556677885f5f5f5f5f5f	intel	ud2
+0f0d08|11223344556677885f5f5f5f5f	gnu	prefetchw (%eax)
+0f0d08|11223344556677885f5f5f5f5f	intel	prefetchw zmmword ptr [eax]
+0f1011|223344556677885f5f5f5f5f5f	gnu	movups (%ecx),%xmm2
+0f1011|223344556677885f5f5f5f5f5f	intel	movups xmm2, xmmword ptr [ecx]
+0f1122|3344556677885f5f5f5f5f5f5f	gnu	movups %xmm4,(%edx)
+0f1122|3344556677885f5f5f5f5f5f5f	intel	movups xmmword ptr [edx], xmm4
+0f1211|223344556677885f5f5f5f5f5f	gnu	movlps (%ecx),%xmm2
+0f1211|223344556677885f5f5f5f5f5f	intel	movlps xmm2, qword ptr [ecx]
+0f12c0|11223344556677885f5f5f5f5f	gnu	movhlps %xmm0,%xmm0
+0f12c0|11223344556677885f5f5f5f5f	intel	movhlps xmm0, xmm0
+0f1311|223344556677885f5f5f5f5f5f	gnu	movlps %xmm2,(%ecx)
+0f1311|223344556677885f5f5f5f5f5f	intel	movlps qword ptr [ecx], xmm2
+0f1411|223344556677885f5f5f5f5f5f	gnu	unpcklps (%ecx),%xmm2
+0f1411|223344556677885f5f5f5f5f5f	intel	unpcklps xmm2, xmmword ptr [ecx]
+0f1511|223344556677885f5f5f5f5f5f	gnu	unpckhps (%ecx),%xmm2
+0f1511|223344556677885f5f5f5f5f5f	intel	unpckhps xmm2, xmmword ptr [ecx]
+0f1611|223344556677885f5f5f5f5f5f	gnu	movhps (%ecx),%xmm2
+0f1611|223344556677885f5f5f5f5f5f	intel	movhps xmm2, qword ptr [ecx]
+0f16c0|11223344556677885f5f5f5f5f	gnu	movlhps %xmm0,%xmm0
+0f16c0|11223344556677885f5f5f5f5f	intel	movlhps xmm0, xmm0
+0f1711|223344556677885f5f5f5f5f5f	gnu	movhps %xmm2,(%ecx)
+0f1711|223344556677885f5f5f5f5f5f	intel	movhps qword ptr [ecx], xmm2
+0f1800|11223344556677885f5f5f5f5f	gnu	prefetchnta (%eax)
+0f1800|11223344556677885f5f5f5f5f	intel	prefetchnta zmmword ptr [eax]
+0f1808|11223344556677885f5f5f5f5f	gnu	prefetcht0 (%eax)
+0f1808|11223344556677885f5f5f5f5f	intel	prefetcht0 zmmword ptr [eax]
+0f1811|223344556677885f5f5f5f5f5f	gnu	prefetcht1 (%ecx)
+0f1811|223344556677885f5f5f5f5f5f	intel	prefetcht1 zmmword ptr [ecx]
+0f1818|11223344556677885f5f5f5f5f	gnu	prefetcht2 (%eax)
+0f1818|11223344556677885f5f5f5f5f	intel	prefetcht2 zmmword ptr [eax]
+0f1f00|11223344556677885f5f5f5f5f	gnu	nopl (%eax)
+0f1f00|11223344556677885f5f5f5f5f	intel	nop dword ptr [eax], eax
+0f2011|223344556677885f5f5f5f5f5f	gnu	mov %cr2,%ecx
+0f2011|223344556677885f5f5f5f5f5f	intel	mov ecx, cr2
+0f2111|223344556677885f5f5f5f5f5f	gnu	mov %db2,%ecx
+0f2111|223344556677885f5f5f5f5f5f	intel	mov ecx, dr2
+0f2211|223344556677885f5f5f5f5f5f	gnu	mov %ecx,%cr2
+0f2211|223344556677885f5f5f5f5f5f	intel	mov cr2, ecx
+0f2311|223344556677885f5f5f5f5f5f	gnu	mov %ecx,%db2
+0f2311|223344556677885f5f5f5f5f5f	intel	mov dr2, ecx
+0f2411|223344556677885f5f5f5f5f5f	gnu	mov %tr2,%ecx
+0f2411|223344556677885f5f5f5f5f5f	intel	mov ecx, tr2
+0f2611|223344556677885f5f5f5f5f5f	gnu	mov %ecx,%tr2
+0f2611|223344556677885f5f5f5f5f5f	intel	mov tr2, ecx
+0f2811|223344556677885f5f5f5f5f5f	gnu	movaps (%ecx),%xmm2
+0f2811|223344556677885f5f5f5f5f5f	intel	movaps xmm2, xmmword ptr [ecx]
+0f2911|223344556677885f5f5f5f5f5f	gnu	movaps %xmm2,(%ecx)
+0f2911|223344556677885f5f5f5f5f5f	intel	movaps xmmword ptr [ecx], xmm2
+0f2a11|223344556677885f5f5f5f5f5f	gnu	cvtpi2ps (%ecx),%xmm2
+0f2a11|223344556677885f5f5f5f5f5f	intel	cvtpi2ps xmm2, qword ptr [ecx]
+0f2b11|223344556677885f5f5f5f5f5f	gnu	movntps %xmm2,(%ecx)
+0f2b11|223344556677885f5f5f5f5f5f	intel	movntps xmmword ptr [ecx], xmm2
+0f2c11|223344556677885f5f5f5f5f5f	gnu	cvttps2pi (%ecx),%mm2
+0f2c11|223344556677885f5f5f5f5f5f	intel	cvttps2pi mmx2, qword ptr [ecx]
+0f2d11|223344556677885f5f5f5f5f5f	gnu	cvtps2pi (%ecx),%mm2
+0f2d11|223344556677885f5f5f5f5f5f	intel	cvtps2pi mmx2, qword ptr [ecx]
+0f2e11|223344556677885f5f5f5f5f5f	gnu	ucomiss (%ecx),%xmm2
+0f2e11|223344556677885f5f5f5f5f5f	intel	ucomiss xmm2, dword ptr [ecx]
+0f2f11|223344556677885f5f5f5f5f5f	gnu	comiss (%ecx),%xmm2
+0f2f11|223344556677885f5f5f5f5f5f	intel	comiss xmm2, dword ptr [ecx]
+0f30|11223344556677885f5f5f5f5f5f	gnu	wrmsr
+0f30|11223344556677885f5f5f5f5f5f	intel	wrmsr
+0f31|11223344556677885f5f5f5f5f5f	gnu	rdtsc
+0f31|11223344556677885f5f5f5f5f5f	intel	rdtsc
+0f32|11223344556677885f5f5f5f5f5f	gnu	rdmsr
+0f32|11223344556677885f5f5f5f5f5f	intel	rdmsr
+0f33|11223344556677885f5f5f5f5f5f	gnu	rdpmc
+0f33|11223344556677885f5f5f5f5f5f	intel	rdpmc
+0f34|11223344556677885f5f5f5f5f5f	gnu	sysenter
+0f34|11223344556677885f5f5f5f5f5f	intel	sysenter
+0f35|11223344556677885f5f5f5f5f5f	gnu	sysexit
+0f35|11223344556677885f5f5f5f5f5f	intel	sysexit
+0f380011|223344556677885f5f5f5f5f	gnu	pshufb (%ecx),%mm2
+0f380011|223344556677885f5f5f5f5f	intel	pshufb mmx2, qword ptr [ecx]
+0f380111|223344556677885f5f5f5f5f	gnu	phaddw (%ecx),%mm2
+0f380111|223344556677885f5f5f5f5f	intel	phaddw mmx2, qword ptr [ecx]
+0f380211|223344556677885f5f5f5f5f	gnu	phaddd (%ecx),%mm2
+0f380211|223344556677885f5f5f5f5f	intel	phaddd mmx2, qword ptr [ecx]
+0f380311|223344556677885f5f5f5f5f	gnu	phaddsw (%ecx),%mm2
+0f380311|223344556677885f5f5f5f5f	intel	phaddsw mmx2, qword ptr [ecx]
+0f380411|223344556677885f5f5f5f5f	gnu	pmaddubsw (%ecx),%mm2
+0f380411|223344556677885f5f5f5f5f	intel	pmaddubsw mmx2, qword ptr [ecx]
+0f380511|223344556677885f5f5f5f5f	gnu	phsubw (%ecx),%mm2
+0f380511|223344556677885f5f5f5f5f	intel	phsubw mmx2, qword ptr [ecx]
+0f380611|223344556677885f5f5f5f5f	gnu	phsubd (%ecx),%mm2
+0f380611|223344556677885f5f5f5f5f	intel	phsubd mmx2, qword ptr [ecx]
+0f380711|223344556677885f5f5f5f5f	gnu	phsubsw (%ecx),%mm2
+0f380711|223344556677885f5f5f5f5f	intel	phsubsw mmx2, qword ptr [ecx]
+0f380811|223344556677885f5f5f5f5f	gnu	psignb (%ecx),%mm2
+0f380811|223344556677885f5f5f5f5f	intel	psignb mmx2, qword ptr [ecx]
+0f380911|223344556677885f5f5f5f5f	gnu	psignw (%ecx),%mm2
+0f380911|223344556677885f5f5f5f5f	intel	psignw mmx2, qword ptr [ecx]
+0f380a11|223344556677885f5f5f5f5f	gnu	psignd (%ecx),%mm2
+0f380a11|223344556677885f5f5f5f5f	intel	psignd mmx2, qword ptr [ecx]
+0f380b11|223344556677885f5f5f5f5f	gnu	pmulhrsw (%ecx),%mm2
+0f380b11|223344556677885f5f5f5f5f	intel	pmulhrsw mmx2, qword ptr [ecx]
+0f3810|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3810|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3811|223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0f3811|223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0f3814|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3814|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3815|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3815|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3817|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3817|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f381c11|223344556677885f5f5f5f5f	gnu	pabsb (%ecx),%mm2
+0f381c11|223344556677885f5f5f5f5f	intel	pabsb mmx2, qword ptr [ecx]
+0f381d11|223344556677885f5f5f5f5f	gnu	pabsw (%ecx),%mm2
+0f381d11|223344556677885f5f5f5f5f	intel	pabsw mmx2, qword ptr [ecx]
+0f381e11|223344556677885f5f5f5f5f	gnu	pabsd (%ecx),%mm2
+0f381e11|223344556677885f5f5f5f5f	intel	pabsd mmx2, qword ptr [ecx]
+0f3820|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3820|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3821|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3821|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3822|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3822|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3823|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3823|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3824|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3824|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3825|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3825|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3828|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3828|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3829|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3829|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f382a|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f382a|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f382b|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f382b|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3830|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3830|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3831|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3831|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3832|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3832|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3833|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3833|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3834|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3834|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3835|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3835|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3837|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3837|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3838|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3838|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3839|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3839|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f383a|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f383a|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f383b|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f383b|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f383c|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f383c|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f383d|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f383d|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f383e|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f383e|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f383f|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f383f|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3840|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3840|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3841|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3841|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3882|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3882|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f38db|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f38db|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f38dc|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f38dc|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f38dd|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f38dd|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f38de|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f38de|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f38df|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f38df|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f38f011|223344556677885f5f5f5f5f	gnu	movbe (%ecx),%edx
+0f38f011|223344556677885f5f5f5f5f	intel	movbe edx, dword ptr [ecx]
+0f38f111|223344556677885f5f5f5f5f	gnu	movbe %edx,(%ecx)
+0f38f111|223344556677885f5f5f5f5f	intel	movbe dword ptr [ecx], edx
+0f3a08|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a08|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a09|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a09|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a0a|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a0a|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a0b|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a0b|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a0c|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a0c|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a0d|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a0d|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a0e|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a0e|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a0f1122|3344556677885f5f5f5f5f	gnu	palignr $0x22,(%ecx),%mm2
+0f3a0f1122|3344556677885f5f5f5f5f	intel	palignr mmx2, qword ptr [ecx], 0x22
+0f3a11|223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a11|223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0f3a14|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a14|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a15|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a15|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a16|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a16|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a17|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a17|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a20|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a20|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a21|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a21|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a22|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a22|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a40|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a40|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a41|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a41|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a42|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a42|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a44|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a44|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a60|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a60|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a61|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a61|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a62|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a62|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3a63|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3a63|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f3adf|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f3adf|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f4011|223344556677885f5f5f5f5f5f	gnu	cmovo (%ecx),%edx
+0f4011|223344556677885f5f5f5f5f5f	intel	cmovo edx, dword ptr [ecx]
+0f4111|223344556677885f5f5f5f5f5f	gnu	cmovno (%ecx),%edx
+0f4111|223344556677885f5f5f5f5f5f	intel	cmovno edx, dword ptr [ecx]
+0f4211|223344556677885f5f5f5f5f5f	gnu	cmovb (%ecx),%edx
+0f4211|223344556677885f5f5f5f5f5f	intel	cmovb edx, dword ptr [ecx]
+0f4311|223344556677885f5f5f5f5f5f	gnu	cmovae (%ecx),%edx
+0f4311|223344556677885f5f5f5f5f5f	intel	cmovnb edx, dword ptr [ecx]
+0f4411|223344556677885f5f5f5f5f5f	gnu	cmove (%ecx),%edx
+0f4411|223344556677885f5f5f5f5f5f	intel	cmovz edx, dword ptr [ecx]
+0f4511|223344556677885f5f5f5f5f5f	gnu	cmovne (%ecx),%edx
+0f4511|223344556677885f5f5f5f5f5f	intel	cmovnz edx, dword ptr [ecx]
+0f4611|223344556677885f5f5f5f5f5f	gnu	cmovbe (%ecx),%edx
+0f4611|223344556677885f5f5f5f5f5f	intel	cmovbe edx, dword ptr [ecx]
+0f4711|223344556677885f5f5f5f5f5f	gnu	cmova (%ecx),%edx
+0f4711|223344556677885f5f5f5f5f5f	intel	cmovnbe edx, dword ptr [ecx]
+0f4811|223344556677885f5f5f5f5f5f	gnu	cmovs (%ecx),%edx
+0f4811|223344556677885f5f5f5f5f5f	intel	cmovs edx, dword ptr [ecx]
+0f4911|223344556677885f5f5f5f5f5f	gnu	cmovns (%ecx),%edx
+0f4911|223344556677885f5f5f5f5f5f	intel	cmovns edx, dword ptr [ecx]
+0f4a11|223344556677885f5f5f5f5f5f	gnu	cmovp (%ecx),%edx
+0f4a11|223344556677885f5f5f5f5f5f	intel	cmovp edx, dword ptr [ecx]
+0f4b11|223344556677885f5f5f5f5f5f	gnu	cmovnp (%ecx),%edx
+0f4b11|223344556677885f5f5f5f5f5f	intel	cmovnp edx, dword ptr [ecx]
+0f4c11|223344556677885f5f5f5f5f5f	gnu	cmovl (%ecx),%edx
+0f4c11|223344556677885f5f5f5f5f5f	intel	cmovl edx, dword ptr [ecx]
+0f4d11|223344556677885f5f5f5f5f5f	gnu	cmovge (%ecx),%edx
+0f4d11|223344556677885f5f5f5f5f5f	intel	cmovnl edx, dword ptr [ecx]
+0f4e11|223344556677885f5f5f5f5f5f	gnu	cmovle (%ecx),%edx
+0f4e11|223344556677885f5f5f5f5f5f	intel	cmovle edx, dword ptr [ecx]
+0f4f11|223344556677885f5f5f5f5f5f	gnu	cmovg (%ecx),%edx
+0f4f11|223344556677885f5f5f5f5f5f	intel	cmovnle edx, dword ptr [ecx]
+0f5011|223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0f5011|223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0f50c0|11223344556677885f5f5f5f5f	gnu	movmskps %xmm0,%eax
+0f50c0|11223344556677885f5f5f5f5f	intel	movmskps eax, xmm0
+0f5111|223344556677885f5f5f5f5f5f	gnu	sqrtps (%ecx),%xmm2
+0f5111|223344556677885f5f5f5f5f5f	intel	sqrtps xmm2, xmmword ptr [ecx]
+0f5211|223344556677885f5f5f5f5f5f	gnu	rsqrtps (%ecx),%xmm2
+0f5211|223344556677885f5f5f5f5f5f	intel	rsqrtps xmm2, xmmword ptr [ecx]
+0f5311|223344556677885f5f5f5f5f5f	gnu	rcpps (%ecx),%xmm2
+0f5311|223344556677885f5f5f5f5f5f	intel	rcpps xmm2, xmmword ptr [ecx]
+0f5411|223344556677885f5f5f5f5f5f	gnu	andps (%ecx),%xmm2
+0f5411|223344556677885f5f5f5f5f5f	intel	andps xmm2, xmmword ptr [ecx]
+0f5511|223344556677885f5f5f5f5f5f	gnu	andnps (%ecx),%xmm2
+0f5511|223344556677885f5f5f5f5f5f	intel	andnps xmm2, xmmword ptr [ecx]
+0f5611|223344556677885f5f5f5f5f5f	gnu	orps (%ecx),%xmm2
+0f5611|223344556677885f5f5f5f5f5f	intel	orps xmm2, xmmword ptr [ecx]
+0f5711|223344556677885f5f5f5f5f5f	gnu	xorps (%ecx),%xmm2
+0f5711|223344556677885f5f5f5f5f5f	intel	xorps xmm2, xmmword ptr [ecx]
+0f5811|223344556677885f5f5f5f5f5f	gnu	addps (%ecx),%xmm2
+0f5811|223344556677885f5f5f5f5f5f	intel	addps xmm2, xmmword ptr [ecx]
+0f5911|223344556677885f5f5f5f5f5f	gnu	mulps (%ecx),%xmm2
+0f5911|223344556677885f5f5f5f5f5f	intel	mulps xmm2, xmmword ptr [ecx]
+0f5a11|223344556677885f5f5f5f5f5f	gnu	cvtps2pd (%ecx),%xmm2
+0f5a11|223344556677885f5f5f5f5f5f	intel	cvtps2pd xmm2, qword ptr [ecx]
+0f5b11|223344556677885f5f5f5f5f5f	gnu	cvtdq2ps (%ecx),%xmm2
+0f5b11|223344556677885f5f5f5f5f5f	intel	cvtdq2ps xmm2, xmmword ptr [ecx]
+0f5c11|223344556677885f5f5f5f5f5f	gnu	subps (%ecx),%xmm2
+0f5c11|223344556677885f5f5f5f5f5f	intel	subps xmm2, xmmword ptr [ecx]
+0f5d11|223344556677885f5f5f5f5f5f	gnu	minps (%ecx),%xmm2
+0f5d11|223344556677885f5f5f5f5f5f	intel	minps xmm2, xmmword ptr [ecx]
+0f5e11|223344556677885f5f5f5f5f5f	gnu	divps (%ecx),%xmm2
+0f5e11|223344556677885f5f5f5f5f5f	intel	divps xmm2, xmmword ptr [ecx]
+0f5f11|223344556677885f5f5f5f5f5f	gnu	maxps (%ecx),%xmm2
+0f5f11|223344556677885f5f5f5f5f5f	intel	maxps xmm2, xmmword ptr [ecx]
+0f6011|223344556677885f5f5f5f5f5f	gnu	punpcklbw (%ecx),%mm2
+0f6011|223344556677885f5f5f5f5f5f	intel	punpcklbw mmx2, dword ptr [ecx]
+0f6111|223344556677885f5f5f5f5f5f	gnu	punpcklwd (%ecx),%mm2
+0f6111|223344556677885f5f5f5f5f5f	intel	punpcklwd mmx2, dword ptr [ecx]
+0f6211|223344556677885f5f5f5f5f5f	gnu	punpckldq (%ecx),%mm2
+0f6211|223344556677885f5f5f5f5f5f	intel	punpckldq mmx2, dword ptr [ecx]
+0f6311|223344556677885f5f5f5f5f5f	gnu	packsswb (%ecx),%mm2
+0f6311|223344556677885f5f5f5f5f5f	intel	packsswb mmx2, qword ptr [ecx]
+0f6411|223344556677885f5f5f5f5f5f	gnu	pcmpgtb (%ecx),%mm2
+0f6411|223344556677885f5f5f5f5f5f	intel	pcmpgtb mmx2, qword ptr [ecx]
+0f6511|223344556677885f5f5f5f5f5f	gnu	pcmpgtw (%ecx),%mm2
+0f6511|223344556677885f5f5f5f5f5f	intel	pcmpgtw mmx2, qword ptr [ecx]
+0f6611|223344556677885f5f5f5f5f5f	gnu	pcmpgtd (%ecx),%mm2
+0f6611|223344556677885f5f5f5f5f5f	intel	pcmpgtd mmx2, qword ptr [ecx]
+0f6711|223344556677885f5f5f5f5f5f	gnu	packuswb (%ecx),%mm2
+0f6711|223344556677885f5f5f5f5f5f	intel	packuswb mmx2, qword ptr [ecx]
+0f6811|223344556677885f5f5f5f5f5f	gnu	punpckhbw (%ecx),%mm2
+0f6811|223344556677885f5f5f5f5f5f	intel	punpckhbw mmx2, qword ptr [ecx]
+0f6911|223344556677885f5f5f5f5f5f	gnu	punpckhwd (%ecx),%mm2
+0f6911|223344556677885f5f5f5f5f5f	intel	punpckhwd mmx2, qword ptr [ecx]
+0f6a11|223344556677885f5f5f5f5f5f	gnu	punpckhdq (%ecx),%mm2
+0f6a11|223344556677885f5f5f5f5f5f	intel	punpckhdq mmx2, qword ptr [ecx]
+0f6b11|223344556677885f5f5f5f5f5f	gnu	packssdw (%ecx),%mm2
+0f6b11|223344556677885f5f5f5f5f5f	intel	packssdw mmx2, qword ptr [ecx]
+0f6c|11223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0f6c|11223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0f6d|11223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0f6d|11223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0f6e11|223344556677885f5f5f5f5f5f	gnu	movd (%ecx),%mm2
+0f6e11|223344556677885f5f5f5f5f5f	intel	movd mmx2, dword ptr [ecx]
+0f6f11|223344556677885f5f5f5f5f5f	gnu	movq (%ecx),%mm2
+0f6f11|223344556677885f5f5f5f5f5f	intel	movq mmx2, qword ptr [ecx]
+0f701122|3344556677885f5f5f5f5f5f	gnu	pshufw $0x22,(%ecx),%mm2
+0f701122|3344556677885f5f5f5f5f5f	intel	pshufw mmx2, qword ptr [ecx], 0x22
+0f7100|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f7100|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f711122|3344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0f711122|3344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0f712011|223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f712011|223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f713011|223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f713011|223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f71d011|223344556677885f5f5f5f5f	gnu	psrlw $0x11,%mm0
+0f71d011|223344556677885f5f5f5f5f	intel	psrlw mmx0, 0x11
+0f71e011|223344556677885f5f5f5f5f	gnu	psraw $0x11,%mm0
+0f71e011|223344556677885f5f5f5f5f	intel	psraw mmx0, 0x11
+0f71f011|223344556677885f5f5f5f5f	gnu	psllw $0x11,%mm0
+0f71f011|223344556677885f5f5f5f5f	intel	psllw mmx0, 0x11
+0f7200|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f7200|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f721122|3344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0f721122|3344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0f722011|223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f722011|223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f723011|223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f723011|223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f72d011|223344556677885f5f5f5f5f	gnu	psrld $0x11,%mm0
+0f72d011|223344556677885f5f5f5f5f	intel	psrld mmx0, 0x11
+0f72e011|223344556677885f5f5f5f5f	gnu	psrad $0x11,%mm0
+0f72e011|223344556677885f5f5f5f5f	intel	psrad mmx0, 0x11
+0f72f011|223344556677885f5f5f5f5f	gnu	pslld $0x11,%mm0
+0f72f011|223344556677885f5f5f5f5f	intel	pslld mmx0, 0x11
+0f7300|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f7300|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f731122|3344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0f731122|3344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0f7318|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f7318|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f733011|223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f733011|223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f7338|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0f7338|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0f73d011|223344556677885f5f5f5f5f	gnu	psrlq $0x11,%mm0
+0f73d011|223344556677885f5f5f5f5f	intel	psrlq mmx0, 0x11
+0f73f011|223344556677885f5f5f5f5f	gnu	psllq $0x11,%mm0
+0f73f011|223344556677885f5f5f5f5f	intel	psllq mmx0, 0x11
+0f7411|223344556677885f5f5f5f5f5f	gnu	pcmpeqb (%ecx),%mm2
+0f7411|223344556677885f5f5f5f5f5f	intel	pcmpeqb mmx2, qword ptr [ecx]
+0f7511|223344556677885f5f5f5f5f5f	gnu	pcmpeqw (%ecx),%mm2
+0f7511|223344556677885f5f5f5f5f5f	intel	pcmpeqw mmx2, qword ptr [ecx]
+0f7611|223344556677885f5f5f5f5f5f	gnu	pcmpeqd (%ecx),%mm2
+0f7611|223344556677885f5f5f5f5f5f	intel	pcmpeqd mmx2, qword ptr [ecx]
+0f77|11223344556677885f5f5f5f5f5f	gnu	emms
+0f77|11223344556677885f5f5f5f5f5f	intel	emms
+0f7c|11223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0f7c|11223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0f7d|11223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0f7d|11223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0f7e11|223344556677885f5f5f5f5f5f	gnu	movd %mm2,(%ecx)
+0f7e11|223344556677885f5f5f5f5f5f	intel	movd dword ptr [ecx], mmx2
+0f7f11|223344556677885f5f5f5f5f5f	gnu	movq %mm2,(%ecx)
+0f7f11|223344556677885f5f5f5f5f5f	intel	movq qword ptr [ecx], mmx2
+0f8011223344|556677885f5f5f5f5f5f	gnu	jo .+0x44332211
+0f8011223344|556677885f5f5f5f5f5f	intel	jo .+0x44332211
+0f8111223344|556677885f5f5f5f5f5f	gnu	jno .+0x44332211
+0f8111223344|556677885f5f5f5f5f5f	intel	jno .+0x44332211
+0f8211223344|556677885f5f5f5f5f5f	gnu	jb .+0x44332211
+0f8211223344|556677885f5f5f5f5f5f	intel	jb .+0x44332211
+0f8311223344|556677885f5f5f5f5f5f	gnu	jae .+0x44332211
+0f8311223344|556677885f5f5f5f5f5f	intel	jnb .+0x44332211
+0f8411223344|556677885f5f5f5f5f5f	gnu	je .+0x44332211
+0f8411223344|556677885f5f5f5f5f5f	intel	jz .+0x44332211
+0f8511223344|556677885f5f5f5f5f5f	gnu	jne .+0x44332211
+0f8511223344|556677885f5f5f5f5f5f	intel	jnz .+0x44332211
+0f8611223344|556677885f5f5f5f5f5f	gnu	jbe .+0x44332211
+0f8611223344|556677885f5f5f5f5f5f	intel	jbe .+0x44332211
+0f8711223344|556677885f5f5f5f5f5f	gnu	ja .+0x44332211
+0f8711223344|556677885f5f5f5f5f5f	intel	jnbe .+0x44332211
+0f8811223344|556677885f5f5f5f5f5f	gnu	js .+0x44332211
+0f8811223344|556677885f5f5f5f5f5f	intel	js .+0x44332211
+0f8911223344|556677885f5f5f5f5f5f	gnu	jns .+0x44332211
+0f8911223344|556677885f5f5f5f5f5f	intel	jns .+0x44332211
+0f8a11223344|556677885f5f5f5f5f5f	gnu	jp .+0x44332211
+0f8a11223344|556677885f5f5f5f5f5f	intel	jp .+0x44332211
+0f8b11223344|556677885f5f5f5f5f5f	gnu	jnp .+0x44332211
+0f8b11223344|556677885f5f5f5f5f5f	intel	jnp .+0x44332211
+0f8c11223344|556677885f5f5f5f5f5f	gnu	jl .+0x44332211
+0f8c11223344|556677885f5f5f5f5f5f	intel	jl .+0x44332211
+0f8d11223344|556677885f5f5f5f5f5f	gnu	jge .+0x44332211
+0f8d11223344|556677885f5f5f5f5f5f	intel	jnl .+0x44332211
+0f8e11223344|556677885f5f5f5f5f5f	gnu	jle .+0x44332211
+0f8e11223344|556677885f5f5f5f5f5f	intel	jle .+0x44332211
+0f8f11223344|556677885f5f5f5f5f5f	gnu	jg .+0x44332211
+0f8f11223344|556677885f5f5f5f5f5f	intel	jnle .+0x44332211
+0f9011|223344556677885f5f5f5f5f5f	gnu	seto (%ecx)
+0f9011|223344556677885f5f5f5f5f5f	intel	seto byte ptr [ecx]
+0f9111|223344556677885f5f5f5f5f5f	gnu	setno (%ecx)
+0f9111|223344556677885f5f5f5f5f5f	intel	setno byte ptr [ecx]
+0f9211|223344556677885f5f5f5f5f5f	gnu	setb (%ecx)
+0f9211|223344556677885f5f5f5f5f5f	intel	setb byte ptr [ecx]
+0f9311|223344556677885f5f5f5f5f5f	gnu	setae (%ecx)
+0f9311|223344556677885f5f5f5f5f5f	intel	setnb byte ptr [ecx]
+0f9411|223344556677885f5f5f5f5f5f	gnu	sete (%ecx)
+0f9411|223344556677885f5f5f5f5f5f	intel	setz byte ptr [ecx]
+0f9511|223344556677885f5f5f5f5f5f	gnu	setne (%ecx)
+0f9511|223344556677885f5f5f5f5f5f	intel	setnz byte ptr [ecx]
+0f9611|223344556677885f5f5f5f5f5f	gnu	setbe (%ecx)
+0f9611|223344556677885f5f5f5f5f5f	intel	setbe byte ptr [ecx]
+0f9711|223344556677885f5f5f5f5f5f	gnu	seta (%ecx)
+0f9711|223344556677885f5f5f5f5f5f	intel	setnbe byte ptr [ecx]
+0f9811|223344556677885f5f5f5f5f5f	gnu	sets (%ecx)
+0f9811|223344556677885f5f5f5f5f5f	intel	sets byte ptr [ecx]
+0f9911|223344556677885f5f5f5f5f5f	gnu	setns (%ecx)
+0f9911|223344556677885f5f5f5f5f5f	intel	setns byte ptr [ecx]
+0f9a11|223344556677885f5f5f5f5f5f	gnu	setp (%ecx)
+0f9a11|223344556677885f5f5f5f5f5f	intel	setp byte ptr [ecx]
+0f9b11|223344556677885f5f5f5f5f5f	gnu	setnp (%ecx)
+0f9b11|223344556677885f5f5f5f5f5f	intel	setnp byte ptr [ecx]
+0f9c11|223344556677885f5f5f5f5f5f	gnu	setl (%ecx)
+0f9c11|223344556677885f5f5f5f5f5f	intel	setl byte ptr [ecx]
+0f9d11|223344556677885f5f5f5f5f5f	gnu	setge (%ecx)
+0f9d11|223344556677885f5f5f5f5f5f	intel	setnl byte ptr [ecx]
+0f9e11|223344556677885f5f5f5f5f5f	gnu	setle (%ecx)
+0f9e11|223344556677885f5f5f5f5f5f	intel	setle byte ptr [ecx]
+0f9f11|223344556677885f5f5f5f5f5f	gnu	setg (%ecx)
+0f9f11|223344556677885f5f5f5f5f5f	intel	setnle byte ptr [ecx]
+0fa0|11223344556677885f5f5f5f5f5f	gnu	push %fs
+0fa0|11223344556677885f5f5f5f5f5f	intel	push fs
+0fa1|11223344556677885f5f5f5f5f5f	gnu	pop %fs
+0fa1|11223344556677885f5f5f5f5f5f	intel	pop fs
+0fa2|11223344556677885f5f5f5f5f5f	gnu	cpuid
+0fa2|11223344556677885f5f5f5f5f5f	intel	cpuid
+0fa311|223344556677885f5f5f5f5f5f	gnu	bt %edx,(%ecx)
+0fa311|223344556677885f5f5f5f5f5f	intel	bt dword ptr [ecx], edx
+0fa41122|3344556677885f5f5f5f5f5f	gnu	shld $0x22,%edx,(%ecx)
+0fa41122|3344556677885f5f5f5f5f5f	intel	shld dword ptr [ecx], edx, 0x22
+0fa511|223344556677885f5f5f5f5f5f	gnu	shld %cl,%edx,(%ecx)
+0fa511|223344556677885f5f5f5f5f5f	intel	shld dword ptr [ecx], edx, cl
+0fa8|11223344556677885f5f5f5f5f5f	gnu	push %gs
+0fa8|11223344556677885f5f5f5f5f5f	intel	push gs
+0fa9|11223344556677885f5f5f5f5f5f	gnu	pop %gs
+0fa9|11223344556677885f5f5f5f5f5f	intel	pop gs
+0faa|11223344556677885f5f5f5f5f5f	gnu	rsm
+0faa|11223344556677885f5f5f5f5f5f	intel	rsm
+0fab11|223344556677885f5f5f5f5f5f	gnu	bts %edx,(%ecx)
+0fab11|223344556677885f5f5f5f5f5f	intel	bts dword ptr [ecx], edx
+0fac1122|3344556677885f5f5f5f5f5f	gnu	shrd $0x22,%edx,(%ecx)
+0fac1122|3344556677885f5f5f5f5f5f	intel	shrd dword ptr [ecx], edx, 0x22
+0fad11|223344556677885f5f5f5f5f5f	gnu	shrd %cl,%edx,(%ecx)
+0fad11|223344556677885f5f5f5f5f5f	intel	shrd dword ptr [ecx], edx, cl
+0fae08|11223344556677885f5f5f5f5f	gnu	fxrstor (%eax)
+0fae08|11223344556677885f5f5f5f5f	intel	fxrstor ptr [eax]
+0fae11|223344556677885f5f5f5f5f5f	gnu	ldmxcsr (%ecx)
+0fae11|223344556677885f5f5f5f5f5f	intel	ldmxcsr dword ptr [ecx]
+0fae18|11223344556677885f5f5f5f5f	gnu	stmxcsr (%eax)
+0fae18|11223344556677885f5f5f5f5f	intel	stmxcsr dword ptr [eax]
+0fae20|11223344556677885f5f5f5f5f	gnu	xsave (%eax)
+0fae20|11223344556677885f5f5f5f5f	intel	xsave ptr [eax]
+0fae28|11223344556677885f5f5f5f5f	gnu	xrstor (%eax)
+0fae28|11223344556677885f5f5f5f5f	intel	xrstor ptr [eax]
+0fae30|11223344556677885f5f5f5f5f	gnu	xsaveopt (%eax)
+0fae30|11223344556677885f5f5f5f5f	intel	xsaveopt ptr [eax]
+0fae38|11223344556677885f5f5f5f5f	gnu	clflush (%eax)
+0fae38|11223344556677885f5f5f5f5f	intel	clflush zmmword ptr [eax]
+0faee8|11223344556677885f5f5f5f5f	gnu	lfence
+0faee8|11223344556677885f5f5f5f5f	intel	lfence
+0faef0|11223344556677885f5f5f5f5f	gnu	mfence
+0faef0|11223344556677885f5f5f5f5f	intel	mfence
+0faef8|11223344556677885f5f5f5f5f	gnu	sfence
+0faef8|11223344556677885f5f5f5f5f	intel	sfence
+0faf11|223344556677885f5f5f5f5f5f	gnu	imul (%ecx),%edx
+0faf11|223344556677885f5f5f5f5f5f	intel	imul edx, dword ptr [ecx]
+0fb011|223344556677885f5f5f5f5f5f	gnu	cmpxchg %dl,(%ecx)
+0fb011|223344556677885f5f5f5f5f5f	intel	cmpxchg byte ptr [ecx], dl
+0fb111|223344556677885f5f5f5f5f5f	gnu	cmpxchg %edx,(%ecx)
+0fb111|223344556677885f5f5f5f5f5f	intel	cmpxchg dword ptr [ecx], edx
+0fb211|223344556677885f5f5f5f5f5f	gnu	lss (%ecx),%edx
+0fb211|223344556677885f5f5f5f5f5f	intel	lss edx, ptr [ecx]
+0fb311|223344556677885f5f5f5f5f5f	gnu	btr %edx,(%ecx)
+0fb311|223344556677885f5f5f5f5f5f	intel	btr dword ptr [ecx], edx
+0fb411|223344556677885f5f5f5f5f5f	gnu	lfs (%ecx),%edx
+0fb411|223344556677885f5f5f5f5f5f	intel	lfs edx, ptr [ecx]
+0fb511|223344556677885f5f5f5f5f5f	gnu	lgs (%ecx),%edx
+0fb511|223344556677885f5f5f5f5f5f	intel	lgs edx, ptr [ecx]
+0fb611|223344556677885f5f5f5f5f5f	gnu	movzbl (%ecx),%edx
+0fb611|223344556677885f5f5f5f5f5f	intel	movzx edx, byte ptr [ecx]
+0fb6c0|11223344556677885f5f5f5f5f	gnu	movzbl %al,%eax
+0fb711|223344556677885f5f5f5f5f5f	gnu	movzwl (%ecx),%edx
+0fb711|223344556677885f5f5f5f5f5f	intel	movzx edx, word ptr [ecx]
+0fb8|11223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0fb8|11223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0fb9|11223344556677885f5f5f5f5f5f	gnu	ud1
+0fb9|11223344556677885f5f5f5f5f5f	intel	ud1
+0fba11|223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0fba11|223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0fba2011|223344556677885f5f5f5f5f	gnu	btl $0x11,(%eax)
+0fba2011|223344556677885f5f5f5f5f	intel	bt dword ptr [eax], 0x11
+0fba2811|223344556677885f5f5f5f5f	gnu	btsl $0x11,(%eax)
+0fba2811|223344556677885f5f5f5f5f	intel	bts dword ptr [eax], 0x11
+0fba3011|223344556677885f5f5f5f5f	gnu	btrl $0x11,(%eax)
+0fba3011|223344556677885f5f5f5f5f	intel	btr dword ptr [eax], 0x11
+0fba3811|223344556677885f5f5f5f5f	gnu	btcl $0x11,(%eax)
+0fba3811|223344556677885f5f5f5f5f	intel	btc dword ptr [eax], 0x11
+0fbb11|223344556677885f5f5f5f5f5f	gnu	btc %edx,(%ecx)
+0fbb11|223344556677885f5f5f5f5f5f	intel	btc dword ptr [ecx], edx
+0fbc11|223344556677885f5f5f5f5f5f	gnu	bsf (%ecx),%edx
+0fbc11|223344556677885f5f5f5f5f5f	intel	bsf edx, dword ptr [ecx]
+0fbd11|223344556677885f5f5f5f5f5f	gnu	bsr (%ecx),%edx
+0fbd11|223344556677885f5f5f5f5f5f	intel	bsr edx, dword ptr [ecx]
+0fbe11|223344556677885f5f5f5f5f5f	gnu	movsbl (%ecx),%edx
+0fbe11|223344556677885f5f5f5f5f5f	intel	movsx edx, byte ptr [ecx]
+0fbf11|223344556677885f5f5f5f5f5f	gnu	movswl (%ecx),%edx
+0fbf11|223344556677885f5f5f5f5f5f	intel	movsx edx, word ptr [ecx]
+0fc011|223344556677885f5f5f5f5f5f	gnu	xadd %dl,(%ecx)
+0fc011|223344556677885f5f5f5f5f5f	intel	xadd byte ptr [ecx], dl
+0fc111|223344556677885f5f5f5f5f5f	gnu	xadd %edx,(%ecx)
+0fc111|223344556677885f5f5f5f5f5f	intel	xadd dword ptr [ecx], edx
+0fc20000|11223344556677885f5f5f5f	gnu	cmpeqps (%eax),%xmm0
+0fc20000|11223344556677885f5f5f5f	intel	cmpps xmm0, xmmword ptr [eax], 0x0
+0fc311|223344556677885f5f5f5f5f5f	gnu	movnti %edx,(%ecx)
+0fc311|223344556677885f5f5f5f5f5f	intel	movnti dword ptr [ecx], edx
+0fc41122|3344556677885f5f5f5f5f5f	gnu	pinsrw $0x22,(%ecx),%mm2
+0fc41122|3344556677885f5f5f5f5f5f	intel	pinsrw mmx2, word ptr [ecx], 0x22
+0fc51122|3344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0fc51122|3344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0fc5c011|223344556677885f5f5f5f5f	gnu	pextrw $0x11,%mm0,%eax
+0fc5c011|223344556677885f5f5f5f5f	intel	pextrw eax, mmx0, 0x11
+0fc61122|3344556677885f5f5f5f5f5f	gnu	shufps $0x22,(%ecx),%xmm2
+0fc61122|3344556677885f5f5f5f5f5f	intel	shufps xmm2, xmmword ptr [ecx], 0x22
+0fc708|11223344556677885f5f5f5f5f	gnu	cmpxchg8b (%eax)
+0fc708|11223344556677885f5f5f5f5f	intel	cmpxchg8b qword ptr [eax]
+0fc718|11223344556677885f5f5f5f5f	gnu	xrstors (%eax)
+0fc718|11223344556677885f5f5f5f5f	intel	xrstors ptr [eax]
+0fc720|11223344556677885f5f5f5f5f	gnu	xsavec (%eax)
+0fc720|11223344556677885f5f5f5f5f	intel	xsavec ptr [eax]
+0fc728|11223344556677885f5f5f5f5f	gnu	xsaves (%eax)
+0fc728|11223344556677885f5f5f5f5f	intel	xsaves ptr [eax]
+0fc730|11223344556677885f5f5f5f5f	gnu	error: unrecognized instruction
+0fc730|11223344556677885f5f5f5f5f	intel	error: unrecognized instruction
+0fc8|11223344556677885f5f5f5f5f5f	gnu	bswap %eax
+0fc8|11223344556677885f5f5f5f5f5f	intel	bswap eax
+0fd0|11223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0fd0|11223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0fd111|223344556677885f5f5f5f5f5f	gnu	psrlw (%ecx),%mm2
+0fd111|223344556677885f5f5f5f5f5f	intel	psrlw mmx2, qword ptr [ecx]
+0fd211|223344556677885f5f5f5f5f5f	gnu	psrld (%ecx),%mm2
+0fd211|223344556677885f5f5f5f5f5f	intel	psrld mmx2, qword ptr [ecx]
+0fd311|223344556677885f5f5f5f5f5f	gnu	psrlq (%ecx),%mm2
+0fd311|223344556677885f5f5f5f5f5f	intel	psrlq mmx2, qword ptr [ecx]
+0fd411|223344556677885f5f5f5f5f5f	gnu	paddq (%ecx),%mm2
+0fd411|223344556677885f5f5f5f5f5f	intel	paddq mmx2, qword ptr [ecx]
+0fd511|223344556677885f5f5f5f5f5f	gnu	pmullw (%ecx),%mm2
+0fd511|223344556677885f5f5f5f5f5f	intel	pmullw mmx2, qword ptr [ecx]
+0fd6|11223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0fd6|11223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0fd711|223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0fd711|223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0fd7c0|11223344556677885f5f5f5f5f	gnu	pmovmskb %mm0,%eax
+0fd7c0|11223344556677885f5f5f5f5f	intel	pmovmskb eax, mmx0
+0fd811|223344556677885f5f5f5f5f5f	gnu	psubusb (%ecx),%mm2
+0fd811|223344556677885f5f5f5f5f5f	intel	psubusb mmx2, qword ptr [ecx]
+0fd911|223344556677885f5f5f5f5f5f	gnu	psubusw (%ecx),%mm2
+0fd911|223344556677885f5f5f5f5f5f	intel	psubusw mmx2, qword ptr [ecx]
+0fda11|223344556677885f5f5f5f5f5f	gnu	pminub (%ecx),%mm2
+0fda11|223344556677885f5f5f5f5f5f	intel	pminub mmx2, qword ptr [ecx]
+0fdb11|223344556677885f5f5f5f5f5f	gnu	pand (%ecx),%mm2
+0fdb11|223344556677885f5f5f5f5f5f	intel	pand mmx2, qword ptr [ecx]
+0fdc11|223344556677885f5f5f5f5f5f	gnu	paddusb (%ecx),%mm2
+0fdc11|223344556677885f5f5f5f5f5f	intel	paddusb mmx2, qword ptr [ecx]
+0fdd11|223344556677885f5f5f5f5f5f	gnu	paddusw (%ecx),%mm2
+0fdd11|223344556677885f5f5f5f5f5f	intel	paddusw mmx2, qword ptr [ecx]
+0fde11|223344556677885f5f5f5f5f5f	gnu	pmaxub (%ecx),%mm2
+0fde11|223344556677885f5f5f5f5f5f	intel	pmaxub mmx2, qword ptr [ecx]
+0fdf11|223344556677885f5f5f5f5f5f	gnu	pandn (%ecx),%mm2
+0fdf11|223344556677885f5f5f5f5f5f	intel	pandn mmx2, qword ptr [ecx]
+0fe011|223344556677885f5f5f5f5f5f	gnu	pavgb (%ecx),%mm2
+0fe011|223344556677885f5f5f5f5f5f	intel	pavgb mmx2, qword ptr [ecx]
+0fe111|223344556677885f5f5f5f5f5f	gnu	psraw (%ecx),%mm2
+0fe111|223344556677885f5f5f5f5f5f	intel	psraw mmx2, qword ptr [ecx]
+0fe211|223344556677885f5f5f5f5f5f	gnu	psrad (%ecx),%mm2
+0fe211|223344556677885f5f5f5f5f5f	intel	psrad mmx2, qword ptr [ecx]
+0fe311|223344556677885f5f5f5f5f5f	gnu	pavgw (%ecx),%mm2
+0fe311|223344556677885f5f5f5f5f5f	intel	pavgw mmx2, qword ptr [ecx]
+0fe411|223344556677885f5f5f5f5f5f	gnu	pmulhuw (%ecx),%mm2
+0fe411|223344556677885f5f5f5f5f5f	intel	pmulhuw mmx2, qword ptr [ecx]
+0fe511|223344556677885f5f5f5f5f5f	gnu	pmulhw (%ecx),%mm2
+0fe511|223344556677885f5f5f5f5f5f	intel	pmulhw mmx2, qword ptr [ecx]
+0fe6|11223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0fe6|11223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0fe711|223344556677885f5f5f5f5f5f	gnu	movntq %mm2,(%ecx)
+0fe711|223344556677885f5f5f5f5f5f	intel	movntq qword ptr [ecx], mmx2
+0fe811|223344556677885f5f5f5f5f5f	gnu	psubsb (%ecx),%mm2
+0fe811|223344556677885f5f5f5f5f5f	intel	psubsb mmx2, qword ptr [ecx]
+0fe911|223344556677885f5f5f5f5f5f	gnu	psubsw (%ecx),%mm2
+0fe911|223344556677885f5f5f5f5f5f	intel	psubsw mmx2, qword ptr [ecx]
+0fea11|223344556677885f5f5f5f5f5f	gnu	pminsw (%ecx),%mm2
+0fea11|223344556677885f5f5f5f5f5f	intel	pminsw mmx2, qword ptr [ecx]
+0feb11|223344556677885f5f5f5f5f5f	gnu	por (%ecx),%mm2
+0feb11|223344556677885f5f5f5f5f5f	intel	por mmx2, qword ptr [ecx]
+0fec11|223344556677885f5f5f5f5f5f	gnu	paddsb (%ecx),%mm2
+0fec11|223344556677885f5f5f5f5f5f	intel	paddsb mmx2, qword ptr [ecx]
+0fed11|223344556677885f5f5f5f5f5f	gnu	paddsw (%ecx),%mm2
+0fed11|223344556677885f5f5f5f5f5f	intel	paddsw mmx2, qword ptr [ecx]
+0fee11|223344556677885f5f5f5f5f5f	gnu	pmaxsw (%ecx),%mm2
+0fee11|223344556677885f5f5f5f5f5f	intel	pmaxsw mmx2, qword ptr [ecx]
+0fef11|223344556677885f5f5f5f5f5f	gnu	pxor (%ecx),%mm2
+0fef11|223344556677885f5f5f5f5f5f	intel	pxor mmx2, qword ptr [ecx]
+0ff0|11223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0ff0|11223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0ff111|223344556677885f5f5f5f5f5f	gnu	psllw (%ecx),%mm2
+0ff111|223344556677885f5f5f5f5f5f	intel	psllw mmx2, qword ptr [ecx]
+0ff211|223344556677885f5f5f5f5f5f	gnu	pslld (%ecx),%mm2
+0ff211|223344556677885f5f5f5f5f5f	intel	pslld mmx2, qword ptr [ecx]
+0ff311|223344556677885f5f5f5f5f5f	gnu	psllq (%ecx),%mm2
+0ff311|223344556677885f5f5f5f5f5f	intel	psllq mmx2, qword ptr [ecx]
+0ff411|223344556677885f5f5f5f5f5f	gnu	pmuludq (%ecx),%mm2
+0ff411|223344556677885f5f5f5f5f5f	intel	pmuludq mmx2, qword ptr [ecx]
+0ff511|223344556677885f5f5f5f5f5f	gnu	pmaddwd (%ecx),%mm2
+0ff511|223344556677885f5f5f5f5f5f	intel	pmaddwd mmx2, qword ptr [ecx]
+0ff611|223344556677885f5f5f5f5f5f	gnu	psadbw (%ecx),%mm2
+0ff611|223344556677885f5f5f5f5f5f	intel	psadbw mmx2, qword ptr [ecx]
+0ff711|223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+0ff711|223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+0ff7c0|11223344556677885f5f5f5f5f	gnu	maskmovq %mm0,%mm0
+0ff7c0|11223344556677885f5f5f5f5f	intel	maskmovq mmx0, mmx0
+0ff811|223344556677885f5f5f5f5f5f	gnu	psubb (%ecx),%mm2
+0ff811|223344556677885f5f5f5f5f5f	intel	psubb mmx2, qword ptr [ecx]
+0ff911|223344556677885f5f5f5f5f5f	gnu	psubw (%ecx),%mm2
+0ff911|223344556677885f5f5f5f5f5f	intel	psubw mmx2, qword ptr [ecx]
+0ffa11|223344556677885f5f5f5f5f5f	gnu	psubd (%ecx),%mm2
+0ffa11|223344556677885f5f5f5f5f5f	intel	psubd mmx2, qword ptr [ecx]
+0ffb11|223344556677885f5f5f5f5f5f	gnu	psubq (%ecx),%mm2
+0ffb11|223344556677885f5f5f5f5f5f	intel	psubq mmx2, qword ptr [ecx]
+0ffc11|223344556677885f5f5f5f5f5f	gnu	paddb (%ecx),%mm2
+0ffc11|223344556677885f5f5f5f5f5f	intel	paddb mmx2, qword ptr [ecx]
+0ffd11|223344556677885f5f5f5f5f5f	gnu	paddw (%ecx),%mm2
+0ffd11|223344556677885f5f5f5f5f5f	intel	paddw mmx2, qword ptr [ecx]
+0ffe11|223344556677885f5f5f5f5f5f	gnu	paddd (%ecx),%mm2
+0ffe11|223344556677885f5f5f5f5f5f	intel	paddd mmx2, qword ptr [ecx]
+1011|223344556677885f5f5f5f5f5f5f	gnu	adc %dl,(%ecx)
+1011|223344556677885f5f5f5f5f5f5f	intel	adc byte ptr [ecx], dl
+1111|223344556677885f5f5f5f5f5f5f	gnu	adc %edx,(%ecx)
+1111|223344556677885f5f5f5f5f5f5f	intel	adc dword ptr [ecx], edx
+1211|223344556677885f5f5f5f5f5f5f	gnu	adc (%ecx),%dl
+1211|223344556677885f5f5f5f5f5f5f	intel	adc dl, byte ptr [ecx]
+1311|223344556677885f5f5f5f5f5f5f	gnu	adc (%ecx),%edx
+1311|223344556677885f5f5f5f5f5f5f	intel	adc edx, dword ptr [ecx]
+1411|223344556677885f5f5f5f5f5f5f	gnu	adc $0x11,%al
+1411|223344556677885f5f5f5f5f5f5f	intel	adc al, 0x11
+1511223344|556677885f5f5f5f5f5f5f	gnu	adc $0x44332211,%eax
+1511223344|556677885f5f5f5f5f5f5f	intel	adc eax, 0x44332211
+16|11223344556677885f5f5f5f5f5f5f	gnu	push %ss
+16|11223344556677885f5f5f5f5f5f5f	intel	push ss
+17|11223344556677885f5f5f5f5f5f5f	gnu	pop %ss
+17|11223344556677885f5f5f5f5f5f5f	intel	pop ss
+1811|223344556677885f5f5f5f5f5f5f	gnu	sbb %dl,(%ecx)
+1811|223344556677885f5f5f5f5f5f5f	intel	sbb byte ptr [ecx], dl
+1911|223344556677885f5f5f5f5f5f5f	gnu	sbb %edx,(%ecx)
+1911|223344556677885f5f5f5f5f5f5f	intel	sbb dword ptr [ecx], edx
+1a11|223344556677885f5f5f5f5f5f5f	gnu	sbb (%ecx),%dl
+1a11|223344556677885f5f5f5f5f5f5f	intel	sbb dl, byte ptr [ecx]
+1b11|223344556677885f5f5f5f5f5f5f	gnu	sbb (%ecx),%edx
+1b11|223344556677885f5f5f5f5f5f5f	intel	sbb edx, dword ptr [ecx]
+1c11|223344556677885f5f5f5f5f5f5f	gnu	sbb $0x11,%al
+1c11|223344556677885f5f5f5f5f5f5f	intel	sbb al, 0x11
+1d11223344|556677885f5f5f5f5f5f5f	gnu	sbb $0x44332211,%eax
+1d11223344|556677885f5f5f5f5f5f5f	intel	sbb eax, 0x44332211
+1e|11223344556677885f5f5f5f5f5f5f	gnu	push %ds
+1e|11223344556677885f5f5f5f5f5f5f	intel	push ds
+1f|11223344556677885f5f5f5f5f5f5f	gnu	pop %ds
+1f|11223344556677885f5f5f5f5f5f5f	intel	pop ds
+2011|223344556677885f5f5f5f5f5f5f	gnu	and %dl,(%ecx)
+2011|223344556677885f5f5f5f5f5f5f	intel	and byte ptr [ecx], dl
+2111|223344556677885f5f5f5f5f5f5f	gnu	and %edx,(%ecx)
+2111|223344556677885f5f5f5f5f5f5f	intel	and dword ptr [ecx], edx
+2211|223344556677885f5f5f5f5f5f5f	gnu	and (%ecx),%dl
+2211|223344556677885f5f5f5f5f5f5f	intel	and dl, byte ptr [ecx]
+2311|223344556677885f5f5f5f5f5f5f	gnu	and (%ecx),%edx
+2311|223344556677885f5f5f5f5f5f5f	intel	and edx, dword ptr [ecx]
+2411|223344556677885f5f5f5f5f5f5f	gnu	and $0x11,%al
+2411|223344556677885f5f5f5f5f5f5f	intel	and al, 0x11
+2511223344|556677885f5f5f5f5f5f5f	gnu	and $0x44332211,%eax
+2511223344|556677885f5f5f5f5f5f5f	intel	and eax, 0x44332211
+260411|223344556677885f5f5f5f5f5f	gnu	es add $0x11,%al
+260411|223344556677885f5f5f5f5f5f	intel	add al, 0x11
+261122|3344556677885f5f5f5f5f5f5f	gnu	adc %esp,%es:(%edx)
+261122|3344556677885f5f5f5f5f5f5f	intel	adc dword ptr es:[edx], esp
+26261122|3344556677885f5f5f5f5f5f	gnu	es adc %esp,%es:(%edx)
+26261122|3344556677885f5f5f5f5f5f	intel	adc dword ptr es:[edx], esp
+262e1122|3344556677885f5f5f5f5f5f	gnu	adc %esp,%cs:%es:(%edx)
+262e1122|3344556677885f5f5f5f5f5f	intel	adc dword ptr cs:[edx], esp
+266e|11223344556677885f5f5f5f5f5f	gnu	outsb %es:(%esi),(%dx)
+266e|11223344556677885f5f5f5f5f5f	intel	outsb es
+267011|223344556677885f5f5f5f5f5f	gnu	es jo .+0x11
+267011|223344556677885f5f5f5f5f5f	intel	jo .+0x11
+26a011223344|556677885f5f5f5f5f5f	gnu	mov %es:0x44332211,%al
+26a011223344|556677885f5f5f5f5f5f	intel	mov al, byte ptr es:[0x44332211]
+26|8211223344556677885f5f5f5f5f5f	gnu	es
+26|8211223344556677885f5f5f5f5f5f	intel	es
+27|11223344556677885f5f5f5f5f5f5f	gnu	daa
+27|11223344556677885f5f5f5f5f5f5f	intel	daa
+2811|223344556677885f5f5f5f5f5f5f	gnu	sub %dl,(%ecx)
+2811|223344556677885f5f5f5f5f5f5f	intel	sub byte ptr [ecx], dl
+2911|223344556677885f5f5f5f5f5f5f	gnu	sub %edx,(%ecx)
+2911|223344556677885f5f5f5f5f5f5f	intel	sub dword ptr [ecx], edx
+2a11|223344556677885f5f5f5f5f5f5f	gnu	sub (%ecx),%dl
+2a11|223344556677885f5f5f5f5f5f5f	intel	sub dl, byte ptr [ecx]
+2b11|223344556677885f5f5f5f5f5f5f	gnu	sub (%ecx),%edx
+2b11|223344556677885f5f5f5f5f5f5f	intel	sub edx, dword ptr [ecx]
+2c11|223344556677885f5f5f5f5f5f5f	gnu	sub $0x11,%al
+2c11|223344556677885f5f5f5f5f5f5f	intel	sub al, 0x11
+2d11223344|556677885f5f5f5f5f5f5f	gnu	sub $0x44332211,%eax
+2d11223344|556677885f5f5f5f5f5f5f	intel	sub eax, 0x44332211
+2e261122|3344556677885f5f5f5f5f5f	gnu	adc %esp,%cs:%es:(%edx)
+2e7011|223344556677885f5f5f5f5f5f	gnu	jo,pn .+0x11
+2e7011|223344556677885f5f5f5f5f5f	intel	hint-not-taken jo .+0x11
+2f|11223344556677885f5f5f5f5f5f5f	gnu	das
+2f|11223344556677885f5f5f5f5f5f5f	intel	das
+3011|223344556677885f5f5f5f5f5f5f	gnu	xor %dl,(%ecx)
+3011|223344556677885f5f5f5f5f5f5f	intel	xor byte ptr [ecx], dl
+3111|223344556677885f5f5f5f5f5f5f	gnu	xor %edx,(%ecx)
+3111|223344556677885f5f5f5f5f5f5f	intel	xor dword ptr [ecx], edx
+3211|223344556677885f5f5f5f5f5f5f	gnu	xor (%ecx),%dl
+3211|223344556677885f5f5f5f5f5f5f	intel	xor dl, byte ptr [ecx]
+3311|223344556677885f5f5f5f5f5f5f	gnu	xor (%ecx),%edx
+3311|223344556677885f5f5f5f5f5f5f	intel	xor edx, dword ptr [ecx]
+3411|223344556677885f5f5f5f5f5f5f	gnu	xor $0x11,%al
+3411|223344556677885f5f5f5f5f5f5f	intel	xor al, 0x11
+3511223344|556677885f5f5f5f5f5f5f	gnu	xor $0x44332211,%eax
+3511223344|556677885f5f5f5f5f5f5f	intel	xor eax, 0x44332211
+361122|3344556677885f5f5f5f5f5f5f	gnu	adc %esp,%ss:(%edx)
+361122|3344556677885f5f5f5f5f5f5f	intel	adc dword ptr ss:[edx], esp
+36261122|3344556677885f5f5f5f5f5f	gnu	adc %esp,%ss:%es:(%edx)
+3667f3660f2ac0|11223344556677885f	gnu	ss addr16 cvtsi2ss %ax,%xmm0
+3667f3660f2ac0|11223344556677885f	intel	addr16 cvtsi2ss xmm0, eax
+3667f3660ff7c0|11223344556677885f	gnu	ss addr16 rep maskmovdqu %xmm0,%xmm0
+36|67f3660ff7c011223344556677885f	intel	ss
+36|f0f2f33e66f066f2f33e3666818411	gnu	ss
+36|f0f2f33e66f066f2f33e3666818411	intel	ss
+36|f2f33ef0f78411223344556677885f	gnu	ss
+36|f2f33ef0f78411223344556677885f	intel	ss
+37|11223344556677885f5f5f5f5f5f5f	gnu	aaa
+37|11223344556677885f5f5f5f5f5f5f	intel	aaa
+3811|223344556677885f5f5f5f5f5f5f	gnu	cmp %dl,(%ecx)
+3811|223344556677885f5f5f5f5f5f5f	intel	cmp byte ptr [ecx], dl
+3911|223344556677885f5f5f5f5f5f5f	gnu	cmp %edx,(%ecx)
+3911|223344556677885f5f5f5f5f5f5f	intel	cmp dword ptr [ecx], edx
+3a11|223344556677885f5f5f5f5f5f5f	gnu	cmp (%ecx),%dl
+3a11|223344556677885f5f5f5f5f5f5f	intel	cmp dl, byte ptr [ecx]
+3b11|223344556677885f5f5f5f5f5f5f	gnu	cmp (%ecx),%edx
+3b11|223344556677885f5f5f5f5f5f5f	intel	cmp edx, dword ptr [ecx]
+3c11|223344556677885f5f5f5f5f5f5f	gnu	cmp $0x11,%al
+3c11|223344556677885f5f5f5f5f5f5f	intel	cmp al, 0x11
+3d11223344|556677885f5f5f5f5f5f5f	gnu	cmp $0x44332211,%eax
+3d11223344|556677885f5f5f5f5f5f5f	intel	cmp eax, 0x44332211
+3e0ff7c0|11223344556677885f5f5f5f	intel	maskmovq mmx0, mmx0
+3e1122|3344556677885f5f5f5f5f5f5f	gnu	adc %esp,%ds:(%edx)
+3e1122|3344556677885f5f5f5f5f5f5f	intel	adc dword ptr [edx], esp
+3e261122|3344556677885f5f5f5f5f5f	gnu	adc %esp,%ds:%es:(%edx)
+3e2e7011|223344556677885f5f5f5f5f	gnu	ds cs jo .+0x11
+3e67e011|223344556677885f5f5f5f5f	gnu	loopnew,pt .+0x11
+3e67e011|223344556677885f5f5f5f5f	intel	addr16 loopne .+0x11
+3e7011|223344556677885f5f5f5f5f5f	intel	hint-taken jo .+0x11
+3ef367660f38f011|223344556677885f	gnu	rep movbe %ds:(%bx,%di),%dx
+3ef367660f38f011|223344556677885f	intel	movbe dx, word ptr [bx+di*1]
+3f|11223344556677885f5f5f5f5f5f5f	gnu	aas
+3f|11223344556677885f5f5f5f5f5f5f	intel	aas
+40|11223344556677885f5f5f5f5f5f5f	gnu	inc %eax
+40|11223344556677885f5f5f5f5f5f5f	intel	inc eax
+48|11223344556677885f5f5f5f5f5f5f	gnu	dec %eax
+48|11223344556677885f5f5f5f5f5f5f	intel	dec eax
+50|11223344556677885f5f5f5f5f5f5f	gnu	push %eax
+50|11223344556677885f5f5f5f5f5f5f	intel	push eax
+58|11223344556677885f5f5f5f5f5f5f	gnu	pop %eax
+58|11223344556677885f5f5f5f5f5f5f	intel	pop eax
+60|11223344556677885f5f5f5f5f5f5f	gnu	pusha
+60|11223344556677885f5f5f5f5f5f5f	intel	pushad
+61|11223344556677885f5f5f5f5f5f5f	gnu	popa
+61|11223344556677885f5f5f5f5f5f5f	intel	popad
+6211|223344556677885f5f5f5f5f5f5f	gnu	bound %edx,(%ecx)
+6211|223344556677885f5f5f5f5f5f5f	intel	bound edx, qword ptr [ecx]
+62c0|11223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+62c0|11223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+6311|223344556677885f5f5f5f5f5f5f	gnu	arpl %dx,(%ecx)
+6311|223344556677885f5f5f5f5f5f5f	intel	arpl word ptr [ecx], dx
+641122|3344556677885f5f5f5f5f5f5f	gnu	adc %esp,%fs:(%edx)
+641122|3344556677885f5f5f5f5f5f5f	intel	adc dword ptr fs:[edx], esp
+64261122|3344556677885f5f5f5f5f5f	gnu	adc %esp,%es:%fs:(%edx)
+651122|3344556677885f5f5f5f5f5f5f	gnu	adc %esp,%gs:(%edx)
+651122|3344556677885f5f5f5f5f5f5f	intel	adc dword ptr gs:[edx], esp
+65261122|3344556677885f5f5f5f5f5f	gnu	adc %esp,%es:%gs:(%edx)
+660111|223344556677885f5f5f5f5f5f	gnu	add %dx,(%ecx)
+660111|223344556677885f5f5f5f5f5f	intel	add word ptr [ecx], dx
+660311|223344556677885f5f5f5f5f5f	gnu	add (%ecx),%dx
+660311|223344556677885f5f5f5f5f5f	intel	add dx, word ptr [ecx]
+66051122|3344556677885f5f5f5f5f5f	gnu	add $0x2211,%ax
+66051122|3344556677885f5f5f5f5f5f	intel	add ax, 0x2211
+6606|11223344556677885f5f5f5f5f5f	gnu	pushw %es
+660911|223344556677885f5f5f5f5f5f	gnu	or %dx,(%ecx)
+660911|223344556677885f5f5f5f5f5f	intel	or word ptr [ecx], dx
+660b11|223344556677885f5f5f5f5f5f	gnu	or (%ecx),%dx
+660b11|223344556677885f5f5f5f5f5f	intel	or dx, word ptr [ecx]
+660d1122|3344556677885f5f5f5f5f5f	gnu	or $0x2211,%ax
+660d1122|3344556677885f5f5f5f5f5f	intel	or ax, 0x2211
+660f0000|11223344556677885f5f5f5f	gnu	data16 sldt (%eax)
+660f0000|11223344556677885f5f5f5f	intel	sldt word ptr [eax]
+660f0008|11223344556677885f5f5f5f	gnu	data16 str (%eax)
+660f0008|11223344556677885f5f5f5f	intel	str word ptr [eax]
+660f01a611223344|556677885f5f5f5f	gnu	data16 smsw 0x44332211(%esi)
+660f01a611223344|556677885f5f5f5f	intel	smsw word ptr [esi+0x44332211]
+660f0211|223344556677885f5f5f5f5f	gnu	lar (%ecx),%dx
+660f0211|223344556677885f5f5f5f5f	intel	lar dx, word ptr [ecx]
+660f0311|223344556677885f5f5f5f5f	gnu	lsl (%ecx),%dx
+660f0311|223344556677885f5f5f5f5f	intel	lsl dx, word ptr [ecx]
+660f1011|223344556677885f5f5f5f5f	gnu	movupd (%ecx),%xmm2
+660f1011|223344556677885f5f5f5f5f	intel	movupd xmm2, xmmword ptr [ecx]
+660f1122|3344556677885f5f5f5f5f5f	gnu	movupd %xmm4,(%edx)
+660f1122|3344556677885f5f5f5f5f5f	intel	movupd xmmword ptr [edx], xmm4
+660f1211|223344556677885f5f5f5f5f	gnu	movlpd (%ecx),%xmm2
+660f1211|223344556677885f5f5f5f5f	intel	movlpd xmm2, qword ptr [ecx]
+660f1311|223344556677885f5f5f5f5f	gnu	movlpd %xmm2,(%ecx)
+660f1311|223344556677885f5f5f5f5f	intel	movlpd qword ptr [ecx], xmm2
+660f1411|223344556677885f5f5f5f5f	gnu	unpcklpd (%ecx),%xmm2
+660f1411|223344556677885f5f5f5f5f	intel	unpcklpd xmm2, xmmword ptr [ecx]
+660f1511|223344556677885f5f5f5f5f	gnu	unpckhpd (%ecx),%xmm2
+660f1511|223344556677885f5f5f5f5f	intel	unpckhpd xmm2, xmmword ptr [ecx]
+660f1611|223344556677885f5f5f5f5f	gnu	movhpd (%ecx),%xmm2
+660f1611|223344556677885f5f5f5f5f	intel	movhpd xmm2, qword ptr [ecx]
+660f1711|223344556677885f5f5f5f5f	gnu	movhpd %xmm2,(%ecx)
+660f1711|223344556677885f5f5f5f5f	intel	movhpd qword ptr [ecx], xmm2
+660f1f00|11223344556677885f5f5f5f	gnu	nopw (%eax)
+660f1f00|11223344556677885f5f5f5f	intel	nop word ptr [eax], ax
+660f2811|223344556677885f5f5f5f5f	gnu	movapd (%ecx),%xmm2
+660f2811|223344556677885f5f5f5f5f	intel	movapd xmm2, xmmword ptr [ecx]
+660f2911|223344556677885f5f5f5f5f	gnu	movapd %xmm2,(%ecx)
+660f2911|223344556677885f5f5f5f5f	intel	movapd xmmword ptr [ecx], xmm2
+660f2a11|223344556677885f5f5f5f5f	gnu	cvtpi2pd (%ecx),%xmm2
+660f2a11|223344556677885f5f5f5f5f	intel	cvtpi2pd xmm2, qword ptr [ecx]
+660f2b11|223344556677885f5f5f5f5f	gnu	movntpd %xmm2,(%ecx)
+660f2b11|223344556677885f5f5f5f5f	intel	movntpd xmmword ptr [ecx], xmm2
+660f2c11|223344556677885f5f5f5f5f	gnu	cvttpd2pi (%ecx),%mm2
+660f2c11|223344556677885f5f5f5f5f	intel	cvttpd2pi mmx2, xmmword ptr [ecx]
+660f2d11|223344556677885f5f5f5f5f	gnu	cvtpd2pi (%ecx),%mm2
+660f2d11|223344556677885f5f5f5f5f	intel	cvtpd2pi mmx2, xmmword ptr [ecx]
+660f2e11|223344556677885f5f5f5f5f	gnu	ucomisd (%ecx),%xmm2
+660f2e11|223344556677885f5f5f5f5f	intel	ucomisd xmm2, qword ptr [ecx]
+660f2f11|223344556677885f5f5f5f5f	gnu	comisd (%ecx),%xmm2
+660f2f11|223344556677885f5f5f5f5f	intel	comisd xmm2, qword ptr [ecx]
+660f380011|223344556677885f5f5f5f	gnu	pshufb (%ecx),%xmm2
+660f380011|223344556677885f5f5f5f	intel	pshufb xmm2, xmmword ptr [ecx]
+660f380111|223344556677885f5f5f5f	gnu	phaddw (%ecx),%xmm2
+660f380111|223344556677885f5f5f5f	intel	phaddw xmm2, xmmword ptr [ecx]
+660f380211|223344556677885f5f5f5f	gnu	phaddd (%ecx),%xmm2
+660f380211|223344556677885f5f5f5f	intel	phaddd xmm2, xmmword ptr [ecx]
+660f380311|223344556677885f5f5f5f	gnu	phaddsw (%ecx),%xmm2
+660f380311|223344556677885f5f5f5f	intel	phaddsw xmm2, xmmword ptr [ecx]
+660f380411|223344556677885f5f5f5f	gnu	pmaddubsw (%ecx),%xmm2
+660f380411|223344556677885f5f5f5f	intel	pmaddubsw xmm2, xmmword ptr [ecx]
+660f380511|223344556677885f5f5f5f	gnu	phsubw (%ecx),%xmm2
+660f380511|223344556677885f5f5f5f	intel	phsubw xmm2, xmmword ptr [ecx]
+660f380611|223344556677885f5f5f5f	gnu	phsubd (%ecx),%xmm2
+660f380611|223344556677885f5f5f5f	intel	phsubd xmm2, xmmword ptr [ecx]
+660f380711|223344556677885f5f5f5f	gnu	phsubsw (%ecx),%xmm2
+660f380711|223344556677885f5f5f5f	intel	phsubsw xmm2, xmmword ptr [ecx]
+660f380811|223344556677885f5f5f5f	gnu	psignb (%ecx),%xmm2
+660f380811|223344556677885f5f5f5f	intel	psignb xmm2, xmmword ptr [ecx]
+660f380911|223344556677885f5f5f5f	gnu	psignw (%ecx),%xmm2
+660f380911|223344556677885f5f5f5f	intel	psignw xmm2, xmmword ptr [ecx]
+660f380a11|223344556677885f5f5f5f	gnu	psignd (%ecx),%xmm2
+660f380a11|223344556677885f5f5f5f	intel	psignd xmm2, xmmword ptr [ecx]
+660f380b11|223344556677885f5f5f5f	gnu	pmulhrsw (%ecx),%xmm2
+660f380b11|223344556677885f5f5f5f	intel	pmulhrsw xmm2, xmmword ptr [ecx]
+660f381011|223344556677885f5f5f5f	gnu	pblendvb %xmm0,(%ecx),%xmm2
+660f381011|223344556677885f5f5f5f	intel	pblendvb xmm2, xmmword ptr [ecx]
+660f381411|223344556677885f5f5f5f	gnu	blendvps %xmm0,(%ecx),%xmm2
+660f381411|223344556677885f5f5f5f	intel	blendvps xmm2, xmmword ptr [ecx]
+660f381511|223344556677885f5f5f5f	gnu	blendvpd %xmm0,(%ecx),%xmm2
+660f381511|223344556677885f5f5f5f	intel	blendvpd xmm2, xmmword ptr [ecx]
+660f381711|223344556677885f5f5f5f	gnu	ptest (%ecx),%xmm2
+660f381711|223344556677885f5f5f5f	intel	ptest xmm2, xmmword ptr [ecx]
+660f381c11|223344556677885f5f5f5f	gnu	pabsb (%ecx),%xmm2
+660f381c11|223344556677885f5f5f5f	intel	pabsb xmm2, xmmword ptr [ecx]
+660f381d11|223344556677885f5f5f5f	gnu	pabsw (%ecx),%xmm2
+660f381d11|223344556677885f5f5f5f	intel	pabsw xmm2, xmmword ptr [ecx]
+660f381e11|223344556677885f5f5f5f	gnu	pabsd (%ecx),%xmm2
+660f381e11|223344556677885f5f5f5f	intel	pabsd xmm2, xmmword ptr [ecx]
+660f382011|223344556677885f5f5f5f	gnu	pmovsxbw (%ecx),%xmm2
+660f382011|223344556677885f5f5f5f	intel	pmovsxbw xmm2, qword ptr [ecx]
+660f382111|223344556677885f5f5f5f	gnu	pmovsxbd (%ecx),%xmm2
+660f382111|223344556677885f5f5f5f	intel	pmovsxbd xmm2, dword ptr [ecx]
+660f382211|223344556677885f5f5f5f	gnu	pmovsxbq (%ecx),%xmm2
+660f382211|223344556677885f5f5f5f	intel	pmovsxbq xmm2, word ptr [ecx]
+660f382311|223344556677885f5f5f5f	gnu	pmovsxwd (%ecx),%xmm2
+660f382311|223344556677885f5f5f5f	intel	pmovsxwd xmm2, qword ptr [ecx]
+660f382411|223344556677885f5f5f5f	gnu	pmovsxwq (%ecx),%xmm2
+660f382411|223344556677885f5f5f5f	intel	pmovsxwq xmm2, dword ptr [ecx]
+660f382511|223344556677885f5f5f5f	gnu	pmovsxdq (%ecx),%xmm2
+660f382511|223344556677885f5f5f5f	intel	pmovsxdq xmm2, qword ptr [ecx]
+660f382811|223344556677885f5f5f5f	gnu	pmuldq (%ecx),%xmm2
+660f382811|223344556677885f5f5f5f	intel	pmuldq xmm2, xmmword ptr [ecx]
+660f382911|223344556677885f5f5f5f	gnu	pcmpeqq (%ecx),%xmm2
+660f382911|223344556677885f5f5f5f	intel	pcmpeqq xmm2, xmmword ptr [ecx]
+660f382a11|223344556677885f5f5f5f	gnu	movntdqa (%ecx),%xmm2
+660f382a11|223344556677885f5f5f5f	intel	movntdqa xmm2, xmmword ptr [ecx]
+660f382b11|223344556677885f5f5f5f	gnu	packusdw (%ecx),%xmm2
+660f382b11|223344556677885f5f5f5f	intel	packusdw xmm2, xmmword ptr [ecx]
+660f383011|223344556677885f5f5f5f	gnu	pmovzxbw (%ecx),%xmm2
+660f383011|223344556677885f5f5f5f	intel	pmovzxbw xmm2, qword ptr [ecx]
+660f383111|223344556677885f5f5f5f	gnu	pmovzxbd (%ecx),%xmm2
+660f383111|223344556677885f5f5f5f	intel	pmovzxbd xmm2, dword ptr [ecx]
+660f383211|223344556677885f5f5f5f	gnu	pmovzxbq (%ecx),%xmm2
+660f383211|223344556677885f5f5f5f	intel	pmovzxbq xmm2, word ptr [ecx]
+660f383311|223344556677885f5f5f5f	gnu	pmovzxwd (%ecx),%xmm2
+660f383311|223344556677885f5f5f5f	intel	pmovzxwd xmm2, qword ptr [ecx]
+660f383411|223344556677885f5f5f5f	gnu	pmovzxwq (%ecx),%xmm2
+660f383411|223344556677885f5f5f5f	intel	pmovzxwq xmm2, dword ptr [ecx]
+660f383511|223344556677885f5f5f5f	gnu	pmovzxdq (%ecx),%xmm2
+660f383511|223344556677885f5f5f5f	intel	pmovzxdq xmm2, qword ptr [ecx]
+660f383711|223344556677885f5f5f5f	gnu	pcmpgtq (%ecx),%xmm2
+660f383711|223344556677885f5f5f5f	intel	pcmpgtq xmm2, xmmword ptr [ecx]
+660f383811|223344556677885f5f5f5f	gnu	pminsb (%ecx),%xmm2
+660f383811|223344556677885f5f5f5f	intel	pminsb xmm2, xmmword ptr [ecx]
+660f383911|223344556677885f5f5f5f	gnu	pminsd (%ecx),%xmm2
+660f383911|223344556677885f5f5f5f	intel	pminsd xmm2, xmmword ptr [ecx]
+660f383a11|223344556677885f5f5f5f	gnu	pminuw (%ecx),%xmm2
+660f383a11|223344556677885f5f5f5f	intel	pminuw xmm2, xmmword ptr [ecx]
+660f383b11|223344556677885f5f5f5f	gnu	pminud (%ecx),%xmm2
+660f383b11|223344556677885f5f5f5f	intel	pminud xmm2, xmmword ptr [ecx]
+660f383c11|223344556677885f5f5f5f	gnu	pmaxsb (%ecx),%xmm2
+660f383c11|223344556677885f5f5f5f	intel	pmaxsb xmm2, xmmword ptr [ecx]
+660f383d11|223344556677885f5f5f5f	gnu	pmaxsd (%ecx),%xmm2
+660f383d11|223344556677885f5f5f5f	intel	pmaxsd xmm2, xmmword ptr [ecx]
+660f383e11|223344556677885f5f5f5f	gnu	pmaxuw (%ecx),%xmm2
+660f383e11|223344556677885f5f5f5f	intel	pmaxuw xmm2, xmmword ptr [ecx]
+660f383f11|223344556677885f5f5f5f	gnu	pmaxud (%ecx),%xmm2
+660f383f11|223344556677885f5f5f5f	intel	pmaxud xmm2, xmmword ptr [ecx]
+660f384011|223344556677885f5f5f5f	gnu	pmulld (%ecx),%xmm2
+660f384011|223344556677885f5f5f5f	intel	pmulld xmm2, xmmword ptr [ecx]
+660f384111|223344556677885f5f5f5f	gnu	phminposuw (%ecx),%xmm2
+660f384111|223344556677885f5f5f5f	intel	phminposuw xmm2, xmmword ptr [ecx]
+660f388211|223344556677885f5f5f5f	gnu	invpcid (%ecx),%edx
+660f388211|223344556677885f5f5f5f	intel	invpcid edx, xmmword ptr [ecx]
+660f38db11|223344556677885f5f5f5f	gnu	aesimc (%ecx),%xmm2
+660f38db11|223344556677885f5f5f5f	intel	aesimc xmm2, xmmword ptr [ecx]
+660f38dc11|223344556677885f5f5f5f	gnu	aesenc (%ecx),%xmm2
+660f38dc11|223344556677885f5f5f5f	intel	aesenc xmm2, xmmword ptr [ecx]
+660f38dd11|223344556677885f5f5f5f	gnu	aesenclast (%ecx),%xmm2
+660f38dd11|223344556677885f5f5f5f	intel	aesenclast xmm2, xmmword ptr [ecx]
+660f38de11|223344556677885f5f5f5f	gnu	aesdec (%ecx),%xmm2
+660f38de11|223344556677885f5f5f5f	intel	aesdec xmm2, xmmword ptr [ecx]
+660f38df11|223344556677885f5f5f5f	gnu	aesdeclast (%ecx),%xmm2
+660f38df11|223344556677885f5f5f5f	intel	aesdeclast xmm2, xmmword ptr [ecx]
+660f3a081122|3344556677885f5f5f5f	gnu	roundps $0x22,(%ecx),%xmm2
+660f3a081122|3344556677885f5f5f5f	intel	roundps xmm2, xmmword ptr [ecx], 0x22
+660f3a091122|3344556677885f5f5f5f	gnu	roundpd $0x22,(%ecx),%xmm2
+660f3a091122|3344556677885f5f5f5f	intel	roundpd xmm2, xmmword ptr [ecx], 0x22
+660f3a0a1122|3344556677885f5f5f5f	gnu	roundss $0x22,(%ecx),%xmm2
+660f3a0a1122|3344556677885f5f5f5f	intel	roundss xmm2, dword ptr [ecx], 0x22
+660f3a0b1122|3344556677885f5f5f5f	gnu	roundsd $0x22,(%ecx),%xmm2
+660f3a0b1122|3344556677885f5f5f5f	intel	roundsd xmm2, qword ptr [ecx], 0x22
+660f3a0c1122|3344556677885f5f5f5f	gnu	blendps $0x22,(%ecx),%xmm2
+660f3a0c1122|3344556677885f5f5f5f	intel	blendps xmm2, xmmword ptr [ecx], 0x22
+660f3a0d1122|3344556677885f5f5f5f	gnu	blendpd $0x22,(%ecx),%xmm2
+660f3a0d1122|3344556677885f5f5f5f	intel	blendpd xmm2, xmmword ptr [ecx], 0x22
+660f3a0e1122|3344556677885f5f5f5f	gnu	pblendw $0x22,(%ecx),%xmm2
+660f3a0e1122|3344556677885f5f5f5f	intel	pblendw xmm2, xmmword ptr [ecx], 0x22
+660f3a0f1122|3344556677885f5f5f5f	gnu	palignr $0x22,(%ecx),%xmm2
+660f3a0f1122|3344556677885f5f5f5f	intel	palignr xmm2, xmmword ptr [ecx], 0x22
+660f3a141122|3344556677885f5f5f5f	gnu	pextrb $0x22,%xmm2,(%ecx)
+660f3a141122|3344556677885f5f5f5f	intel	pextrb byte ptr [ecx], xmm2, 0x22
+660f3a151122|3344556677885f5f5f5f	gnu	pextrw $0x22,%xmm2,(%ecx)
+660f3a151122|3344556677885f5f5f5f	intel	pextrw word ptr [ecx], xmm2, 0x22
+660f3a161122|3344556677885f5f5f5f	gnu	pextrd $0x22,%xmm2,(%ecx)
+660f3a161122|3344556677885f5f5f5f	intel	pextrd dword ptr [ecx], xmm2, 0x22
+660f3a171122|3344556677885f5f5f5f	gnu	extractps $0x22,%xmm2,(%ecx)
+660f3a171122|3344556677885f5f5f5f	intel	extractps dword ptr [ecx], xmm2, 0x22
+660f3a201122|3344556677885f5f5f5f	gnu	pinsrb $0x22,(%ecx),%xmm2
+660f3a201122|3344556677885f5f5f5f	intel	pinsrb xmm2, byte ptr [ecx], 0x22
+660f3a211122|3344556677885f5f5f5f	gnu	insertps $0x22,(%ecx),%xmm2
+660f3a211122|3344556677885f5f5f5f	intel	insertps xmm2, dword ptr [ecx], 0x22
+660f3a221122|3344556677885f5f5f5f	gnu	pinsrd $0x22,(%ecx),%xmm2
+660f3a221122|3344556677885f5f5f5f	intel	pinsrd xmm2, dword ptr [ecx], 0x22
+660f3a401122|3344556677885f5f5f5f	gnu	dpps $0x22,(%ecx),%xmm2
+660f3a401122|3344556677885f5f5f5f	intel	dpps xmm2, xmmword ptr [ecx], 0x22
+660f3a411122|3344556677885f5f5f5f	gnu	dppd $0x22,(%ecx),%xmm2
+660f3a411122|3344556677885f5f5f5f	intel	dppd xmm2, xmmword ptr [ecx], 0x22
+660f3a421122|3344556677885f5f5f5f	gnu	mpsadbw $0x22,(%ecx),%xmm2
+660f3a421122|3344556677885f5f5f5f	intel	mpsadbw xmm2, xmmword ptr [ecx], 0x22
+660f3a441122|3344556677885f5f5f5f	gnu	pclmulqdq $0x22,(%ecx),%xmm2
+660f3a441122|3344556677885f5f5f5f	intel	pclmulqdq xmm2, xmmword ptr [ecx], 0x22
+660f3a601122|3344556677885f5f5f5f	gnu	pcmpestrm $0x22,(%ecx),%xmm2
+660f3a601122|3344556677885f5f5f5f	intel	pcmpestrm xmm2, xmmword ptr [ecx], 0x22
+660f3a611122|3344556677885f5f5f5f	gnu	pcmpestri $0x22,(%ecx),%xmm2
+660f3a611122|3344556677885f5f5f5f	intel	pcmpestri xmm2, xmmword ptr [ecx], 0x22
+660f3a621122|3344556677885f5f5f5f	gnu	pcmpistrm $0x22,(%ecx),%xmm2
+660f3a621122|3344556677885f5f5f5f	intel	pcmpistrm xmm2, xmmword ptr [ecx], 0x22
+660f3a631122|3344556677885f5f5f5f	gnu	pcmpistri $0x22,(%ecx),%xmm2
+660f3a631122|3344556677885f5f5f5f	intel	pcmpistri xmm2, xmmword ptr [ecx], 0x22
+660f3adf1122|3344556677885f5f5f5f	gnu	aeskeygenassist $0x22,(%ecx),%xmm2
+660f3adf1122|3344556677885f5f5f5f	intel	aeskeygenassist xmm2, xmmword ptr [ecx], 0x22
+660f4011|223344556677885f5f5f5f5f	gnu	cmovo (%ecx),%dx
+660f4011|223344556677885f5f5f5f5f	intel	cmovo dx, word ptr [ecx]
+660f4111|223344556677885f5f5f5f5f	gnu	cmovno (%ecx),%dx
+660f4111|223344556677885f5f5f5f5f	intel	cmovno dx, word ptr [ecx]
+660f4211|223344556677885f5f5f5f5f	gnu	cmovb (%ecx),%dx
+660f4211|223344556677885f5f5f5f5f	intel	cmovb dx, word ptr [ecx]
+660f4311|223344556677885f5f5f5f5f	gnu	cmovae (%ecx),%dx
+660f4311|223344556677885f5f5f5f5f	intel	cmovnb dx, word ptr [ecx]
+660f4411|223344556677885f5f5f5f5f	gnu	cmove (%ecx),%dx
+660f4411|223344556677885f5f5f5f5f	intel	cmovz dx, word ptr [ecx]
+660f4511|223344556677885f5f5f5f5f	gnu	cmovne (%ecx),%dx
+660f4511|223344556677885f5f5f5f5f	intel	cmovnz dx, word ptr [ecx]
+660f4611|223344556677885f5f5f5f5f	gnu	cmovbe (%ecx),%dx
+660f4611|223344556677885f5f5f5f5f	intel	cmovbe dx, word ptr [ecx]
+660f4711|223344556677885f5f5f5f5f	gnu	cmova (%ecx),%dx
+660f4711|223344556677885f5f5f5f5f	intel	cmovnbe dx, word ptr [ecx]
+660f4811|223344556677885f5f5f5f5f	gnu	cmovs (%ecx),%dx
+660f4811|223344556677885f5f5f5f5f	intel	cmovs dx, word ptr [ecx]
+660f4911|223344556677885f5f5f5f5f	gnu	cmovns (%ecx),%dx
+660f4911|223344556677885f5f5f5f5f	intel	cmovns dx, word ptr [ecx]
+660f4a11|223344556677885f5f5f5f5f	gnu	cmovp (%ecx),%dx
+660f4a11|223344556677885f5f5f5f5f	intel	cmovp dx, word ptr [ecx]
+660f4b11|223344556677885f5f5f5f5f	gnu	cmovnp (%ecx),%dx
+660f4b11|223344556677885f5f5f5f5f	intel	cmovnp dx, word ptr [ecx]
+660f4c11|223344556677885f5f5f5f5f	gnu	cmovl (%ecx),%dx
+660f4c11|223344556677885f5f5f5f5f	intel	cmovl dx, word ptr [ecx]
+660f4d11|223344556677885f5f5f5f5f	gnu	cmovge (%ecx),%dx
+660f4d11|223344556677885f5f5f5f5f	intel	cmovnl dx, word ptr [ecx]
+660f4e11|223344556677885f5f5f5f5f	gnu	cmovle (%ecx),%dx
+660f4e11|223344556677885f5f5f5f5f	intel	cmovle dx, word ptr [ecx]
+660f4f11|223344556677885f5f5f5f5f	gnu	cmovg (%ecx),%dx
+660f4f11|223344556677885f5f5f5f5f	intel	cmovnle dx, word ptr [ecx]
+660f50c0|11223344556677885f5f5f5f	gnu	movmskpd %xmm0,%eax
+660f50c0|11223344556677885f5f5f5f	intel	movmskpd eax, xmm0
+660f5111|223344556677885f5f5f5f5f	gnu	sqrtpd (%ecx),%xmm2
+660f5111|223344556677885f5f5f5f5f	intel	sqrtpd xmm2, xmmword ptr [ecx]
+660f5411|223344556677885f5f5f5f5f	gnu	andpd (%ecx),%xmm2
+660f5411|223344556677885f5f5f5f5f	intel	andpd xmm2, xmmword ptr [ecx]
+660f5511|223344556677885f5f5f5f5f	gnu	andnpd (%ecx),%xmm2
+660f5511|223344556677885f5f5f5f5f	intel	andnpd xmm2, xmmword ptr [ecx]
+660f5611|223344556677885f5f5f5f5f	gnu	orpd (%ecx),%xmm2
+660f5611|223344556677885f5f5f5f5f	intel	orpd xmm2, xmmword ptr [ecx]
+660f5711|223344556677885f5f5f5f5f	gnu	xorpd (%ecx),%xmm2
+660f5711|223344556677885f5f5f5f5f	intel	xorpd xmm2, xmmword ptr [ecx]
+660f5811|223344556677885f5f5f5f5f	gnu	addpd (%ecx),%xmm2
+660f5811|223344556677885f5f5f5f5f	intel	addpd xmm2, xmmword ptr [ecx]
+660f5911|223344556677885f5f5f5f5f	gnu	mulpd (%ecx),%xmm2
+660f5911|223344556677885f5f5f5f5f	intel	mulpd xmm2, xmmword ptr [ecx]
+660f5a11|223344556677885f5f5f5f5f	gnu	cvtpd2ps (%ecx),%xmm2
+660f5a11|223344556677885f5f5f5f5f	intel	cvtpd2ps xmm2, xmmword ptr [ecx]
+660f5b11|223344556677885f5f5f5f5f	gnu	cvtps2dq (%ecx),%xmm2
+660f5b11|223344556677885f5f5f5f5f	intel	cvtps2dq xmm2, xmmword ptr [ecx]
+660f5c11|223344556677885f5f5f5f5f	gnu	subpd (%ecx),%xmm2
+660f5c11|223344556677885f5f5f5f5f	intel	subpd xmm2, xmmword ptr [ecx]
+660f5d11|223344556677885f5f5f5f5f	gnu	minpd (%ecx),%xmm2
+660f5d11|223344556677885f5f5f5f5f	intel	minpd xmm2, xmmword ptr [ecx]
+660f5e11|223344556677885f5f5f5f5f	gnu	divpd (%ecx),%xmm2
+660f5e11|223344556677885f5f5f5f5f	intel	divpd xmm2, xmmword ptr [ecx]
+660f5f11|223344556677885f5f5f5f5f	gnu	maxpd (%ecx),%xmm2
+660f5f11|223344556677885f5f5f5f5f	intel	maxpd xmm2, xmmword ptr [ecx]
+660f6011|223344556677885f5f5f5f5f	gnu	punpcklbw (%ecx),%xmm2
+660f6011|223344556677885f5f5f5f5f	intel	punpcklbw xmm2, xmmword ptr [ecx]
+660f6111|223344556677885f5f5f5f5f	gnu	punpcklwd (%ecx),%xmm2
+660f6111|223344556677885f5f5f5f5f	intel	punpcklwd xmm2, xmmword ptr [ecx]
+660f6211|223344556677885f5f5f5f5f	gnu	punpckldq (%ecx),%xmm2
+660f6211|223344556677885f5f5f5f5f	intel	punpckldq xmm2, xmmword ptr [ecx]
+660f6311|223344556677885f5f5f5f5f	gnu	packsswb (%ecx),%xmm2
+660f6311|223344556677885f5f5f5f5f	intel	packsswb xmm2, xmmword ptr [ecx]
+660f6411|223344556677885f5f5f5f5f	gnu	pcmpgtb (%ecx),%xmm2
+660f6411|223344556677885f5f5f5f5f	intel	pcmpgtb xmm2, xmmword ptr [ecx]
+660f6511|223344556677885f5f5f5f5f	gnu	pcmpgtw (%ecx),%xmm2
+660f6511|223344556677885f5f5f5f5f	intel	pcmpgtw xmm2, xmmword ptr [ecx]
+660f6611|223344556677885f5f5f5f5f	gnu	pcmpgtd (%ecx),%xmm2
+660f6611|223344556677885f5f5f5f5f	intel	pcmpgtd xmm2, xmmword ptr [ecx]
+660f6711|223344556677885f5f5f5f5f	gnu	packuswb (%ecx),%xmm2
+660f6711|223344556677885f5f5f5f5f	intel	packuswb xmm2, xmmword ptr [ecx]
+660f6811|223344556677885f5f5f5f5f	gnu	punpckhbw (%ecx),%xmm2
+660f6811|223344556677885f5f5f5f5f	intel	punpckhbw xmm2, xmmword ptr [ecx]
+660f6911|223344556677885f5f5f5f5f	gnu	punpckhwd (%ecx),%xmm2
+660f6911|223344556677885f5f5f5f5f	intel	punpckhwd xmm2, xmmword ptr [ecx]
+660f6a11|223344556677885f5f5f5f5f	gnu	punpckhdq (%ecx),%xmm2
+660f6a11|223344556677885f5f5f5f5f	intel	punpckhdq xmm2, xmmword ptr [ecx]
+660f6b11|223344556677885f5f5f5f5f	gnu	packssdw (%ecx),%xmm2
+660f6b11|223344556677885f5f5f5f5f	intel	packssdw xmm2, xmmword ptr [ecx]
+660f6c11|223344556677885f5f5f5f5f	gnu	punpcklqdq (%ecx),%xmm2
+660f6c11|223344556677885f5f5f5f5f	intel	punpcklqdq xmm2, xmmword ptr [ecx]
+660f6d11|223344556677885f5f5f5f5f	gnu	punpckhqdq (%ecx),%xmm2
+660f6d11|223344556677885f5f5f5f5f	intel	punpckhqdq xmm2, xmmword ptr [ecx]
+660f6e11|223344556677885f5f5f5f5f	gnu	movd (%ecx),%xmm2
+660f6e11|223344556677885f5f5f5f5f	intel	movd xmm2, dword ptr [ecx]
+660f6f11|223344556677885f5f5f5f5f	gnu	movdqa (%ecx),%xmm2
+660f6f11|223344556677885f5f5f5f5f	intel	movdqa xmm2, xmmword ptr [ecx]
+660f701122|3344556677885f5f5f5f5f	gnu	pshufd $0x22,(%ecx),%xmm2
+660f701122|3344556677885f5f5f5f5f	intel	pshufd xmm2, xmmword ptr [ecx], 0x22
+660f71d011|223344556677885f5f5f5f	gnu	psrlw $0x11,%xmm0
+660f71d011|223344556677885f5f5f5f	intel	psrlw xmm0, 0x11
+660f71e011|223344556677885f5f5f5f	gnu	psraw $0x11,%xmm0
+660f71e011|223344556677885f5f5f5f	intel	psraw xmm0, 0x11
+660f71f011|223344556677885f5f5f5f	gnu	psllw $0x11,%xmm0
+660f71f011|223344556677885f5f5f5f	intel	psllw xmm0, 0x11
+660f72d011|223344556677885f5f5f5f	gnu	psrld $0x11,%xmm0
+660f72d011|223344556677885f5f5f5f	intel	psrld xmm0, 0x11
+660f72e011|223344556677885f5f5f5f	gnu	psrad $0x11,%xmm0
+660f72e011|223344556677885f5f5f5f	intel	psrad xmm0, 0x11
+660f72f011|223344556677885f5f5f5f	gnu	pslld $0x11,%xmm0
+660f72f011|223344556677885f5f5f5f	intel	pslld xmm0, 0x11
+660f73d011|223344556677885f5f5f5f	gnu	psrlq $0x11,%xmm0
+660f73d011|223344556677885f5f5f5f	intel	psrlq xmm0, 0x11
+660f73d811|223344556677885f5f5f5f	gnu	psrldq $0x11,%xmm0
+660f73d811|223344556677885f5f5f5f	intel	psrldq xmm0, 0x11
+660f73f011|223344556677885f5f5f5f	gnu	psllq $0x11,%xmm0
+660f73f011|223344556677885f5f5f5f	intel	psllq xmm0, 0x11
+660f73f811|223344556677885f5f5f5f	gnu	pslldq $0x11,%xmm0
+660f73f811|223344556677885f5f5f5f	intel	pslldq xmm0, 0x11
+660f7411|223344556677885f5f5f5f5f	gnu	pcmpeqb (%ecx),%xmm2
+660f7411|223344556677885f5f5f5f5f	intel	pcmpeqb xmm2, xmmword ptr [ecx]
+660f7511|223344556677885f5f5f5f5f	gnu	pcmpeqw (%ecx),%xmm2
+660f7511|223344556677885f5f5f5f5f	intel	pcmpeqw xmm2, xmmword ptr [ecx]
+660f7611|223344556677885f5f5f5f5f	gnu	pcmpeqd (%ecx),%xmm2
+660f7611|223344556677885f5f5f5f5f	intel	pcmpeqd xmm2, xmmword ptr [ecx]
+660f7c11|223344556677885f5f5f5f5f	gnu	haddpd (%ecx),%xmm2
+660f7c11|223344556677885f5f5f5f5f	intel	haddpd xmm2, xmmword ptr [ecx]
+660f7d11|223344556677885f5f5f5f5f	gnu	hsubpd (%ecx),%xmm2
+660f7d11|223344556677885f5f5f5f5f	intel	hsubpd xmm2, xmmword ptr [ecx]
+660f7e11|223344556677885f5f5f5f5f	gnu	movd %xmm2,(%ecx)
+660f7e11|223344556677885f5f5f5f5f	intel	movd dword ptr [ecx], xmm2
+660f7f11|223344556677885f5f5f5f5f	gnu	movdqa %xmm2,(%ecx)
+660f7f11|223344556677885f5f5f5f5f	intel	movdqa xmmword ptr [ecx], xmm2
+660f801122|3344556677885f5f5f5f5f	gnu	jo .+0x2211
+660f801122|3344556677885f5f5f5f5f	intel	jo .+0x2211
+660f811122|3344556677885f5f5f5f5f	gnu	jno .+0x2211
+660f811122|3344556677885f5f5f5f5f	intel	jno .+0x2211
+660f821122|3344556677885f5f5f5f5f	gnu	jb .+0x2211
+660f821122|3344556677885f5f5f5f5f	intel	jb .+0x2211
+660f831122|3344556677885f5f5f5f5f	gnu	jae .+0x2211
+660f831122|3344556677885f5f5f5f5f	intel	jnb .+0x2211
+660f841122|3344556677885f5f5f5f5f	gnu	je .+0x2211
+660f841122|3344556677885f5f5f5f5f	intel	jz .+0x2211
+660f851122|3344556677885f5f5f5f5f	gnu	jne .+0x2211
+660f851122|3344556677885f5f5f5f5f	intel	jnz .+0x2211
+660f861122|3344556677885f5f5f5f5f	gnu	jbe .+0x2211
+660f861122|3344556677885f5f5f5f5f	intel	jbe .+0x2211
+660f871122|3344556677885f5f5f5f5f	gnu	ja .+0x2211
+660f871122|3344556677885f5f5f5f5f	intel	jnbe .+0x2211
+660f881122|3344556677885f5f5f5f5f	gnu	js .+0x2211
+660f881122|3344556677885f5f5f5f5f	intel	js .+0x2211
+660f891122|3344556677885f5f5f5f5f	gnu	jns .+0x2211
+660f891122|3344556677885f5f5f5f5f	intel	jns .+0x2211
+660f8a1122|3344556677885f5f5f5f5f	gnu	jp .+0x2211
+660f8a1122|3344556677885f5f5f5f5f	intel	jp .+0x2211
+660f8b1122|3344556677885f5f5f5f5f	gnu	jnp .+0x2211
+660f8b1122|3344556677885f5f5f5f5f	intel	jnp .+0x2211
+660f8c1122|3344556677885f5f5f5f5f	gnu	jl .+0x2211
+660f8c1122|3344556677885f5f5f5f5f	intel	jl .+0x2211
+660f8d1122|3344556677885f5f5f5f5f	gnu	jge .+0x2211
+660f8d1122|3344556677885f5f5f5f5f	intel	jnl .+0x2211
+660f8e1122|3344556677885f5f5f5f5f	gnu	jle .+0x2211
+660f8e1122|3344556677885f5f5f5f5f	intel	jle .+0x2211
+660f8f1122|3344556677885f5f5f5f5f	gnu	jg .+0x2211
+660f8f1122|3344556677885f5f5f5f5f	intel	jnle .+0x2211
+660fa1|11223344556677885f5f5f5f5f	gnu	popw %fs
+660fa1|11223344556677885f5f5f5f5f	intel	pop fs
+660fa311|223344556677885f5f5f5f5f	gnu	bt %dx,(%ecx)
+660fa311|223344556677885f5f5f5f5f	intel	bt word ptr [ecx], dx
+660fa41122|3344556677885f5f5f5f5f	gnu	shld $0x22,%dx,(%ecx)
+660fa41122|3344556677885f5f5f5f5f	intel	shld word ptr [ecx], dx, 0x22
+660fa511|223344556677885f5f5f5f5f	gnu	shld %cl,%dx,(%ecx)
+660fa511|223344556677885f5f5f5f5f	intel	shld word ptr [ecx], dx, cl
+660fa9|11223344556677885f5f5f5f5f	gnu	popw %gs
+660fa9|11223344556677885f5f5f5f5f	intel	pop gs
+660fab11|223344556677885f5f5f5f5f	gnu	bts %dx,(%ecx)
+660fab11|223344556677885f5f5f5f5f	intel	bts word ptr [ecx], dx
+660fac1122|3344556677885f5f5f5f5f	gnu	shrd $0x22,%dx,(%ecx)
+660fac1122|3344556677885f5f5f5f5f	intel	shrd word ptr [ecx], dx, 0x22
+660fad11|223344556677885f5f5f5f5f	gnu	shrd %cl,%dx,(%ecx)
+660fad11|223344556677885f5f5f5f5f	intel	shrd word ptr [ecx], dx, cl
+660faf11|223344556677885f5f5f5f5f	gnu	imul (%ecx),%dx
+660faf11|223344556677885f5f5f5f5f	intel	imul dx, word ptr [ecx]
+660fb111|223344556677885f5f5f5f5f	gnu	cmpxchg %dx,(%ecx)
+660fb111|223344556677885f5f5f5f5f	intel	cmpxchg word ptr [ecx], dx
+660fb211|223344556677885f5f5f5f5f	gnu	lss (%ecx),%dx
+660fb211|223344556677885f5f5f5f5f	intel	lss dx, dword ptr [ecx]
+660fb311|223344556677885f5f5f5f5f	gnu	btr %dx,(%ecx)
+660fb311|223344556677885f5f5f5f5f	intel	btr word ptr [ecx], dx
+660fb411|223344556677885f5f5f5f5f	gnu	lfs (%ecx),%dx
+660fb411|223344556677885f5f5f5f5f	intel	lfs dx, dword ptr [ecx]
+660fb511|223344556677885f5f5f5f5f	gnu	lgs (%ecx),%dx
+660fb511|223344556677885f5f5f5f5f	intel	lgs dx, dword ptr [ecx]
+660fb611|223344556677885f5f5f5f5f	gnu	movzbw (%ecx),%dx
+660fb611|223344556677885f5f5f5f5f	intel	movzx dx, byte ptr [ecx]
+660fb711|223344556677885f5f5f5f5f	gnu	movzww (%ecx),%dx
+660fb711|223344556677885f5f5f5f5f	intel	movzx dx, word ptr [ecx]
+660fba2011|223344556677885f5f5f5f	gnu	btw $0x11,(%eax)
+660fba2011|223344556677885f5f5f5f	intel	bt word ptr [eax], 0x11
+660fba2811|223344556677885f5f5f5f	gnu	btsw $0x11,(%eax)
+660fba2811|223344556677885f5f5f5f	intel	bts word ptr [eax], 0x11
+660fba3011|223344556677885f5f5f5f	gnu	btrw $0x11,(%eax)
+660fba3011|223344556677885f5f5f5f	intel	btr word ptr [eax], 0x11
+660fba3811|223344556677885f5f5f5f	gnu	btcw $0x11,(%eax)
+660fba3811|223344556677885f5f5f5f	intel	btc word ptr [eax], 0x11
+660fbb11|223344556677885f5f5f5f5f	gnu	btc %dx,(%ecx)
+660fbb11|223344556677885f5f5f5f5f	intel	btc word ptr [ecx], dx
+660fbc11|223344556677885f5f5f5f5f	gnu	bsf (%ecx),%dx
+660fbc11|223344556677885f5f5f5f5f	intel	bsf dx, word ptr [ecx]
+660fbd11|223344556677885f5f5f5f5f	gnu	bsr (%ecx),%dx
+660fbd11|223344556677885f5f5f5f5f	intel	bsr dx, word ptr [ecx]
+660fbe11|223344556677885f5f5f5f5f	gnu	movsbw (%ecx),%dx
+660fbe11|223344556677885f5f5f5f5f	intel	movsx dx, byte ptr [ecx]
+660fbf11|223344556677885f5f5f5f5f	gnu	movsww (%ecx),%dx
+660fbf11|223344556677885f5f5f5f5f	intel	movsx dx, word ptr [ecx]
+660fc111|223344556677885f5f5f5f5f	gnu	xadd %dx,(%ecx)
+660fc111|223344556677885f5f5f5f5f	intel	xadd word ptr [ecx], dx
+660fc21122|3344556677885f5f5f5f5f	gnu	cmppd $0x22,(%ecx),%xmm2
+660fc21122|3344556677885f5f5f5f5f	intel	cmppd xmm2, xmmword ptr [ecx], 0x22
+660fc41122|3344556677885f5f5f5f5f	gnu	pinsrw $0x22,(%ecx),%xmm2
+660fc41122|3344556677885f5f5f5f5f	intel	pinsrw xmm2, word ptr [ecx], 0x22
+660fc5c011|223344556677885f5f5f5f	gnu	pextrw $0x11,%xmm0,%eax
+660fc5c011|223344556677885f5f5f5f	intel	pextrw eax, xmm0, 0x11
+660fc61122|3344556677885f5f5f5f5f	gnu	shufpd $0x22,(%ecx),%xmm2
+660fc61122|3344556677885f5f5f5f5f	intel	shufpd xmm2, xmmword ptr [ecx], 0x22
+660fc7f2|11223344556677885f5f5f5f	gnu	rdrand %dx
+660fc7f2|11223344556677885f5f5f5f	intel	rdrand dx
+660fc8|11223344556677885f5f5f5f5f	gnu	bswap %ax
+660fc8|11223344556677885f5f5f5f5f	intel	bswap ax
+660fd011|223344556677885f5f5f5f5f	gnu	addsubpd (%ecx),%xmm2
+660fd011|223344556677885f5f5f5f5f	intel	addsubpd xmm2, xmmword ptr [ecx]
+660fd111|223344556677885f5f5f5f5f	gnu	psrlw (%ecx),%xmm2
+660fd111|223344556677885f5f5f5f5f	intel	psrlw xmm2, xmmword ptr [ecx]
+660fd211|223344556677885f5f5f5f5f	gnu	psrld (%ecx),%xmm2
+660fd211|223344556677885f5f5f5f5f	intel	psrld xmm2, xmmword ptr [ecx]
+660fd311|223344556677885f5f5f5f5f	gnu	psrlq (%ecx),%xmm2
+660fd311|223344556677885f5f5f5f5f	intel	psrlq xmm2, xmmword ptr [ecx]
+660fd411|223344556677885f5f5f5f5f	gnu	paddq (%ecx),%xmm2
+660fd411|223344556677885f5f5f5f5f	intel	paddq xmm2, xmmword ptr [ecx]
+660fd511|223344556677885f5f5f5f5f	gnu	pmullw (%ecx),%xmm2
+660fd511|223344556677885f5f5f5f5f	intel	pmullw xmm2, xmmword ptr [ecx]
+660fd611|223344556677885f5f5f5f5f	gnu	movq %xmm2,(%ecx)
+660fd611|223344556677885f5f5f5f5f	intel	movq qword ptr [ecx], xmm2
+660fd7c0|11223344556677885f5f5f5f	gnu	pmovmskb %xmm0,%eax
+660fd7c0|11223344556677885f5f5f5f	intel	pmovmskb eax, xmm0
+660fd811|223344556677885f5f5f5f5f	gnu	psubusb (%ecx),%xmm2
+660fd811|223344556677885f5f5f5f5f	intel	psubusb xmm2, xmmword ptr [ecx]
+660fd911|223344556677885f5f5f5f5f	gnu	psubusw (%ecx),%xmm2
+660fd911|223344556677885f5f5f5f5f	intel	psubusw xmm2, xmmword ptr [ecx]
+660fda11|223344556677885f5f5f5f5f	gnu	pminub (%ecx),%xmm2
+660fda11|223344556677885f5f5f5f5f	intel	pminub xmm2, xmmword ptr [ecx]
+660fdb11|223344556677885f5f5f5f5f	gnu	pand (%ecx),%xmm2
+660fdb11|223344556677885f5f5f5f5f	intel	pand xmm2, xmmword ptr [ecx]
+660fdc11|223344556677885f5f5f5f5f	gnu	paddusb (%ecx),%xmm2
+660fdc11|223344556677885f5f5f5f5f	intel	paddusb xmm2, xmmword ptr [ecx]
+660fdd11|223344556677885f5f5f5f5f	gnu	paddusw (%ecx),%xmm2
+660fdd11|223344556677885f5f5f5f5f	intel	paddusw xmm2, xmmword ptr [ecx]
+660fde11|223344556677885f5f5f5f5f	gnu	pmaxub (%ecx),%xmm2
+660fde11|223344556677885f5f5f5f5f	intel	pmaxub xmm2, xmmword ptr [ecx]
+660fdf11|223344556677885f5f5f5f5f	gnu	pandn (%ecx),%xmm2
+660fdf11|223344556677885f5f5f5f5f	intel	pandn xmm2, xmmword ptr [ecx]
+660fe011|223344556677885f5f5f5f5f	gnu	pavgb (%ecx),%xmm2
+660fe011|223344556677885f5f5f5f5f	intel	pavgb xmm2, xmmword ptr [ecx]
+660fe111|223344556677885f5f5f5f5f	gnu	psraw (%ecx),%xmm2
+660fe111|223344556677885f5f5f5f5f	intel	psraw xmm2, xmmword ptr [ecx]
+660fe211|223344556677885f5f5f5f5f	gnu	psrad (%ecx),%xmm2
+660fe211|223344556677885f5f5f5f5f	intel	psrad xmm2, xmmword ptr [ecx]
+660fe311|223344556677885f5f5f5f5f	gnu	pavgw (%ecx),%xmm2
+660fe311|223344556677885f5f5f5f5f	intel	pavgw xmm2, xmmword ptr [ecx]
+660fe411|223344556677885f5f5f5f5f	gnu	pmulhuw (%ecx),%xmm2
+660fe411|223344556677885f5f5f5f5f	intel	pmulhuw xmm2, xmmword ptr [ecx]
+660fe511|223344556677885f5f5f5f5f	gnu	pmulhw (%ecx),%xmm2
+660fe511|223344556677885f5f5f5f5f	intel	pmulhw xmm2, xmmword ptr [ecx]
+660fe611|223344556677885f5f5f5f5f	gnu	cvttpd2dq (%ecx),%xmm2
+660fe611|223344556677885f5f5f5f5f	intel	cvttpd2dq xmm2, xmmword ptr [ecx]
+660fe711|223344556677885f5f5f5f5f	gnu	movntdq %xmm2,(%ecx)
+660fe711|223344556677885f5f5f5f5f	intel	movntdq xmmword ptr [ecx], xmm2
+660fe811|223344556677885f5f5f5f5f	gnu	psubsb (%ecx),%xmm2
+660fe811|223344556677885f5f5f5f5f	intel	psubsb xmm2, xmmword ptr [ecx]
+660fe911|223344556677885f5f5f5f5f	gnu	psubsw (%ecx),%xmm2
+660fe911|223344556677885f5f5f5f5f	intel	psubsw xmm2, xmmword ptr [ecx]
+660fea11|223344556677885f5f5f5f5f	gnu	pminsw (%ecx),%xmm2
+660fea11|223344556677885f5f5f5f5f	intel	pminsw xmm2, xmmword ptr [ecx]
+660feb11|223344556677885f5f5f5f5f	gnu	por (%ecx),%xmm2
+660feb11|223344556677885f5f5f5f5f	intel	por xmm2, xmmword ptr [ecx]
+660fec11|223344556677885f5f5f5f5f	gnu	paddsb (%ecx),%xmm2
+660fec11|223344556677885f5f5f5f5f	intel	paddsb xmm2, xmmword ptr [ecx]
+660fed11|223344556677885f5f5f5f5f	gnu	paddsw (%ecx),%xmm2
+660fed11|223344556677885f5f5f5f5f	intel	paddsw xmm2, xmmword ptr [ecx]
+660fee11|223344556677885f5f5f5f5f	gnu	pmaxsw (%ecx),%xmm2
+660fee11|223344556677885f5f5f5f5f	intel	pmaxsw xmm2, xmmword ptr [ecx]
+660fef11|223344556677885f5f5f5f5f	gnu	pxor (%ecx),%xmm2
+660fef11|223344556677885f5f5f5f5f	intel	pxor xmm2, xmmword ptr [ecx]
+660ff111|223344556677885f5f5f5f5f	gnu	psllw (%ecx),%xmm2
+660ff111|223344556677885f5f5f5f5f	intel	psllw xmm2, xmmword ptr [ecx]
+660ff211|223344556677885f5f5f5f5f	gnu	pslld (%ecx),%xmm2
+660ff211|223344556677885f5f5f5f5f	intel	pslld xmm2, xmmword ptr [ecx]
+660ff311|223344556677885f5f5f5f5f	gnu	psllq (%ecx),%xmm2
+660ff311|223344556677885f5f5f5f5f	intel	psllq xmm2, xmmword ptr [ecx]
+660ff411|223344556677885f5f5f5f5f	gnu	pmuludq (%ecx),%xmm2
+660ff411|223344556677885f5f5f5f5f	intel	pmuludq xmm2, xmmword ptr [ecx]
+660ff511|223344556677885f5f5f5f5f	gnu	pmaddwd (%ecx),%xmm2
+660ff511|223344556677885f5f5f5f5f	intel	pmaddwd xmm2, xmmword ptr [ecx]
+660ff611|223344556677885f5f5f5f5f	gnu	psadbw (%ecx),%xmm2
+660ff611|223344556677885f5f5f5f5f	intel	psadbw xmm2, xmmword ptr [ecx]
+660ff7c0|11223344556677885f5f5f5f	intel	maskmovdqu xmm0, xmm0
+660ff811|223344556677885f5f5f5f5f	gnu	psubb (%ecx),%xmm2
+660ff811|223344556677885f5f5f5f5f	intel	psubb xmm2, xmmword ptr [ecx]
+660ff911|223344556677885f5f5f5f5f	gnu	psubw (%ecx),%xmm2
+660ff911|223344556677885f5f5f5f5f	intel	psubw xmm2, xmmword ptr [ecx]
+660ffa11|223344556677885f5f5f5f5f	gnu	psubd (%ecx),%xmm2
+660ffa11|223344556677885f5f5f5f5f	intel	psubd xmm2, xmmword ptr [ecx]
+660ffb11|223344556677885f5f5f5f5f	gnu	psubq (%ecx),%xmm2
+660ffb11|223344556677885f5f5f5f5f	intel	psubq xmm2, xmmword ptr [ecx]
+660ffc11|223344556677885f5f5f5f5f	gnu	paddb (%ecx),%xmm2
+660ffc11|223344556677885f5f5f5f5f	intel	paddb xmm2, xmmword ptr [ecx]
+660ffd11|223344556677885f5f5f5f5f	gnu	paddw (%ecx),%xmm2
+660ffd11|223344556677885f5f5f5f5f	intel	paddw xmm2, xmmword ptr [ecx]
+660ffe11|223344556677885f5f5f5f5f	gnu	paddd (%ecx),%xmm2
+660ffe11|223344556677885f5f5f5f5f	intel	paddd xmm2, xmmword ptr [ecx]
+661122|3344556677885f5f5f5f5f5f5f	gnu	adc %sp,(%edx)
+661122|3344556677885f5f5f5f5f5f5f	intel	adc word ptr [edx], sp
+661311|223344556677885f5f5f5f5f5f	gnu	adc (%ecx),%dx
+661311|223344556677885f5f5f5f5f5f	intel	adc dx, word ptr [ecx]
+66151122|3344556677885f5f5f5f5f5f	gnu	adc $0x2211,%ax
+66151122|3344556677885f5f5f5f5f5f	intel	adc ax, 0x2211
+661911|223344556677885f5f5f5f5f5f	gnu	sbb %dx,(%ecx)
+661911|223344556677885f5f5f5f5f5f	intel	sbb word ptr [ecx], dx
+661b11|223344556677885f5f5f5f5f5f	gnu	sbb (%ecx),%dx
+661b11|223344556677885f5f5f5f5f5f	intel	sbb dx, word ptr [ecx]
+661d1122|3344556677885f5f5f5f5f5f	gnu	sbb $0x2211,%ax
+661d1122|3344556677885f5f5f5f5f5f	intel	sbb ax, 0x2211
+662111|223344556677885f5f5f5f5f5f	gnu	and %dx,(%ecx)
+662111|223344556677885f5f5f5f5f5f	intel	and word ptr [ecx], dx
+662311|223344556677885f5f5f5f5f5f	gnu	and (%ecx),%dx
+662311|223344556677885f5f5f5f5f5f	intel	and dx, word ptr [ecx]
+66251122|3344556677885f5f5f5f5f5f	gnu	and $0x2211,%ax
+66251122|3344556677885f5f5f5f5f5f	intel	and ax, 0x2211
+662911|223344556677885f5f5f5f5f5f	gnu	sub %dx,(%ecx)
+662911|223344556677885f5f5f5f5f5f	intel	sub word ptr [ecx], dx
+662b11|223344556677885f5f5f5f5f5f	gnu	sub (%ecx),%dx
+662b11|223344556677885f5f5f5f5f5f	intel	sub dx, word ptr [ecx]
+662d1122|3344556677885f5f5f5f5f5f	gnu	sub $0x2211,%ax
+662d1122|3344556677885f5f5f5f5f5f	intel	sub ax, 0x2211
+663111|223344556677885f5f5f5f5f5f	gnu	xor %dx,(%ecx)
+663111|223344556677885f5f5f5f5f5f	intel	xor word ptr [ecx], dx
+663311|223344556677885f5f5f5f5f5f	gnu	xor (%ecx),%dx
+663311|223344556677885f5f5f5f5f5f	intel	xor dx, word ptr [ecx]
+66351122|3344556677885f5f5f5f5f5f	gnu	xor $0x2211,%ax
+66351122|3344556677885f5f5f5f5f5f	intel	xor ax, 0x2211
+663667f3660f2ac0|1122334455667788	gnu	data32 ss addr16 cvtsi2ss %ax,%xmm0
+663911|223344556677885f5f5f5f5f5f	gnu	cmp %dx,(%ecx)
+663911|223344556677885f5f5f5f5f5f	intel	cmp word ptr [ecx], dx
+663b11|223344556677885f5f5f5f5f5f	gnu	cmp (%ecx),%dx
+663b11|223344556677885f5f5f5f5f5f	intel	cmp dx, word ptr [ecx]
+663d1122|3344556677885f5f5f5f5f5f	gnu	cmp $0x2211,%ax
+663d1122|3344556677885f5f5f5f5f5f	intel	cmp ax, 0x2211
+6640|11223344556677885f5f5f5f5f5f	gnu	inc %ax
+6648|11223344556677885f5f5f5f5f5f	gnu	dec %ax
+6648|11223344556677885f5f5f5f5f5f	intel	dec ax
+6650|11223344556677885f5f5f5f5f5f	gnu	push %ax
+6650|11223344556677885f5f5f5f5f5f	intel	push ax
+6658|11223344556677885f5f5f5f5f5f	gnu	pop %ax
+6658|11223344556677885f5f5f5f5f5f	intel	pop ax
+6660|11223344556677885f5f5f5f5f5f	gnu	pushaw
+6660|11223344556677885f5f5f5f5f5f	intel	data16 pusha
+6661|11223344556677885f5f5f5f5f5f	gnu	popaw
+6661|11223344556677885f5f5f5f5f5f	intel	data16 popa
+666211|223344556677885f5f5f5f5f5f	gnu	bound %dx,(%ecx)
+666211|223344556677885f5f5f5f5f5f	intel	bound dx, qword ptr [ecx]
+66681122|3344556677885f5f5f5f5f5f	gnu	pushw $0x2211
+66681122|3344556677885f5f5f5f5f5f	intel	push 0x2211
+6669112233|44556677885f5f5f5f5f5f	gnu	imul $0x3322,(%ecx),%dx
+6669112233|44556677885f5f5f5f5f5f	intel	imul dx, word ptr [ecx], 0x3322
+666b1122|3344556677885f5f5f5f5f5f	gnu	imul $0x22,(%ecx),%dx
+666b1122|3344556677885f5f5f5f5f5f	intel	imul dx, word ptr [ecx], 0x22
+666d|11223344556677885f5f5f5f5f5f	gnu	insw (%dx),%es:(%edi)
+666d|11223344556677885f5f5f5f5f5f	intel	data16 insw
+666f|11223344556677885f5f5f5f5f5f	gnu	outsw %ds:(%esi),(%dx)
+666f|11223344556677885f5f5f5f5f5f	intel	data16 outsw
+6681001122|3344556677885f5f5f5f5f	gnu	addw $0x2211,(%eax)
+6681001122|3344556677885f5f5f5f5f	intel	add word ptr [eax], 0x2211
+6681081122|3344556677885f5f5f5f5f	gnu	orw $0x2211,(%eax)
+6681081122|3344556677885f5f5f5f5f	intel	or word ptr [eax], 0x2211
+6681112233|44556677885f5f5f5f5f5f	gnu	adcw $0x3322,(%ecx)
+6681112233|44556677885f5f5f5f5f5f	intel	adc word ptr [ecx], 0x3322
+6681181122|3344556677885f5f5f5f5f	gnu	sbbw $0x2211,(%eax)
+6681181122|3344556677885f5f5f5f5f	intel	sbb word ptr [eax], 0x2211
+6681201122|3344556677885f5f5f5f5f	gnu	andw $0x2211,(%eax)
+6681201122|3344556677885f5f5f5f5f	intel	and word ptr [eax], 0x2211
+6681281122|3344556677885f5f5f5f5f	gnu	subw $0x2211,(%eax)
+6681281122|3344556677885f5f5f5f5f	intel	sub word ptr [eax], 0x2211
+6681301122|3344556677885f5f5f5f5f	gnu	xorw $0x2211,(%eax)
+6681301122|3344556677885f5f5f5f5f	intel	xor word ptr [eax], 0x2211
+6681381122|3344556677885f5f5f5f5f	gnu	cmpw $0x2211,(%eax)
+6681381122|3344556677885f5f5f5f5f	intel	cmp word ptr [eax], 0x2211
+66830011|223344556677885f5f5f5f5f	gnu	addw $0x11,(%eax)
+66830011|223344556677885f5f5f5f5f	intel	add word ptr [eax], 0x11
+66830811|223344556677885f5f5f5f5f	gnu	orw $0x11,(%eax)
+66830811|223344556677885f5f5f5f5f	intel	or word ptr [eax], 0x11
+66831122|3344556677885f5f5f5f5f5f	gnu	adcw $0x22,(%ecx)
+66831122|3344556677885f5f5f5f5f5f	intel	adc word ptr [ecx], 0x22
+66831811|223344556677885f5f5f5f5f	gnu	sbbw $0x11,(%eax)
+66831811|223344556677885f5f5f5f5f	intel	sbb word ptr [eax], 0x11
+66832011|223344556677885f5f5f5f5f	gnu	andw $0x11,(%eax)
+66832011|223344556677885f5f5f5f5f	intel	and word ptr [eax], 0x11
+66832811|223344556677885f5f5f5f5f	gnu	subw $0x11,(%eax)
+66832811|223344556677885f5f5f5f5f	intel	sub word ptr [eax], 0x11
+66833011|223344556677885f5f5f5f5f	gnu	xorw $0x11,(%eax)
+66833011|223344556677885f5f5f5f5f	intel	xor word ptr [eax], 0x11
+66833811|223344556677885f5f5f5f5f	gnu	cmpw $0x11,(%eax)
+66833811|223344556677885f5f5f5f5f	intel	cmp word ptr [eax], 0x11
+668511|223344556677885f5f5f5f5f5f	gnu	test %dx,(%ecx)
+668511|223344556677885f5f5f5f5f5f	intel	test word ptr [ecx], dx
+668711|223344556677885f5f5f5f5f5f	gnu	xchg %dx,(%ecx)
+668711|223344556677885f5f5f5f5f5f	intel	xchg word ptr [ecx], dx
+668911|223344556677885f5f5f5f5f5f	gnu	mov %dx,(%ecx)
+668911|223344556677885f5f5f5f5f5f	intel	mov word ptr [ecx], dx
+668b11|223344556677885f5f5f5f5f5f	gnu	mov (%ecx),%dx
+668b11|223344556677885f5f5f5f5f5f	intel	mov dx, word ptr [ecx]
+668c11|223344556677885f5f5f5f5f5f	gnu	data16 mov %ss,(%ecx)
+668c11|223344556677885f5f5f5f5f5f	intel	mov word ptr [ecx], ss
+668d11|223344556677885f5f5f5f5f5f	gnu	lea (%ecx),%dx
+668d11|223344556677885f5f5f5f5f5f	intel	lea dx, ptr [ecx]
+668ec0|11223344556677885f5f5f5f5f	gnu	mov %ax,%es
+668ec0|11223344556677885f5f5f5f5f	intel	mov es, ax
+668f00|11223344556677885f5f5f5f5f	gnu	popw (%eax)
+668f00|11223344556677885f5f5f5f5f	intel	pop word ptr [eax]
+6690|11223344556677885f5f5f5f5f5f	intel	data16 nop
+6691|11223344556677885f5f5f5f5f5f	gnu	xchg %ax,%cx
+6691|11223344556677885f5f5f5f5f5f	intel	xchg cx, ax
+6698|11223344556677885f5f5f5f5f5f	gnu	cbtw
+6698|11223344556677885f5f5f5f5f5f	intel	data16 cbw
+6699|11223344556677885f5f5f5f5f5f	gnu	cwtd
+6699|11223344556677885f5f5f5f5f5f	intel	data16 cwd
+669a11223344|556677885f5f5f5f5f5f	gnu	lcallw $0x4433,$0x2211
+669a11223344|556677885f5f5f5f5f5f	intel	call far 0x2211, 0x4433
+669c|11223344556677885f5f5f5f5f5f	gnu	pushfw
+669c|11223344556677885f5f5f5f5f5f	intel	data16 pushf
+669d|11223344556677885f5f5f5f5f5f	gnu	popfw
+669d|11223344556677885f5f5f5f5f5f	intel	data16 popf
+66a111223344|556677885f5f5f5f5f5f	gnu	mov 0x44332211,%ax
+66a111223344|556677885f5f5f5f5f5f	intel	mov ax, word ptr [0x44332211]
+66a311223344|556677885f5f5f5f5f5f	gnu	mov %ax,0x44332211
+66a311223344|556677885f5f5f5f5f5f	intel	mov word ptr [0x44332211], ax
+66a5|11223344556677885f5f5f5f5f5f	gnu	movsw %ds:(%esi),%es:(%edi)
+66a5|11223344556677885f5f5f5f5f5f	intel	movsw word ptr [edi], word ptr [esi]
+66a7|11223344556677885f5f5f5f5f5f	gnu	cmpsw %es:(%edi),%ds:(%esi)
+66a7|11223344556677885f5f5f5f5f5f	intel	cmpsw word ptr [esi], word ptr [edi]
+66a91122|3344556677885f5f5f5f5f5f	gnu	test $0x2211,%ax
+66a91122|3344556677885f5f5f5f5f5f	intel	test ax, 0x2211
+66ab|11223344556677885f5f5f5f5f5f	gnu	stos %ax,%es:(%edi)
+66ab|11223344556677885f5f5f5f5f5f	intel	stosw word ptr [edi]
+66ad|11223344556677885f5f5f5f5f5f	gnu	lods %ds:(%esi),%ax
+66ad|11223344556677885f5f5f5f5f5f	intel	lodsw word ptr [esi]
+66af|11223344556677885f5f5f5f5f5f	gnu	scas %es:(%edi),%ax
+66af|11223344556677885f5f5f5f5f5f	intel	scasw word ptr [edi]
+66b81122|3344556677885f5f5f5f5f5f	gnu	mov $0x2211,%ax
+66b81122|3344556677885f5f5f5f5f5f	intel	mov ax, 0x2211
+66c10011|223344556677885f5f5f5f5f	gnu	rolw $0x11,(%eax)
+66c10011|223344556677885f5f5f5f5f	intel	rol word ptr [eax], 0x11
+66c10811|223344556677885f5f5f5f5f	gnu	rorw $0x11,(%eax)
+66c10811|223344556677885f5f5f5f5f	intel	ror word ptr [eax], 0x11
+66c11122|3344556677885f5f5f5f5f5f	gnu	rclw $0x22,(%ecx)
+66c11122|3344556677885f5f5f5f5f5f	intel	rcl word ptr [ecx], 0x22
+66c11811|223344556677885f5f5f5f5f	gnu	rcrw $0x11,(%eax)
+66c11811|223344556677885f5f5f5f5f	intel	rcr word ptr [eax], 0x11
+66c12011|223344556677885f5f5f5f5f	gnu	shlw $0x11,(%eax)
+66c12011|223344556677885f5f5f5f5f	intel	shl word ptr [eax], 0x11
+66c12811|223344556677885f5f5f5f5f	gnu	shrw $0x11,(%eax)
+66c12811|223344556677885f5f5f5f5f	intel	shr word ptr [eax], 0x11
+66c13811|223344556677885f5f5f5f5f	gnu	sarw $0x11,(%eax)
+66c13811|223344556677885f5f5f5f5f	intel	sar word ptr [eax], 0x11
+66c21122|3344556677885f5f5f5f5f5f	gnu	retw $0x2211
+66c21122|3344556677885f5f5f5f5f5f	intel	ret 0x2211
+66c411|223344556677885f5f5f5f5f5f	gnu	les (%ecx),%dx
+66c411|223344556677885f5f5f5f5f5f	intel	les dx, dword ptr [ecx]
+66c511|223344556677885f5f5f5f5f5f	gnu	lds (%ecx),%dx
+66c511|223344556677885f5f5f5f5f5f	intel	lds dx, dword ptr [ecx]
+66c7001122|3344556677885f5f5f5f5f	gnu	movw $0x2211,(%eax)
+66c7001122|3344556677885f5f5f5f5f	intel	mov word ptr [eax], 0x2211
+66c7f81122|3344556677885f5f5f5f5f	gnu	xbeginw .+0x2211
+66c7f81122|3344556677885f5f5f5f5f	intel	xbegin .+0x2211
+66c9|11223344556677885f5f5f5f5f5f	gnu	leavew
+66c9|11223344556677885f5f5f5f5f5f	intel	data16 leave
+66cf|11223344556677885f5f5f5f5f5f	gnu	iretw
+66cf|11223344556677885f5f5f5f5f5f	intel	data16 iret
+66d100|11223344556677885f5f5f5f5f	gnu	rolw $0x1,(%eax)
+66d100|11223344556677885f5f5f5f5f	intel	rol word ptr [eax], 0x1
+66d108|11223344556677885f5f5f5f5f	gnu	rorw $0x1,(%eax)
+66d108|11223344556677885f5f5f5f5f	intel	ror word ptr [eax], 0x1
+66d111|223344556677885f5f5f5f5f5f	gnu	rclw $0x1,(%ecx)
+66d111|223344556677885f5f5f5f5f5f	intel	rcl word ptr [ecx], 0x1
+66d118|11223344556677885f5f5f5f5f	gnu	rcrw $0x1,(%eax)
+66d118|11223344556677885f5f5f5f5f	intel	rcr word ptr [eax], 0x1
+66d120|11223344556677885f5f5f5f5f	gnu	shlw $0x1,(%eax)
+66d120|11223344556677885f5f5f5f5f	intel	shl word ptr [eax], 0x1
+66d128|11223344556677885f5f5f5f5f	gnu	shrw $0x1,(%eax)
+66d128|11223344556677885f5f5f5f5f	intel	shr word ptr [eax], 0x1
+66d138|11223344556677885f5f5f5f5f	gnu	sarw $0x1,(%eax)
+66d138|11223344556677885f5f5f5f5f	intel	sar word ptr [eax], 0x1
+66d300|11223344556677885f5f5f5f5f	gnu	rolw %cl,(%eax)
+66d300|11223344556677885f5f5f5f5f	intel	rol word ptr [eax], cl
+66d308|11223344556677885f5f5f5f5f	gnu	rorw %cl,(%eax)
+66d308|11223344556677885f5f5f5f5f	intel	ror word ptr [eax], cl
+66d311|223344556677885f5f5f5f5f5f	gnu	rclw %cl,(%ecx)
+66d311|223344556677885f5f5f5f5f5f	intel	rcl word ptr [ecx], cl
+66d318|11223344556677885f5f5f5f5f	gnu	rcrw %cl,(%eax)
+66d318|11223344556677885f5f5f5f5f	intel	rcr word ptr [eax], cl
+66d320|11223344556677885f5f5f5f5f	gnu	shlw %cl,(%eax)
+66d320|11223344556677885f5f5f5f5f	intel	shl word ptr [eax], cl
+66d328|11223344556677885f5f5f5f5f	gnu	shrw %cl,(%eax)
+66d328|11223344556677885f5f5f5f5f	intel	shr word ptr [eax], cl
+66d338|11223344556677885f5f5f5f5f	gnu	sarw %cl,(%eax)
+66d338|11223344556677885f5f5f5f5f	intel	sar word ptr [eax], cl
+66d411|223344556677885f5f5f5f5f5f	gnu	data16 aam $0x11
+66d411|223344556677885f5f5f5f5f5f	intel	aam 0x11
+66d920|11223344556677885f5f5f5f5f	gnu	fldenvs (%eax)
+66d920|11223344556677885f5f5f5f5f	intel	fldenv ptr [eax]
+66e511|223344556677885f5f5f5f5f5f	gnu	in $0x11,%ax
+66e511|223344556677885f5f5f5f5f5f	intel	in ax, 0x11
+66e711|223344556677885f5f5f5f5f5f	gnu	out %ax,$0x11
+66e711|223344556677885f5f5f5f5f5f	intel	out 0x11, ax
+66e81122|3344556677885f5f5f5f5f5f	gnu	callw .+0x2211
+66e81122|3344556677885f5f5f5f5f5f	intel	call .+0x2211
+66e91122|3344556677885f5f5f5f5f5f	gnu	jmpw .+0x2211
+66e91122|3344556677885f5f5f5f5f5f	intel	jmp .+0x2211
+66ea11223344|556677885f5f5f5f5f5f	gnu	ljmpw $0x4433,$0x2211
+66ea11223344|556677885f5f5f5f5f5f	intel	jmp far 0x2211, 0x4433
+66ed|11223344556677885f5f5f5f5f5f	gnu	in %dx,%ax
+66ed|11223344556677885f5f5f5f5f5f	intel	in ax, dx
+66ef|11223344556677885f5f5f5f5f5f	gnu	out %ax,%dx
+66ef|11223344556677885f5f5f5f5f5f	intel	out dx, ax
+66f20f6f11|223344556677885f5f5f5f	gnu	repn movdqa (%ecx),%xmm2
+66f30fd6c5|11223344556677885f5f5f	gnu	movq2dq %mm5,%xmm0
+66f30fd6c5|11223344556677885f5f5f	intel	movq2dq xmm0, mmx5
+66f7001122|3344556677885f5f5f5f5f	gnu	testw $0x2211,(%eax)
+66f7001122|3344556677885f5f5f5f5f	intel	test word ptr [eax], 0x2211
+66f711|223344556677885f5f5f5f5f5f	gnu	notw (%ecx)
+66f711|223344556677885f5f5f5f5f5f	intel	not word ptr [ecx]
+66f718|11223344556677885f5f5f5f5f	gnu	negw (%eax)
+66f718|11223344556677885f5f5f5f5f	intel	neg word ptr [eax]
+66f720|11223344556677885f5f5f5f5f	gnu	mulw (%eax)
+66f720|11223344556677885f5f5f5f5f	intel	mul word ptr [eax]
+66f728|11223344556677885f5f5f5f5f	gnu	imulw (%eax)
+66f728|11223344556677885f5f5f5f5f	intel	imul word ptr [eax]
+66f730|11223344556677885f5f5f5f5f	gnu	divw (%eax)
+66f730|11223344556677885f5f5f5f5f	intel	div word ptr [eax]
+66f738|11223344556677885f5f5f5f5f	gnu	idivw (%eax)
+66f738|11223344556677885f5f5f5f5f	intel	idiv word ptr [eax]
+66ff00|11223344556677885f5f5f5f5f	gnu	incw (%eax)
+66ff00|11223344556677885f5f5f5f5f	intel	inc word ptr [eax]
+66ff08|11223344556677885f5f5f5f5f	gnu	decw (%eax)
+66ff08|11223344556677885f5f5f5f5f	intel	dec word ptr [eax]
+66ff11|223344556677885f5f5f5f5f5f	gnu	callw *(%ecx)
+66ff11|223344556677885f5f5f5f5f5f	intel	call word ptr [ecx]
+66ff18|11223344556677885f5f5f5f5f	gnu	lcallw *(%eax)
+66ff18|11223344556677885f5f5f5f5f	intel	call far dword ptr [eax]
+66ff20|11223344556677885f5f5f5f5f	gnu	jmpw *(%eax)
+66ff20|11223344556677885f5f5f5f5f	intel	jmp word ptr [eax]
+66ff28|11223344556677885f5f5f5f5f	gnu	ljmpw *(%eax)
+66ff28|11223344556677885f5f5f5f5f	intel	jmp far dword ptr [eax]
+66ff30|11223344556677885f5f5f5f5f	gnu	pushw (%eax)
+66ff30|11223344556677885f5f5f5f5f	intel	push word ptr [eax]
+66|f06766f2f36667f066f2f33e366681	gnu	data16
+66|f06766f2f36667f066f2f33e366681	intel	data16
+66|f20f6f11223344556677885f5f5f5f	intel	data16
+6700061122|3344556677885f5f5f5f5f	gnu	add %al,0x2211
+6700061122|3344556677885f5f5f5f5f	intel	add byte ptr [0x2211], al
+67004011|223344556677885f5f5f5f5f	gnu	add %al,0x11(%bx,%si)
+67004011|223344556677885f5f5f5f5f	intel	add byte ptr [bx+si*1+0x11], al
+670f01c8|11223344556677885f5f5f5f	gnu	monitor %ax,%ecx,%edx
+67361122|3344556677885f5f5f5f5f5f	intel	adc dword ptr [bp+si*1], esp
+67671122|3344556677885f5f5f5f5f5f	gnu	addr32 adc %esp,(%bp,%si)
+67671122|3344556677885f5f5f5f5f5f	intel	adc dword ptr [bp+si*1], esp
+676c|11223344556677885f5f5f5f5f5f	gnu	insb (%dx),%es:(%di)
+676c|11223344556677885f5f5f5f5f5f	intel	addr16 insb
+67a01122|3344556677885f5f5f5f5f5f	gnu	addr16 mov 0x2211,%al
+67a01122|3344556677885f5f5f5f5f5f	intel	mov al, byte ptr [0x2211]
+67d7|11223344556677885f5f5f5f5f5f	gnu	xlat %ds:(%bx)
+67e311|223344556677885f5f5f5f5f5f	gnu	jcxz .+0x11
+67e311|223344556677885f5f5f5f5f5f	intel	addr16 jcxz .+0x11
+67f066f2f33e3666818411223344|5566	gnu	lock data32 xacquire xrelease addw $0x4433,%ds:%ss:0x2211(%si)
+67f066f2f33e3666818411223344|5566	intel	xrelease lock add word ptr ss:[si+0x2211], 0x4433
+67|66f0f2f33e36f267f0663e360f38f1	gnu	addr16
+67|66f0f2f33e36f267f0663e360f38f1	intel	addr16
+67|66f0f2f3f066f2f33e366681841122	gnu	addr16
+67|66f0f2f3f066f2f33e366681841122	intel	addr16
+6811223344|556677885f5f5f5f5f5f5f	gnu	push $0x44332211
+6811223344|556677885f5f5f5f5f5f5f	intel	push 0x44332211
+691122334455|6677885f5f5f5f5f5f5f	gnu	imul $0x55443322,(%ecx),%edx
+691122334455|6677885f5f5f5f5f5f5f	intel	imul edx, dword ptr [ecx], 0x55443322
+6a11|223344556677885f5f5f5f5f5f5f	gnu	push $0x11
+6a11|223344556677885f5f5f5f5f5f5f	intel	push 0x11
+6b1122|3344556677885f5f5f5f5f5f5f	gnu	imul $0x22,(%ecx),%edx
+6b1122|3344556677885f5f5f5f5f5f5f	intel	imul edx, dword ptr [ecx], 0x22
+6d|11223344556677885f5f5f5f5f5f5f	gnu	insl (%dx),%es:(%edi)
+6d|11223344556677885f5f5f5f5f5f5f	intel	insd
+6f|11223344556677885f5f5f5f5f5f5f	gnu	outsl %ds:(%esi),(%dx)
+6f|11223344556677885f5f5f5f5f5f5f	intel	outsd
+7111|223344556677885f5f5f5f5f5f5f	gnu	jno .+0x11
+7111|223344556677885f5f5f5f5f5f5f	intel	jno .+0x11
+7211|223344556677885f5f5f5f5f5f5f	gnu	jb .+0x11
+7211|223344556677885f5f5f5f5f5f5f	intel	jb .+0x11
+7311|223344556677885f5f5f5f5f5f5f	gnu	jae .+0x11
+7311|223344556677885f5f5f5f5f5f5f	intel	jnb .+0x11
+7411|223344556677885f5f5f5f5f5f5f	gnu	je .+0x11
+7411|223344556677885f5f5f5f5f5f5f	intel	jz .+0x11
+7511|223344556677885f5f5f5f5f5f5f	gnu	jne .+0x11
+7511|223344556677885f5f5f5f5f5f5f	intel	jnz .+0x11
+7611|223344556677885f5f5f5f5f5f5f	gnu	jbe .+0x11
+7611|223344556677885f5f5f5f5f5f5f	intel	jbe .+0x11
+7711|223344556677885f5f5f5f5f5f5f	gnu	ja .+0x11
+7711|223344556677885f5f5f5f5f5f5f	intel	jnbe .+0x11
+7811|223344556677885f5f5f5f5f5f5f	gnu	js .+0x11
+7811|223344556677885f5f5f5f5f5f5f	intel	js .+0x11
+7911|223344556677885f5f5f5f5f5f5f	gnu	jns .+0x11
+7911|223344556677885f5f5f5f5f5f5f	intel	jns .+0x11
+7a11|223344556677885f5f5f5f5f5f5f	gnu	jp .+0x11
+7a11|223344556677885f5f5f5f5f5f5f	intel	jp .+0x11
+7b11|223344556677885f5f5f5f5f5f5f	gnu	jnp .+0x11
+7b11|223344556677885f5f5f5f5f5f5f	intel	jnp .+0x11
+7c11|223344556677885f5f5f5f5f5f5f	gnu	jl .+0x11
+7c11|223344556677885f5f5f5f5f5f5f	intel	jl .+0x11
+7d11|223344556677885f5f5f5f5f5f5f	gnu	jge .+0x11
+7d11|223344556677885f5f5f5f5f5f5f	intel	jnl .+0x11
+7e11|223344556677885f5f5f5f5f5f5f	gnu	jle .+0x11
+7e11|223344556677885f5f5f5f5f5f5f	intel	jle .+0x11
+7f11|223344556677885f5f5f5f5f5f5f	gnu	jg .+0x11
+7f11|223344556677885f5f5f5f5f5f5f	intel	jnle .+0x11
+800011|223344556677885f5f5f5f5f5f	gnu	addb $0x11,(%eax)
+800011|223344556677885f5f5f5f5f5f	intel	add byte ptr [eax], 0x11
+800811|223344556677885f5f5f5f5f5f	gnu	orb $0x11,(%eax)
+800811|223344556677885f5f5f5f5f5f	intel	or byte ptr [eax], 0x11
+801122|3344556677885f5f5f5f5f5f5f	gnu	adcb $0x22,(%ecx)
+801122|3344556677885f5f5f5f5f5f5f	intel	adc byte ptr [ecx], 0x22
+801811|223344556677885f5f5f5f5f5f	gnu	sbbb $0x11,(%eax)
+801811|223344556677885f5f5f5f5f5f	intel	sbb byte ptr [eax], 0x11
+802011|223344556677885f5f5f5f5f5f	gnu	andb $0x11,(%eax)
+802011|223344556677885f5f5f5f5f5f	intel	and byte ptr [eax], 0x11
+802811|223344556677885f5f5f5f5f5f	gnu	subb $0x11,(%eax)
+802811|223344556677885f5f5f5f5f5f	intel	sub byte ptr [eax], 0x11
+803011|223344556677885f5f5f5f5f5f	gnu	xorb $0x11,(%eax)
+803011|223344556677885f5f5f5f5f5f	intel	xor byte ptr [eax], 0x11
+803811|223344556677885f5f5f5f5f5f	gnu	cmpb $0x11,(%eax)
+803811|223344556677885f5f5f5f5f5f	intel	cmp byte ptr [eax], 0x11
+810011223344|556677885f5f5f5f5f5f	gnu	addl $0x44332211,(%eax)
+810011223344|556677885f5f5f5f5f5f	intel	add dword ptr [eax], 0x44332211
+810811223344|556677885f5f5f5f5f5f	gnu	orl $0x44332211,(%eax)
+810811223344|556677885f5f5f5f5f5f	intel	or dword ptr [eax], 0x44332211
+811122334455|6677885f5f5f5f5f5f5f	gnu	adcl $0x55443322,(%ecx)
+811122334455|6677885f5f5f5f5f5f5f	intel	adc dword ptr [ecx], 0x55443322
+811811223344|556677885f5f5f5f5f5f	gnu	sbbl $0x44332211,(%eax)
+811811223344|556677885f5f5f5f5f5f	intel	sbb dword ptr [eax], 0x44332211
+812011223344|556677885f5f5f5f5f5f	gnu	andl $0x44332211,(%eax)
+812011223344|556677885f5f5f5f5f5f	intel	and dword ptr [eax], 0x44332211
+812811223344|556677885f5f5f5f5f5f	gnu	subl $0x44332211,(%eax)
+812811223344|556677885f5f5f5f5f5f	intel	sub dword ptr [eax], 0x44332211
+813011223344|556677885f5f5f5f5f5f	gnu	xorl $0x44332211,(%eax)
+813011223344|556677885f5f5f5f5f5f	intel	xor dword ptr [eax], 0x44332211
+813811223344|556677885f5f5f5f5f5f	gnu	cmpl $0x44332211,(%eax)
+813811223344|556677885f5f5f5f5f5f	intel	cmp dword ptr [eax], 0x44332211
+830011|223344556677885f5f5f5f5f5f	gnu	addl $0x11,(%eax)
+830011|223344556677885f5f5f5f5f5f	intel	add dword ptr [eax], 0x11
+830811|223344556677885f5f5f5f5f5f	gnu	orl $0x11,(%eax)
+830811|223344556677885f5f5f5f5f5f	intel	or dword ptr [eax], 0x11
+831122|3344556677885f5f5f5f5f5f5f	gnu	adcl $0x22,(%ecx)
+831122|3344556677885f5f5f5f5f5f5f	intel	adc dword ptr [ecx], 0x22
+831811|223344556677885f5f5f5f5f5f	gnu	sbbl $0x11,(%eax)
+831811|223344556677885f5f5f5f5f5f	intel	sbb dword ptr [eax], 0x11
+832011|223344556677885f5f5f5f5f5f	gnu	andl $0x11,(%eax)
+832011|223344556677885f5f5f5f5f5f	intel	and dword ptr [eax], 0x11
+832811|223344556677885f5f5f5f5f5f	gnu	subl $0x11,(%eax)
+832811|223344556677885f5f5f5f5f5f	intel	sub dword ptr [eax], 0x11
+833011|223344556677885f5f5f5f5f5f	gnu	xorl $0x11,(%eax)
+833011|223344556677885f5f5f5f5f5f	intel	xor dword ptr [eax], 0x11
+833811|223344556677885f5f5f5f5f5f	gnu	cmpl $0x11,(%eax)
+833811|223344556677885f5f5f5f5f5f	intel	cmp dword ptr [eax], 0x11
+8411|223344556677885f5f5f5f5f5f5f	gnu	test %dl,(%ecx)
+8411|223344556677885f5f5f5f5f5f5f	intel	test byte ptr [ecx], dl
+8511|223344556677885f5f5f5f5f5f5f	gnu	test %edx,(%ecx)
+8511|223344556677885f5f5f5f5f5f5f	intel	test dword ptr [ecx], edx
+8611|223344556677885f5f5f5f5f5f5f	gnu	xchg %dl,(%ecx)
+8611|223344556677885f5f5f5f5f5f5f	intel	xchg byte ptr [ecx], dl
+8711|223344556677885f5f5f5f5f5f5f	gnu	xchg %edx,(%ecx)
+8711|223344556677885f5f5f5f5f5f5f	intel	xchg dword ptr [ecx], edx
+8811|223344556677885f5f5f5f5f5f5f	gnu	mov %dl,(%ecx)
+8811|223344556677885f5f5f5f5f5f5f	intel	mov byte ptr [ecx], dl
+8911|223344556677885f5f5f5f5f5f5f	gnu	mov %edx,(%ecx)
+8911|223344556677885f5f5f5f5f5f5f	intel	mov dword ptr [ecx], edx
+8a11|223344556677885f5f5f5f5f5f5f	gnu	mov (%ecx),%dl
+8a11|223344556677885f5f5f5f5f5f5f	intel	mov dl, byte ptr [ecx]
+8b11|223344556677885f5f5f5f5f5f5f	gnu	mov (%ecx),%edx
+8b11|223344556677885f5f5f5f5f5f5f	intel	mov edx, dword ptr [ecx]
+8c11|223344556677885f5f5f5f5f5f5f	gnu	mov %ss,(%ecx)
+8c11|223344556677885f5f5f5f5f5f5f	intel	mov word ptr [ecx], ss
+8c30|11223344556677885f5f5f5f5f5f	gnu	error: unrecognized instruction
+8c30|11223344556677885f5f5f5f5f5f	intel	error: unrecognized instruction
+8d11|223344556677885f5f5f5f5f5f5f	gnu	lea (%ecx),%edx
+8d11|223344556677885f5f5f5f5f5f5f	intel	lea edx, ptr [ecx]
+8e11|223344556677885f5f5f5f5f5f5f	gnu	mov (%ecx),%ss
+8e11|223344556677885f5f5f5f5f5f5f	intel	mov ss, word ptr [ecx]
+8ec0|11223344556677885f5f5f5f5f5f	intel	mov es, ax
+8f00|11223344556677885f5f5f5f5f5f	gnu	popl (%eax)
+8f00|11223344556677885f5f5f5f5f5f	intel	pop dword ptr [eax]
+91|11223344556677885f5f5f5f5f5f5f	gnu	xchg %eax,%ecx
+91|11223344556677885f5f5f5f5f5f5f	intel	xchg ecx, eax
+98|11223344556677885f5f5f5f5f5f5f	gnu	cwtl
+98|11223344556677885f5f5f5f5f5f5f	intel	cwde
+99|11223344556677885f5f5f5f5f5f5f	gnu	cltd
+99|11223344556677885f5f5f5f5f5f5f	intel	cdq
+9a112233445566|77885f5f5f5f5f5f5f	gnu	lcall $0x6655,$0x44332211
+9a112233445566|77885f5f5f5f5f5f5f	intel	call far 0x44332211, 0x6655
+9b|11223344556677885f5f5f5f5f5f5f	gnu	fwait
+9b|11223344556677885f5f5f5f5f5f5f	intel	fwait
+9c|11223344556677885f5f5f5f5f5f5f	gnu	pushf
+9c|11223344556677885f5f5f5f5f5f5f	intel	pushfd
+9d|11223344556677885f5f5f5f5f5f5f	gnu	popf
+9d|11223344556677885f5f5f5f5f5f5f	intel	popfd
+9e|11223344556677885f5f5f5f5f5f5f	gnu	sahf
+9e|11223344556677885f5f5f5f5f5f5f	intel	sahf
+9f|11223344556677885f5f5f5f5f5f5f	gnu	lahf
+9f|11223344556677885f5f5f5f5f5f5f	intel	lahf
+a111223344|556677885f5f5f5f5f5f5f	gnu	mov 0x44332211,%eax
+a111223344|556677885f5f5f5f5f5f5f	intel	mov eax, dword ptr [0x44332211]
+a211223344|556677885f5f5f5f5f5f5f	gnu	mov %al,0x44332211
+a211223344|556677885f5f5f5f5f5f5f	intel	mov byte ptr [0x44332211], al
+a311223344|556677885f5f5f5f5f5f5f	gnu	mov %eax,0x44332211
+a311223344|556677885f5f5f5f5f5f5f	intel	mov dword ptr [0x44332211], eax
+a4|11223344556677885f5f5f5f5f5f5f	gnu	movsb %ds:(%esi),%es:(%edi)
+a4|11223344556677885f5f5f5f5f5f5f	intel	movsb byte ptr [edi], byte ptr [esi]
+a5|11223344556677885f5f5f5f5f5f5f	gnu	movsl %ds:(%esi),%es:(%edi)
+a5|11223344556677885f5f5f5f5f5f5f	intel	movsd dword ptr [edi], dword ptr [esi]
+a6|11223344556677885f5f5f5f5f5f5f	gnu	cmpsb %es:(%edi),%ds:(%esi)
+a6|11223344556677885f5f5f5f5f5f5f	intel	cmpsb byte ptr [esi], byte ptr [edi]
+a7|11223344556677885f5f5f5f5f5f5f	gnu	cmpsl %es:(%edi),%ds:(%esi)
+a7|11223344556677885f5f5f5f5f5f5f	intel	cmpsd dword ptr [esi], dword ptr [edi]
+a811|223344556677885f5f5f5f5f5f5f	gnu	test $0x11,%al
+a811|223344556677885f5f5f5f5f5f5f	intel	test al, 0x11
+a911223344|556677885f5f5f5f5f5f5f	gnu	test $0x44332211,%eax
+a911223344|556677885f5f5f5f5f5f5f	intel	test eax, 0x44332211
+aa|11223344556677885f5f5f5f5f5f5f	gnu	stos %al,%es:(%edi)
+aa|11223344556677885f5f5f5f5f5f5f	intel	stosb byte ptr [edi]
+ab|11223344556677885f5f5f5f5f5f5f	gnu	stos %eax,%es:(%edi)
+ab|11223344556677885f5f5f5f5f5f5f	intel	stosd dword ptr [edi]
+ac|11223344556677885f5f5f5f5f5f5f	gnu	lods %ds:(%esi),%al
+ac|11223344556677885f5f5f5f5f5f5f	intel	lodsb byte ptr [esi]
+ad|11223344556677885f5f5f5f5f5f5f	gnu	lods %ds:(%esi),%eax
+ad|11223344556677885f5f5f5f5f5f5f	intel	lodsd dword ptr [esi]
+ae|11223344556677885f5f5f5f5f5f5f	gnu	scas %es:(%edi),%al
+ae|11223344556677885f5f5f5f5f5f5f	intel	scasb byte ptr [edi]
+af|11223344556677885f5f5f5f5f5f5f	gnu	scas %es:(%edi),%eax
+af|11223344556677885f5f5f5f5f5f5f	intel	scasd dword ptr [edi]
+b011|223344556677885f5f5f5f5f5f5f	gnu	mov $0x11,%al
+b011|223344556677885f5f5f5f5f5f5f	intel	mov al, 0x11
+b811223344|556677885f5f5f5f5f5f5f	gnu	mov $0x44332211,%eax
+b811223344|556677885f5f5f5f5f5f5f	intel	mov eax, 0x44332211
+c00011|223344556677885f5f5f5f5f5f	gnu	rolb $0x11,(%eax)
+c00011|223344556677885f5f5f5f5f5f	intel	rol byte ptr [eax], 0x11
+c00811|223344556677885f5f5f5f5f5f	gnu	rorb $0x11,(%eax)
+c00811|223344556677885f5f5f5f5f5f	intel	ror byte ptr [eax], 0x11
+c01122|3344556677885f5f5f5f5f5f5f	gnu	rclb $0x22,(%ecx)
+c01122|3344556677885f5f5f5f5f5f5f	intel	rcl byte ptr [ecx], 0x22
+c01811|223344556677885f5f5f5f5f5f	gnu	rcrb $0x11,(%eax)
+c01811|223344556677885f5f5f5f5f5f	intel	rcr byte ptr [eax], 0x11
+c02011|223344556677885f5f5f5f5f5f	gnu	shlb $0x11,(%eax)
+c02011|223344556677885f5f5f5f5f5f	intel	shl byte ptr [eax], 0x11
+c02811|223344556677885f5f5f5f5f5f	gnu	shrb $0x11,(%eax)
+c02811|223344556677885f5f5f5f5f5f	intel	shr byte ptr [eax], 0x11
+c03811|223344556677885f5f5f5f5f5f	gnu	sarb $0x11,(%eax)
+c03811|223344556677885f5f5f5f5f5f	intel	sar byte ptr [eax], 0x11
+c10011|223344556677885f5f5f5f5f5f	gnu	roll $0x11,(%eax)
+c10011|223344556677885f5f5f5f5f5f	intel	rol dword ptr [eax], 0x11
+c10811|223344556677885f5f5f5f5f5f	gnu	rorl $0x11,(%eax)
+c10811|223344556677885f5f5f5f5f5f	intel	ror dword ptr [eax], 0x11
+c11122|3344556677885f5f5f5f5f5f5f	gnu	rcll $0x22,(%ecx)
+c11122|3344556677885f5f5f5f5f5f5f	intel	rcl dword ptr [ecx], 0x22
+c11811|223344556677885f5f5f5f5f5f	gnu	rcrl $0x11,(%eax)
+c11811|223344556677885f5f5f5f5f5f	intel	rcr dword ptr [eax], 0x11
+c12011|223344556677885f5f5f5f5f5f	gnu	shll $0x11,(%eax)
+c12011|223344556677885f5f5f5f5f5f	intel	shl dword ptr [eax], 0x11
+c12811|223344556677885f5f5f5f5f5f	gnu	shrl $0x11,(%eax)
+c12811|223344556677885f5f5f5f5f5f	intel	shr dword ptr [eax], 0x11
+c13811|223344556677885f5f5f5f5f5f	gnu	sarl $0x11,(%eax)
+c13811|223344556677885f5f5f5f5f5f	intel	sar dword ptr [eax], 0x11
+c3|11223344556677885f5f5f5f5f5f5f	gnu	ret
+c3|11223344556677885f5f5f5f5f5f5f	intel	ret
+c411|223344556677885f5f5f5f5f5f5f	gnu	les (%ecx),%edx
+c411|223344556677885f5f5f5f5f5f5f	intel	les edx, ptr [ecx]
+c511|223344556677885f5f5f5f5f5f5f	gnu	lds (%ecx),%edx
+c511|223344556677885f5f5f5f5f5f5f	intel	lds edx, ptr [ecx]
+c60011|223344556677885f5f5f5f5f5f	gnu	movb $0x11,(%eax)
+c60011|223344556677885f5f5f5f5f5f	intel	mov byte ptr [eax], 0x11
+c6f811|223344556677885f5f5f5f5f5f	gnu	xabort $0x11
+c6f811|223344556677885f5f5f5f5f5f	intel	xabort 0x11
+c70011223344|556677885f5f5f5f5f5f	gnu	movl $0x44332211,(%eax)
+c70011223344|556677885f5f5f5f5f5f	intel	mov dword ptr [eax], 0x44332211
+c7f811223344|556677885f5f5f5f5f5f	gnu	xbegin .+0x44332211
+c7f811223344|556677885f5f5f5f5f5f	intel	xbegin .+0x44332211
+c8112233|44556677885f5f5f5f5f5f5f	gnu	enter $0x2211,$0x33
+c8112233|44556677885f5f5f5f5f5f5f	intel	enter 0x2211, 0x33
+c9|11223344556677885f5f5f5f5f5f5f	gnu	leave
+c9|11223344556677885f5f5f5f5f5f5f	intel	leave
+ca1122|3344556677885f5f5f5f5f5f5f	gnu	lret $0x2211
+ca1122|3344556677885f5f5f5f5f5f5f	intel	ret far 0x2211
+cb|11223344556677885f5f5f5f5f5f5f	gnu	lret
+cb|11223344556677885f5f5f5f5f5f5f	intel	ret far
+cc|11223344556677885f5f5f5f5f5f5f	gnu	int3
+cc|11223344556677885f5f5f5f5f5f5f	intel	int3
+cd11|223344556677885f5f5f5f5f5f5f	gnu	int $0x11
+cd11|223344556677885f5f5f5f5f5f5f	intel	int 0x11
+ce|11223344556677885f5f5f5f5f5f5f	gnu	into
+ce|11223344556677885f5f5f5f5f5f5f	intel	into
+cf|11223344556677885f5f5f5f5f5f5f	gnu	iret
+cf|11223344556677885f5f5f5f5f5f5f	intel	iretd
+d000|11223344556677885f5f5f5f5f5f	gnu	rolb $0x1,(%eax)
+d000|11223344556677885f5f5f5f5f5f	intel	rol byte ptr [eax], 0x1
+d008|11223344556677885f5f5f5f5f5f	gnu	rorb $0x1,(%eax)
+d008|11223344556677885f5f5f5f5f5f	intel	ror byte ptr [eax], 0x1
+d011|223344556677885f5f5f5f5f5f5f	gnu	rclb $0x1,(%ecx)
+d011|223344556677885f5f5f5f5f5f5f	intel	rcl byte ptr [ecx], 0x1
+d018|11223344556677885f5f5f5f5f5f	gnu	rcrb $0x1,(%eax)
+d018|11223344556677885f5f5f5f5f5f	intel	rcr byte ptr [eax], 0x1
+d020|11223344556677885f5f5f5f5f5f	gnu	shlb $0x1,(%eax)
+d020|11223344556677885f5f5f5f5f5f	intel	shl byte ptr [eax], 0x1
+d028|11223344556677885f5f5f5f5f5f	gnu	shrb $0x1,(%eax)
+d028|11223344556677885f5f5f5f5f5f	intel	shr byte ptr [eax], 0x1
+d038|11223344556677885f5f5f5f5f5f	gnu	sarb $0x1,(%eax)
+d038|11223344556677885f5f5f5f5f5f	intel	sar byte ptr [eax], 0x1
+d100|11223344556677885f5f5f5f5f5f	gnu	roll $0x1,(%eax)
+d100|11223344556677885f5f5f5f5f5f	intel	rol dword ptr [eax], 0x1
+d108|11223344556677885f5f5f5f5f5f	gnu	rorl $0x1,(%eax)
+d108|11223344556677885f5f5f5f5f5f	intel	ror dword ptr [eax], 0x1
+d111|223344556677885f5f5f5f5f5f5f	gnu	rcll $0x1,(%ecx)
+d111|223344556677885f5f5f5f5f5f5f	intel	rcl dword ptr [ecx], 0x1
+d118|11223344556677885f5f5f5f5f5f	gnu	rcrl $0x1,(%eax)
+d118|11223344556677885f5f5f5f5f5f	intel	rcr dword ptr [eax], 0x1
+d120|11223344556677885f5f5f5f5f5f	gnu	shll $0x1,(%eax)
+d120|11223344556677885f5f5f5f5f5f	intel	shl dword ptr [eax], 0x1
+d128|11223344556677885f5f5f5f5f5f	gnu	shrl $0x1,(%eax)
+d128|11223344556677885f5f5f5f5f5f	intel	shr dword ptr [eax], 0x1
+d138|11223344556677885f5f5f5f5f5f	gnu	sarl $0x1,(%eax)
+d138|11223344556677885f5f5f5f5f5f	intel	sar dword ptr [eax], 0x1
+d200|11223344556677885f5f5f5f5f5f	gnu	rolb %cl,(%eax)
+d200|11223344556677885f5f5f5f5f5f	intel	rol byte ptr [eax], cl
+d208|11223344556677885f5f5f5f5f5f	gnu	rorb %cl,(%eax)
+d208|11223344556677885f5f5f5f5f5f	intel	ror byte ptr [eax], cl
+d211|223344556677885f5f5f5f5f5f5f	gnu	rclb %cl,(%ecx)
+d211|223344556677885f5f5f5f5f5f5f	intel	rcl byte ptr [ecx], cl
+d218|11223344556677885f5f5f5f5f5f	gnu	rcrb %cl,(%eax)
+d218|11223344556677885f5f5f5f5f5f	intel	rcr byte ptr [eax], cl
+d220|11223344556677885f5f5f5f5f5f	gnu	shlb %cl,(%eax)
+d220|11223344556677885f5f5f5f5f5f	intel	shl byte ptr [eax], cl
+d228|11223344556677885f5f5f5f5f5f	gnu	shrb %cl,(%eax)
+d228|11223344556677885f5f5f5f5f5f	intel	shr byte ptr [eax], cl
+d238|11223344556677885f5f5f5f5f5f	gnu	sarb %cl,(%eax)
+d238|11223344556677885f5f5f5f5f5f	intel	sar byte ptr [eax], cl
+d300|11223344556677885f5f5f5f5f5f	gnu	roll %cl,(%eax)
+d300|11223344556677885f5f5f5f5f5f	intel	rol dword ptr [eax], cl
+d308|11223344556677885f5f5f5f5f5f	gnu	rorl %cl,(%eax)
+d308|11223344556677885f5f5f5f5f5f	intel	ror dword ptr [eax], cl
+d311|223344556677885f5f5f5f5f5f5f	gnu	rcll %cl,(%ecx)
+d311|223344556677885f5f5f5f5f5f5f	intel	rcl dword ptr [ecx], cl
+d318|11223344556677885f5f5f5f5f5f	gnu	rcrl %cl,(%eax)
+d318|11223344556677885f5f5f5f5f5f	intel	rcr dword ptr [eax], cl
+d320|11223344556677885f5f5f5f5f5f	gnu	shll %cl,(%eax)
+d320|11223344556677885f5f5f5f5f5f	intel	shl dword ptr [eax], cl
+d328|11223344556677885f5f5f5f5f5f	gnu	shrl %cl,(%eax)
+d328|11223344556677885f5f5f5f5f5f	intel	shr dword ptr [eax], cl
+d338|11223344556677885f5f5f5f5f5f	gnu	sarl %cl,(%eax)
+d338|11223344556677885f5f5f5f5f5f	intel	sar dword ptr [eax], cl
+d511|223344556677885f5f5f5f5f5f5f	gnu	aad $0x11
+d511|223344556677885f5f5f5f5f5f5f	intel	aad 0x11
+d7|11223344556677885f5f5f5f5f5f5f	gnu	xlat %ds:(%ebx)
+d7|11223344556677885f5f5f5f5f5f5f	intel	xlat
+d800|11223344556677885f5f5f5f5f5f	gnu	fadds (%eax)
+d800|11223344556677885f5f5f5f5f5f	intel	fadd st0, dword ptr [eax]
+d808|11223344556677885f5f5f5f5f5f	gnu	fmuls (%eax)
+d808|11223344556677885f5f5f5f5f5f	intel	fmul st0, dword ptr [eax]
+d811|223344556677885f5f5f5f5f5f5f	gnu	fcoms (%ecx)
+d811|223344556677885f5f5f5f5f5f5f	intel	fcom st0, dword ptr [ecx]
+d818|11223344556677885f5f5f5f5f5f	gnu	fcomps (%eax)
+d818|11223344556677885f5f5f5f5f5f	intel	fcomp st0, dword ptr [eax]
+d820|11223344556677885f5f5f5f5f5f	gnu	fsubs (%eax)
+d820|11223344556677885f5f5f5f5f5f	intel	fsub st0, dword ptr [eax]
+d828|11223344556677885f5f5f5f5f5f	gnu	fsubrs (%eax)
+d828|11223344556677885f5f5f5f5f5f	intel	fsubr st0, dword ptr [eax]
+d830|11223344556677885f5f5f5f5f5f	gnu	fdivs (%eax)
+d830|11223344556677885f5f5f5f5f5f	intel	fdiv st0, dword ptr [eax]
+d838|11223344556677885f5f5f5f5f5f	gnu	fdivrs (%eax)
+d838|11223344556677885f5f5f5f5f5f	intel	fdivr st0, dword ptr [eax]
+d8c0|11223344556677885f5f5f5f5f5f	gnu	fadd %st,%st
+d8c0|11223344556677885f5f5f5f5f5f	intel	fadd st0, st0
+d8c8|11223344556677885f5f5f5f5f5f	gnu	fmul %st,%st
+d8c8|11223344556677885f5f5f5f5f5f	intel	fmul st0, st0
+d8d0|11223344556677885f5f5f5f5f5f	gnu	fcom %st
+d8d0|11223344556677885f5f5f5f5f5f	intel	fcom st0, st0
+d8d8|11223344556677885f5f5f5f5f5f	gnu	fcomp %st
+d8d8|11223344556677885f5f5f5f5f5f	intel	fcomp st0, st0
+d8e0|11223344556677885f5f5f5f5f5f	gnu	fsub %st,%st
+d8e0|11223344556677885f5f5f5f5f5f	intel	fsub st0, st0
+d8e8|11223344556677885f5f5f5f5f5f	gnu	fsubr %st,%st
+d8e8|11223344556677885f5f5f5f5f5f	intel	fsubr st0, st0
+d8f0|11223344556677885f5f5f5f5f5f	gnu	fdiv %st,%st
+d8f0|11223344556677885f5f5f5f5f5f	intel	fdiv st0, st0
+d8f8|11223344556677885f5f5f5f5f5f	gnu	fdivr %st,%st
+d8f8|11223344556677885f5f5f5f5f5f	intel	fdivr st0, st0
+d900|11223344556677885f5f5f5f5f5f	gnu	flds (%eax)
+d900|11223344556677885f5f5f5f5f5f	intel	fld st0, dword ptr [eax]
+d911|223344556677885f5f5f5f5f5f5f	gnu	fsts (%ecx)
+d911|223344556677885f5f5f5f5f5f5f	intel	fst dword ptr [ecx], st0
+d918|11223344556677885f5f5f5f5f5f	gnu	fstps (%eax)
+d918|11223344556677885f5f5f5f5f5f	intel	fstp dword ptr [eax], st0
+d928|11223344556677885f5f5f5f5f5f	gnu	fldcw (%eax)
+d928|11223344556677885f5f5f5f5f5f	intel	fldcw word ptr [eax]
+d930|11223344556677885f5f5f5f5f5f	gnu	fnstenv (%eax)
+d930|11223344556677885f5f5f5f5f5f	intel	fnstenv ptr [eax]
+d938|11223344556677885f5f5f5f5f5f	gnu	fnstcw (%eax)
+d938|11223344556677885f5f5f5f5f5f	intel	fnstcw word ptr [eax]
+d9c0|11223344556677885f5f5f5f5f5f	gnu	fld %st
+d9c0|11223344556677885f5f5f5f5f5f	intel	fld st0, st0
+d9c8|11223344556677885f5f5f5f5f5f	gnu	fxch %st
+d9c8|11223344556677885f5f5f5f5f5f	intel	fxch st0, st0
+d9d0|11223344556677885f5f5f5f5f5f	gnu	fnop
+d9d0|11223344556677885f5f5f5f5f5f	intel	fnop
+d9e0|11223344556677885f5f5f5f5f5f	gnu	fchs
+d9e0|11223344556677885f5f5f5f5f5f	intel	fchs st0
+d9e1|11223344556677885f5f5f5f5f5f	gnu	fabs
+d9e1|11223344556677885f5f5f5f5f5f	intel	fabs st0
+d9e4|11223344556677885f5f5f5f5f5f	gnu	ftst
+d9e4|11223344556677885f5f5f5f5f5f	intel	ftst st0
+d9e5|11223344556677885f5f5f5f5f5f	gnu	fxam
+d9e5|11223344556677885f5f5f5f5f5f	intel	fxam st0
+d9e8|11223344556677885f5f5f5f5f5f	gnu	fld1
+d9e8|11223344556677885f5f5f5f5f5f	intel	fld1 st0
+d9e9|11223344556677885f5f5f5f5f5f	gnu	fldl2t
+d9e9|11223344556677885f5f5f5f5f5f	intel	fldl2t st0
+d9ea|11223344556677885f5f5f5f5f5f	gnu	fldl2e
+d9ea|11223344556677885f5f5f5f5f5f	intel	fldl2e st0
+d9eb|11223344556677885f5f5f5f5f5f	gnu	fldpi
+d9eb|11223344556677885f5f5f5f5f5f	intel	fldpi st0
+d9ec|11223344556677885f5f5f5f5f5f	gnu	fldlg2
+d9ec|11223344556677885f5f5f5f5f5f	intel	fldlg2 st0
+d9f0|11223344556677885f5f5f5f5f5f	gnu	f2xm1
+d9f0|11223344556677885f5f5f5f5f5f	intel	f2xm1 st0
+d9f1|11223344556677885f5f5f5f5f5f	gnu	fyl2x
+d9f1|11223344556677885f5f5f5f5f5f	intel	fyl2x st0, st1
+d9f2|11223344556677885f5f5f5f5f5f	gnu	fptan
+d9f2|11223344556677885f5f5f5f5f5f	intel	fptan st0, st1
+d9f3|11223344556677885f5f5f5f5f5f	gnu	fpatan
+d9f3|11223344556677885f5f5f5f5f5f	intel	fpatan st0, st1
+d9f4|11223344556677885f5f5f5f5f5f	gnu	fxtract
+d9f4|11223344556677885f5f5f5f5f5f	intel	fxtract st0, st1
+d9f5|11223344556677885f5f5f5f5f5f	gnu	fprem1
+d9f5|11223344556677885f5f5f5f5f5f	intel	fprem1 st0, st1
+d9f6|11223344556677885f5f5f5f5f5f	gnu	fdecstp
+d9f6|11223344556677885f5f5f5f5f5f	intel	fdecstp
+d9f7|11223344556677885f5f5f5f5f5f	gnu	fincstp
+d9f7|11223344556677885f5f5f5f5f5f	intel	fincstp
+d9f8|11223344556677885f5f5f5f5f5f	gnu	fprem
+d9f8|11223344556677885f5f5f5f5f5f	intel	fprem st0, st1
+d9f9|11223344556677885f5f5f5f5f5f	gnu	fyl2xp1
+d9f9|11223344556677885f5f5f5f5f5f	intel	fyl2xp1 st0, st1
+d9fa|11223344556677885f5f5f5f5f5f	gnu	fsqrt
+d9fa|11223344556677885f5f5f5f5f5f	intel	fsqrt st0
+d9fb|11223344556677885f5f5f5f5f5f	gnu	fsincos
+d9fb|11223344556677885f5f5f5f5f5f	intel	fsincos st0, st1
+d9fc|11223344556677885f5f5f5f5f5f	gnu	frndint
+d9fc|11223344556677885f5f5f5f5f5f	intel	frndint st0
+d9fd|11223344556677885f5f5f5f5f5f	gnu	fscale
+d9fd|11223344556677885f5f5f5f5f5f	intel	fscale st0, st1
+d9fe|11223344556677885f5f5f5f5f5f	gnu	fsin
+d9fe|11223344556677885f5f5f5f5f5f	intel	fsin st0
+d9ff|11223344556677885f5f5f5f5f5f	gnu	fcos
+d9ff|11223344556677885f5f5f5f5f5f	intel	fcos st0
+da00|11223344556677885f5f5f5f5f5f	gnu	fiaddl (%eax)
+da00|11223344556677885f5f5f5f5f5f	intel	fiadd st0, dword ptr [eax]
+da08|11223344556677885f5f5f5f5f5f	gnu	fimull (%eax)
+da08|11223344556677885f5f5f5f5f5f	intel	fimul st0, dword ptr [eax]
+da11|223344556677885f5f5f5f5f5f5f	gnu	ficoml (%ecx)
+da11|223344556677885f5f5f5f5f5f5f	intel	ficom st0, dword ptr [ecx]
+da18|11223344556677885f5f5f5f5f5f	gnu	ficompl (%eax)
+da18|11223344556677885f5f5f5f5f5f	intel	ficomp st0, dword ptr [eax]
+da20|11223344556677885f5f5f5f5f5f	gnu	fisubl (%eax)
+da20|11223344556677885f5f5f5f5f5f	intel	fisub st0, dword ptr [eax]
+da28|11223344556677885f5f5f5f5f5f	gnu	fisubrl (%eax)
+da28|11223344556677885f5f5f5f5f5f	intel	fisubr st0, dword ptr [eax]
+da30|11223344556677885f5f5f5f5f5f	gnu	fidivl (%eax)
+da30|11223344556677885f5f5f5f5f5f	intel	fidiv st0, dword ptr [eax]
+da38|11223344556677885f5f5f5f5f5f	gnu	fidivrl (%eax)
+da38|11223344556677885f5f5f5f5f5f	intel	fidivr st0, dword ptr [eax]
+dac0|11223344556677885f5f5f5f5f5f	gnu	fcmovb %st,%st
+dac0|11223344556677885f5f5f5f5f5f	intel	fcmovb st0, st0
+dac8|11223344556677885f5f5f5f5f5f	gnu	fcmove %st,%st
+dac8|11223344556677885f5f5f5f5f5f	intel	fcmove st0, st0
+dad0|11223344556677885f5f5f5f5f5f	gnu	fcmovbe %st,%st
+dad0|11223344556677885f5f5f5f5f5f	intel	fcmovbe st0, st0
+dad8|11223344556677885f5f5f5f5f5f	gnu	fcmovu %st,%st
+dad8|11223344556677885f5f5f5f5f5f	intel	fcmovu st0, st0
+dae9|11223344556677885f5f5f5f5f5f	gnu	fucompp
+dae9|11223344556677885f5f5f5f5f5f	intel	fucompp st0, st1
+db00|11223344556677885f5f5f5f5f5f	gnu	fildl (%eax)
+db00|11223344556677885f5f5f5f5f5f	intel	fild st0, dword ptr [eax]
+db08|11223344556677885f5f5f5f5f5f	gnu	fisttpl (%eax)
+db08|11223344556677885f5f5f5f5f5f	intel	fisttp dword ptr [eax], st0
+db11|223344556677885f5f5f5f5f5f5f	gnu	fistl (%ecx)
+db11|223344556677885f5f5f5f5f5f5f	intel	fist dword ptr [ecx], st0
+db18|11223344556677885f5f5f5f5f5f	gnu	fistpl (%eax)
+db18|11223344556677885f5f5f5f5f5f	intel	fistp dword ptr [eax], st0
+db28|11223344556677885f5f5f5f5f5f	gnu	fldt (%eax)
+db28|11223344556677885f5f5f5f5f5f	intel	fld st0, ptr [eax]
+db38|11223344556677885f5f5f5f5f5f	gnu	fstpt (%eax)
+db38|11223344556677885f5f5f5f5f5f	intel	fstp ptr [eax], st0
+dbc0|11223344556677885f5f5f5f5f5f	gnu	fcmovnb %st,%st
+dbc0|11223344556677885f5f5f5f5f5f	intel	fcmovnb st0, st0
+dbc8|11223344556677885f5f5f5f5f5f	gnu	fcmovne %st,%st
+dbc8|11223344556677885f5f5f5f5f5f	intel	fcmovne st0, st0
+dbd0|11223344556677885f5f5f5f5f5f	gnu	fcmovnbe %st,%st
+dbd0|11223344556677885f5f5f5f5f5f	intel	fcmovnbe st0, st0
+dbd8|11223344556677885f5f5f5f5f5f	gnu	fcmovnu %st,%st
+dbd8|11223344556677885f5f5f5f5f5f	intel	fcmovnu st0, st0
+dbe2|11223344556677885f5f5f5f5f5f	gnu	fnclex
+dbe2|11223344556677885f5f5f5f5f5f	intel	fnclex
+dbe3|11223344556677885f5f5f5f5f5f	gnu	fninit
+dbe3|11223344556677885f5f5f5f5f5f	intel	fninit
+dbe8|11223344556677885f5f5f5f5f5f	gnu	fucomi %st,%st
+dbe8|11223344556677885f5f5f5f5f5f	intel	fucomi st0, st0
+dbf0|11223344556677885f5f5f5f5f5f	gnu	fcomi %st,%st
+dbf0|11223344556677885f5f5f5f5f5f	intel	fcomi st0, st0
+dc00|11223344556677885f5f5f5f5f5f	gnu	faddl (%eax)
+dc00|11223344556677885f5f5f5f5f5f	intel	fadd st0, qword ptr [eax]
+dc08|11223344556677885f5f5f5f5f5f	gnu	fmull (%eax)
+dc08|11223344556677885f5f5f5f5f5f	intel	fmul st0, qword ptr [eax]
+dc11|223344556677885f5f5f5f5f5f5f	gnu	fcoml (%ecx)
+dc11|223344556677885f5f5f5f5f5f5f	intel	fcom st0, qword ptr [ecx]
+dc18|11223344556677885f5f5f5f5f5f	gnu	fcompl (%eax)
+dc18|11223344556677885f5f5f5f5f5f	intel	fcomp st0, qword ptr [eax]
+dc20|11223344556677885f5f5f5f5f5f	gnu	fsubl (%eax)
+dc20|11223344556677885f5f5f5f5f5f	intel	fsub st0, qword ptr [eax]
+dc28|11223344556677885f5f5f5f5f5f	gnu	fsubrl (%eax)
+dc28|11223344556677885f5f5f5f5f5f	intel	fsubr st0, qword ptr [eax]
+dc30|11223344556677885f5f5f5f5f5f	gnu	fdivl (%eax)
+dc30|11223344556677885f5f5f5f5f5f	intel	fdiv st0, qword ptr [eax]
+dc38|11223344556677885f5f5f5f5f5f	gnu	fdivrl (%eax)
+dc38|11223344556677885f5f5f5f5f5f	intel	fdivr st0, qword ptr [eax]
+dcc0|11223344556677885f5f5f5f5f5f	gnu	fadd %st,%st
+dcc0|11223344556677885f5f5f5f5f5f	intel	fadd st0, st0
+dcc8|11223344556677885f5f5f5f5f5f	gnu	fmul %st,%st
+dcc8|11223344556677885f5f5f5f5f5f	intel	fmul st0, st0
+dce0|11223344556677885f5f5f5f5f5f	gnu	fsub %st,%st
+dce0|11223344556677885f5f5f5f5f5f	intel	fsubr st0, st0
+dce8|11223344556677885f5f5f5f5f5f	gnu	fsubr %st,%st
+dce8|11223344556677885f5f5f5f5f5f	intel	fsub st0, st0
+dcf0|11223344556677885f5f5f5f5f5f	gnu	fdiv %st,%st
+dcf0|11223344556677885f5f5f5f5f5f	intel	fdivr st0, st0
+dcf8|11223344556677885f5f5f5f5f5f	gnu	fdivr %st,%st
+dcf8|11223344556677885f5f5f5f5f5f	intel	fdiv st0, st0
+dd00|11223344556677885f5f5f5f5f5f	gnu	fldl (%eax)
+dd00|11223344556677885f5f5f5f5f5f	intel	fld st0, qword ptr [eax]
+dd08|11223344556677885f5f5f5f5f5f	gnu	fisttpll (%eax)
+dd08|11223344556677885f5f5f5f5f5f	intel	fisttp qword ptr [eax], st0
+dd11|223344556677885f5f5f5f5f5f5f	gnu	fstl (%ecx)
+dd11|223344556677885f5f5f5f5f5f5f	intel	fst qword ptr [ecx], st0
+dd18|11223344556677885f5f5f5f5f5f	gnu	fstpl (%eax)
+dd18|11223344556677885f5f5f5f5f5f	intel	fstp qword ptr [eax], st0
+dd20|11223344556677885f5f5f5f5f5f	gnu	frstor (%eax)
+dd20|11223344556677885f5f5f5f5f5f	intel	frstor ptr [eax]
+dd30|11223344556677885f5f5f5f5f5f	gnu	fnsave (%eax)
+dd30|11223344556677885f5f5f5f5f5f	intel	fnsave ptr [eax]
+dd38|11223344556677885f5f5f5f5f5f	gnu	fnstsw (%eax)
+dd38|11223344556677885f5f5f5f5f5f	intel	fnstsw word ptr [eax]
+ddc0|11223344556677885f5f5f5f5f5f	gnu	ffree %st
+ddc0|11223344556677885f5f5f5f5f5f	intel	ffree st0
+ddd0|11223344556677885f5f5f5f5f5f	gnu	fst %st
+ddd0|11223344556677885f5f5f5f5f5f	intel	fst st0, st0
+ddd8|11223344556677885f5f5f5f5f5f	gnu	fstp %st
+ddd8|11223344556677885f5f5f5f5f5f	intel	fstp st0, st0
+dde0|11223344556677885f5f5f5f5f5f	gnu	fucom %st
+dde0|11223344556677885f5f5f5f5f5f	intel	fucom st0, st0
+dde8|11223344556677885f5f5f5f5f5f	gnu	fucomp %st
+dde8|11223344556677885f5f5f5f5f5f	intel	fucomp st0, st0
+de00|11223344556677885f5f5f5f5f5f	gnu	fiadd (%eax)
+de00|11223344556677885f5f5f5f5f5f	intel	fiadd st0, word ptr [eax]
+de08|11223344556677885f5f5f5f5f5f	gnu	fimul (%eax)
+de08|11223344556677885f5f5f5f5f5f	intel	fimul st0, word ptr [eax]
+de11|223344556677885f5f5f5f5f5f5f	gnu	ficom (%ecx)
+de11|223344556677885f5f5f5f5f5f5f	intel	ficom st0, word ptr [ecx]
+de18|11223344556677885f5f5f5f5f5f	gnu	ficomp (%eax)
+de18|11223344556677885f5f5f5f5f5f	intel	ficomp st0, word ptr [eax]
+de20|11223344556677885f5f5f5f5f5f	gnu	fisub (%eax)
+de20|11223344556677885f5f5f5f5f5f	intel	fisub st0, word ptr [eax]
+de28|11223344556677885f5f5f5f5f5f	gnu	fisubr (%eax)
+de28|11223344556677885f5f5f5f5f5f	intel	fisubr st0, word ptr [eax]
+de30|11223344556677885f5f5f5f5f5f	gnu	fidiv (%eax)
+de30|11223344556677885f5f5f5f5f5f	intel	fidiv st0, word ptr [eax]
+de38|11223344556677885f5f5f5f5f5f	gnu	fidivr (%eax)
+de38|11223344556677885f5f5f5f5f5f	intel	fidivr st0, word ptr [eax]
+dec0|11223344556677885f5f5f5f5f5f	gnu	faddp %st,%st
+dec0|11223344556677885f5f5f5f5f5f	intel	faddp st0, st0
+dec8|11223344556677885f5f5f5f5f5f	gnu	fmulp %st,%st
+dec8|11223344556677885f5f5f5f5f5f	intel	fmulp st0, st0
+ded9|11223344556677885f5f5f5f5f5f	gnu	fcompp
+ded9|11223344556677885f5f5f5f5f5f	intel	fcompp st0, st1
+dee0|11223344556677885f5f5f5f5f5f	gnu	fsubp %st,%st
+dee0|11223344556677885f5f5f5f5f5f	intel	fsubrp st0, st0
+dee8|11223344556677885f5f5f5f5f5f	gnu	fsubrp %st,%st
+dee8|11223344556677885f5f5f5f5f5f	intel	fsubp st0, st0
+def0|11223344556677885f5f5f5f5f5f	gnu	fdivp %st,%st
+def0|11223344556677885f5f5f5f5f5f	intel	fdivrp st0, st0
+def8|11223344556677885f5f5f5f5f5f	gnu	fdivrp %st,%st
+def8|11223344556677885f5f5f5f5f5f	intel	fdivp st0, st0
+df00|11223344556677885f5f5f5f5f5f	gnu	fild (%eax)
+df00|11223344556677885f5f5f5f5f5f	intel	fild st0, word ptr [eax]
+df08|11223344556677885f5f5f5f5f5f	gnu	fisttp (%eax)
+df08|11223344556677885f5f5f5f5f5f	intel	fisttp word ptr [eax], st0
+df11|223344556677885f5f5f5f5f5f5f	gnu	fist (%ecx)
+df11|223344556677885f5f5f5f5f5f5f	intel	fist word ptr [ecx], st0
+df18|11223344556677885f5f5f5f5f5f	gnu	fistp (%eax)
+df18|11223344556677885f5f5f5f5f5f	intel	fistp word ptr [eax], st0
+df20|11223344556677885f5f5f5f5f5f	gnu	fbld (%eax)
+df20|11223344556677885f5f5f5f5f5f	intel	fbld st0, ptr [eax]
+df28|11223344556677885f5f5f5f5f5f	gnu	fildll (%eax)
+df28|11223344556677885f5f5f5f5f5f	intel	fild st0, qword ptr [eax]
+df30|11223344556677885f5f5f5f5f5f	gnu	fbstp (%eax)
+df30|11223344556677885f5f5f5f5f5f	intel	fbstp ptr [eax], st0
+df38|11223344556677885f5f5f5f5f5f	gnu	fistpll (%eax)
+df38|11223344556677885f5f5f5f5f5f	intel	fistp qword ptr [eax], st0
+dfc0|11223344556677885f5f5f5f5f5f	gnu	ffreep %st
+dfc0|11223344556677885f5f5f5f5f5f	intel	ffreep st0
+dfe0|11223344556677885f5f5f5f5f5f	gnu	fnstsw %ax
+dfe0|11223344556677885f5f5f5f5f5f	intel	fnstsw ax
+dfe8|11223344556677885f5f5f5f5f5f	gnu	fucomip %st,%st
+dfe8|11223344556677885f5f5f5f5f5f	intel	fucomip st0, st0
+dff0|11223344556677885f5f5f5f5f5f	gnu	fcomip %st,%st
+dff0|11223344556677885f5f5f5f5f5f	intel	fcomip st0, st0
+e111|223344556677885f5f5f5f5f5f5f	gnu	loope .+0x11
+e111|223344556677885f5f5f5f5f5f5f	intel	loope .+0x11
+e211|223344556677885f5f5f5f5f5f5f	gnu	loop .+0x11
+e211|223344556677885f5f5f5f5f5f5f	intel	loop .+0x11
+e311|223344556677885f5f5f5f5f5f5f	gnu	jecxz .+0x11
+e311|223344556677885f5f5f5f5f5f5f	intel	jecxz .+0x11
+e411|223344556677885f5f5f5f5f5f5f	gnu	in $0x11,%al
+e411|223344556677885f5f5f5f5f5f5f	intel	in al, 0x11
+e511|223344556677885f5f5f5f5f5f5f	gnu	in $0x11,%eax
+e511|223344556677885f5f5f5f5f5f5f	intel	in eax, 0x11
+e611|223344556677885f5f5f5f5f5f5f	gnu	out %al,$0x11
+e611|223344556677885f5f5f5f5f5f5f	intel	out 0x11, al
+e711|223344556677885f5f5f5f5f5f5f	gnu	out %eax,$0x11
+e711|223344556677885f5f5f5f5f5f5f	intel	out 0x11, eax
+e811223344|556677885f5f5f5f5f5f5f	gnu	call .+0x44332211
+e811223344|556677885f5f5f5f5f5f5f	intel	call .+0x44332211
+e911223344|556677885f5f5f5f5f5f5f	gnu	jmp .+0x44332211
+e911223344|556677885f5f5f5f5f5f5f	intel	jmp .+0x44332211
+ea112233445566|77885f5f5f5f5f5f5f	gnu	ljmp $0x6655,$0x44332211
+ea112233445566|77885f5f5f5f5f5f5f	intel	jmp far 0x44332211, 0x6655
+eb11|223344556677885f5f5f5f5f5f5f	gnu	jmp .+0x11
+eb11|223344556677885f5f5f5f5f5f5f	intel	jmp .+0x11
+ec|11223344556677885f5f5f5f5f5f5f	gnu	in %dx,%al
+ec|11223344556677885f5f5f5f5f5f5f	intel	in al, dx
+ed|11223344556677885f5f5f5f5f5f5f	gnu	in %dx,%eax
+ed|11223344556677885f5f5f5f5f5f5f	intel	in eax, dx
+ee|11223344556677885f5f5f5f5f5f5f	gnu	out %al,%dx
+ee|11223344556677885f5f5f5f5f5f5f	intel	out dx, al
+ef|11223344556677885f5f5f5f5f5f5f	gnu	out %eax,%dx
+ef|11223344556677885f5f5f5f5f5f5f	intel	out dx, eax
+f000c0|11223344556677885f5f5f5f5f	gnu	lock add %al,%al
+f000c0|11223344556677885f5f5f5f5f	intel	lock add al, al
+f00f20c1|11223344556677885f5f5f5f	gnu	mov %cr8,%ecx
+f00f20c1|11223344556677885f5f5f5f	intel	mov ecx, cr8
+f0|66f2f33e3666818411223344556677	gnu	lock
+f0|66f2f33e3666818411223344556677	intel	lock
+f0|66f33e66f066f2f33e366681841122	gnu	lock
+f0|66f33e66f066f2f33e366681841122	intel	lock
+f0|6766f2f36667f066f2f33e36668184	gnu	lock
+f0|6766f2f36667f066f2f33e36668184	intel	lock
+f1|11223344556677885f5f5f5f5f5f5f	gnu	icebp
+f1|11223344556677885f5f5f5f5f5f5f	intel	int1
+f20f1011|223344556677885f5f5f5f5f	gnu	movsd (%ecx),%xmm2
+f20f1011|223344556677885f5f5f5f5f	intel	movsd xmm2, qword ptr [ecx]
+f20f1122|3344556677885f5f5f5f5f5f	gnu	movsd %xmm4,(%edx)
+f20f1122|3344556677885f5f5f5f5f5f	intel	movsd qword ptr [edx], xmm4
+f20f1211|223344556677885f5f5f5f5f	gnu	movddup (%ecx),%xmm2
+f20f1211|223344556677885f5f5f5f5f	intel	movddup xmm2, qword ptr [ecx]
+f20f2a11|223344556677885f5f5f5f5f	gnu	cvtsi2sdl (%ecx),%xmm2
+f20f2a11|223344556677885f5f5f5f5f	intel	cvtsi2sd xmm2, dword ptr [ecx]
+f20f2c11|223344556677885f5f5f5f5f	gnu	cvttsd2si (%ecx),%edx
+f20f2c11|223344556677885f5f5f5f5f	intel	cvttsd2si edx, qword ptr [ecx]
+f20f2d11|223344556677885f5f5f5f5f	gnu	cvtsd2si (%ecx),%edx
+f20f2d11|223344556677885f5f5f5f5f	intel	cvtsd2si edx, qword ptr [ecx]
+f20f38f011|223344556677885f5f5f5f	gnu	crc32b (%ecx),%edx
+f20f38f011|223344556677885f5f5f5f	intel	crc32 edx, byte ptr [ecx]
+f20f38f111|223344556677885f5f5f5f	gnu	crc32l (%ecx),%edx
+f20f38f111|223344556677885f5f5f5f	intel	crc32 edx, dword ptr [ecx]
+f20f5111|223344556677885f5f5f5f5f	gnu	sqrtsd (%ecx),%xmm2
+f20f5111|223344556677885f5f5f5f5f	intel	sqrtsd xmm2, qword ptr [ecx]
+f20f5811|223344556677885f5f5f5f5f	gnu	addsd (%ecx),%xmm2
+f20f5811|223344556677885f5f5f5f5f	intel	addsd xmm2, qword ptr [ecx]
+f20f5911|223344556677885f5f5f5f5f	gnu	mulsd (%ecx),%xmm2
+f20f5911|223344556677885f5f5f5f5f	intel	mulsd xmm2, qword ptr [ecx]
+f20f5a11|223344556677885f5f5f5f5f	gnu	cvtsd2ss (%ecx),%xmm2
+f20f5a11|223344556677885f5f5f5f5f	intel	cvtsd2ss xmm2, qword ptr [ecx]
+f20f5c11|223344556677885f5f5f5f5f	gnu	subsd (%ecx),%xmm2
+f20f5c11|223344556677885f5f5f5f5f	intel	subsd xmm2, qword ptr [ecx]
+f20f5d11|223344556677885f5f5f5f5f	gnu	minsd (%ecx),%xmm2
+f20f5d11|223344556677885f5f5f5f5f	intel	minsd xmm2, qword ptr [ecx]
+f20f5e11|223344556677885f5f5f5f5f	gnu	divsd (%ecx),%xmm2
+f20f5e11|223344556677885f5f5f5f5f	intel	divsd xmm2, qword ptr [ecx]
+f20f5f11|223344556677885f5f5f5f5f	gnu	maxsd (%ecx),%xmm2
+f20f5f11|223344556677885f5f5f5f5f	intel	maxsd xmm2, qword ptr [ecx]
+f20f701122|3344556677885f5f5f5f5f	gnu	pshuflw $0x22,(%ecx),%xmm2
+f20f701122|3344556677885f5f5f5f5f	intel	pshuflw xmm2, xmmword ptr [ecx], 0x22
+f20f7c11|223344556677885f5f5f5f5f	gnu	haddps (%ecx),%xmm2
+f20f7c11|223344556677885f5f5f5f5f	intel	haddps xmm2, xmmword ptr [ecx]
+f20f7d11|223344556677885f5f5f5f5f	gnu	hsubps (%ecx),%xmm2
+f20f7d11|223344556677885f5f5f5f5f	intel	hsubps xmm2, xmmword ptr [ecx]
+f20fc21122|3344556677885f5f5f5f5f	gnu	cmpsd $0x22,(%ecx),%xmm2
+f20fc21122|3344556677885f5f5f5f5f	intel	cmpsd_xmm xmm2, qword ptr [ecx], 0x22
+f20fd011|223344556677885f5f5f5f5f	gnu	addsubps (%ecx),%xmm2
+f20fd011|223344556677885f5f5f5f5f	intel	addsubps xmm2, xmmword ptr [ecx]
+f20fd6c0|11223344556677885f5f5f5f	gnu	movdq2q %xmm0,%mm0
+f20fd6c0|11223344556677885f5f5f5f	intel	movdq2q mmx0, xmm0
+f20fe611|223344556677885f5f5f5f5f	gnu	cvtpd2dq (%ecx),%xmm2
+f20fe611|223344556677885f5f5f5f5f	intel	cvtpd2dq xmm2, xmmword ptr [ecx]
+f20ff011|223344556677885f5f5f5f5f	gnu	lddqu (%ecx),%xmm2
+f20ff011|223344556677885f5f5f5f5f	intel	lddqu xmm2, xmmword ptr [ecx]
+f2266e|11223344556677885f5f5f5f5f	gnu	repn outsb %es:(%esi),(%dx)
+f2266e|11223344556677885f5f5f5f5f	intel	repne outsb es
+f23ef367660f38f011|22334455667788	gnu	rep crc32b %ds:(%bx,%di),%edx
+f267f0663e360f38f111|223344556677	gnu	lock crc32w %ds:%ss:(%bx,%di),%edx
+f267f0663e360f38f111|223344556677	intel	lock crc32 edx, word ptr ss:[bx+di*1]
+f267f066f2f33e3666818411223344|55	gnu	repn lock data32 xacquire xrelease addw $0x4433,%ds:%ss:0x2211(%si)
+f27011|223344556677885f5f5f5f5f5f	gnu	bnd jo .+0x11
+f27011|223344556677885f5f5f5f5f5f	intel	bnd jo .+0x11
+f28611|223344556677885f5f5f5f5f5f	intel	xacquire xchg byte ptr [ecx], dl
+f28811|223344556677885f5f5f5f5f5f	gnu	repn mov %dl,(%ecx)
+f2f23ef367660f38f011|223344556677	gnu	repn rep crc32b %ds:(%bx,%di),%edx
+f2f30f2b11|5f5f5f5f5f5f5f5f5f5f5f	gnu	repn movntss %xmm2,(%ecx)
+f2f30f2b11|5f5f5f5f5f5f5f5f5f5f5f	intel	movntss dword ptr [ecx], xmm2
+f30f1011|223344556677885f5f5f5f5f	gnu	movss (%ecx),%xmm2
+f30f1011|223344556677885f5f5f5f5f	intel	movss xmm2, dword ptr [ecx]
+f30f1122|3344556677885f5f5f5f5f5f	gnu	movss %xmm4,(%edx)
+f30f1122|3344556677885f5f5f5f5f5f	intel	movss dword ptr [edx], xmm4
+f30f1211|223344556677885f5f5f5f5f	gnu	movsldup (%ecx),%xmm2
+f30f1211|223344556677885f5f5f5f5f	intel	movsldup xmm2, xmmword ptr [ecx]
+f30f1611|223344556677885f5f5f5f5f	gnu	movshdup (%ecx),%xmm2
+f30f1611|223344556677885f5f5f5f5f	intel	movshdup xmm2, xmmword ptr [ecx]
+f30f2c11|223344556677885f5f5f5f5f	gnu	cvttss2si (%ecx),%edx
+f30f2c11|223344556677885f5f5f5f5f	intel	cvttss2si edx, dword ptr [ecx]
+f30f2d11|223344556677885f5f5f5f5f	gnu	cvtss2si (%ecx),%edx
+f30f2d11|223344556677885f5f5f5f5f	intel	cvtss2si edx, dword ptr [ecx]
+f30f5111|223344556677885f5f5f5f5f	gnu	sqrtss (%ecx),%xmm2
+f30f5111|223344556677885f5f5f5f5f	intel	sqrtss xmm2, dword ptr [ecx]
+f30f5211|223344556677885f5f5f5f5f	gnu	rsqrtss (%ecx),%xmm2
+f30f5211|223344556677885f5f5f5f5f	intel	rsqrtss xmm2, dword ptr [ecx]
+f30f5311|223344556677885f5f5f5f5f	gnu	rcpss (%ecx),%xmm2
+f30f5311|223344556677885f5f5f5f5f	intel	rcpss xmm2, dword ptr [ecx]
+f30f5811|223344556677885f5f5f5f5f	gnu	addss (%ecx),%xmm2
+f30f5811|223344556677885f5f5f5f5f	intel	addss xmm2, dword ptr [ecx]
+f30f5911|223344556677885f5f5f5f5f	gnu	mulss (%ecx),%xmm2
+f30f5911|223344556677885f5f5f5f5f	intel	mulss xmm2, dword ptr [ecx]
+f30f5a11|223344556677885f5f5f5f5f	gnu	cvtss2sd (%ecx),%xmm2
+f30f5a11|223344556677885f5f5f5f5f	intel	cvtss2sd xmm2, dword ptr [ecx]
+f30f5b11|223344556677885f5f5f5f5f	gnu	cvttps2dq (%ecx),%xmm2
+f30f5b11|223344556677885f5f5f5f5f	intel	cvttps2dq xmm2, xmmword ptr [ecx]
+f30f5c11|223344556677885f5f5f5f5f	gnu	subss (%ecx),%xmm2
+f30f5c11|223344556677885f5f5f5f5f	intel	subss xmm2, dword ptr [ecx]
+f30f5d11|223344556677885f5f5f5f5f	gnu	minss (%ecx),%xmm2
+f30f5d11|223344556677885f5f5f5f5f	intel	minss xmm2, dword ptr [ecx]
+f30f5e11|223344556677885f5f5f5f5f	gnu	divss (%ecx),%xmm2
+f30f5e11|223344556677885f5f5f5f5f	intel	divss xmm2, dword ptr [ecx]
+f30f5f11|223344556677885f5f5f5f5f	gnu	maxss (%ecx),%xmm2
+f30f5f11|223344556677885f5f5f5f5f	intel	maxss xmm2, dword ptr [ecx]
+f30f6f11|223344556677885f5f5f5f5f	gnu	movdqu (%ecx),%xmm2
+f30f6f11|223344556677885f5f5f5f5f	intel	movdqu xmm2, xmmword ptr [ecx]
+f30f701122|3344556677885f5f5f5f5f	gnu	pshufhw $0x22,(%ecx),%xmm2
+f30f701122|3344556677885f5f5f5f5f	intel	pshufhw xmm2, xmmword ptr [ecx], 0x22
+f30f7e11|223344556677885f5f5f5f5f	gnu	movq (%ecx),%xmm2
+f30f7e11|223344556677885f5f5f5f5f	intel	movq xmm2, qword ptr [ecx]
+f30f7f11|223344556677885f5f5f5f5f	gnu	movdqu %xmm2,(%ecx)
+f30f7f11|223344556677885f5f5f5f5f	intel	movdqu xmmword ptr [ecx], xmm2
+f30fb811|223344556677885f5f5f5f5f	gnu	popcnt (%ecx),%edx
+f30fb811|223344556677885f5f5f5f5f	intel	popcnt edx, dword ptr [ecx]
+f30fbc11|223344556677885f5f5f5f5f	gnu	tzcnt (%ecx),%edx
+f30fbc11|223344556677885f5f5f5f5f	intel	tzcnt edx, dword ptr [ecx]
+f30fbd11|223344556677885f5f5f5f5f	gnu	lzcnt (%ecx),%edx
+f30fbd11|223344556677885f5f5f5f5f	intel	lzcnt edx, dword ptr [ecx]
+f30fc21122|3344556677885f5f5f5f5f	gnu	cmpss $0x22,(%ecx),%xmm2
+f30fc21122|3344556677885f5f5f5f5f	intel	cmpss xmm2, dword ptr [ecx], 0x22
+f30fe611|223344556677885f5f5f5f5f	gnu	cvtdq2pd (%ecx),%xmm2
+f30fe611|223344556677885f5f5f5f5f	intel	cvtdq2pd xmm2, qword ptr [ecx]
+f3660fb811|223344556677885f5f5f5f	gnu	popcnt (%ecx),%dx
+f3660fb811|223344556677885f5f5f5f	intel	popcnt dx, word ptr [ecx]
+f3660fbc11|223344556677885f5f5f5f	gnu	tzcnt (%ecx),%dx
+f3660fbc11|223344556677885f5f5f5f	intel	tzcnt dx, word ptr [ecx]
+f3660fbd11|223344556677885f5f5f5f	gnu	lzcnt (%ecx),%dx
+f3660fbd11|223344556677885f5f5f5f	intel	lzcnt dx, word ptr [ecx]
+f367f066f2f33e3666818411223344|55	gnu	rep lock data32 xacquire xrelease addw $0x4433,%ds:%ss:0x2211(%si)
+f38811|223344556677885f5f5f5f5f5f	gnu	xrelease mov %dl,(%ecx)
+f38811|223344556677885f5f5f5f5f5f	intel	xrelease mov byte ptr [ecx], dl
+f390|11223344556677885f5f5f5f5f5f	gnu	pause
+f390|11223344556677885f5f5f5f5f5f	intel	pause
+f3f0673e660f38f111|22334455667788	gnu	rep lock movbe %dx,%ds:(%bx,%di)
+f3f0673e660f38f111|22334455667788	intel	lock movbe word ptr [bx+di*1], dx
+f3f20f2b11|5f5f5f5f5f5f5f5f5f5f5f	gnu	repn movntss %xmm2,(%ecx)
+f3f20f2b11|5f5f5f5f5f5f5f5f5f5f5f	intel	movntsd qword ptr [ecx], xmm2
+f3f20f6f11|223344556677885f5f5f5f	gnu	repn movdqu (%ecx),%xmm2
+f3f28811|223344556677885f5f5f5f5f	gnu	rep repn mov %dl,(%ecx)
+f3f3f20f6f11|223344556677885f5f5f	gnu	rep repn movdqu (%ecx),%xmm2
+f4|11223344556677885f5f5f5f5f5f5f	gnu	hlt
+f4|11223344556677885f5f5f5f5f5f5f	intel	hlt
+f5|11223344556677885f5f5f5f5f5f5f	gnu	cmc
+f5|11223344556677885f5f5f5f5f5f5f	intel	cmc
+f60011|223344556677885f5f5f5f5f5f	gnu	testb $0x11,(%eax)
+f60011|223344556677885f5f5f5f5f5f	intel	test byte ptr [eax], 0x11
+f611|223344556677885f5f5f5f5f5f5f	gnu	notb (%ecx)
+f611|223344556677885f5f5f5f5f5f5f	intel	not byte ptr [ecx]
+f618|11223344556677885f5f5f5f5f5f	gnu	negb (%eax)
+f618|11223344556677885f5f5f5f5f5f	intel	neg byte ptr [eax]
+f620|11223344556677885f5f5f5f5f5f	gnu	mulb (%eax)
+f620|11223344556677885f5f5f5f5f5f	intel	mul byte ptr [eax]
+f628|11223344556677885f5f5f5f5f5f	gnu	imulb (%eax)
+f628|11223344556677885f5f5f5f5f5f	intel	imul byte ptr [eax]
+f630|11223344556677885f5f5f5f5f5f	gnu	divb (%eax)
+f630|11223344556677885f5f5f5f5f5f	intel	div byte ptr [eax]
+f638|11223344556677885f5f5f5f5f5f	gnu	idivb (%eax)
+f638|11223344556677885f5f5f5f5f5f	intel	idiv byte ptr [eax]
+f70011223344|556677885f5f5f5f5f5f	gnu	testl $0x44332211,(%eax)
+f70011223344|556677885f5f5f5f5f5f	intel	test dword ptr [eax], 0x44332211
+f711|223344556677885f5f5f5f5f5f5f	gnu	notl (%ecx)
+f711|223344556677885f5f5f5f5f5f5f	intel	not dword ptr [ecx]
+f718|11223344556677885f5f5f5f5f5f	gnu	negl (%eax)
+f718|11223344556677885f5f5f5f5f5f	intel	neg dword ptr [eax]
+f720|11223344556677885f5f5f5f5f5f	gnu	mull (%eax)
+f720|11223344556677885f5f5f5f5f5f	intel	mul dword ptr [eax]
+f728|11223344556677885f5f5f5f5f5f	gnu	imull (%eax)
+f728|11223344556677885f5f5f5f5f5f	intel	imul dword ptr [eax]
+f730|11223344556677885f5f5f5f5f5f	gnu	divl (%eax)
+f730|11223344556677885f5f5f5f5f5f	intel	div dword ptr [eax]
+f738|11223344556677885f5f5f5f5f5f	gnu	idivl (%eax)
+f738|11223344556677885f5f5f5f5f5f	intel	idiv dword ptr [eax]
+f8|11223344556677885f5f5f5f5f5f5f	gnu	clc
+f8|11223344556677885f5f5f5f5f5f5f	intel	clc
+f9|11223344556677885f5f5f5f5f5f5f	gnu	stc
+f9|11223344556677885f5f5f5f5f5f5f	intel	stc
+fa|11223344556677885f5f5f5f5f5f5f	gnu	cli
+fa|11223344556677885f5f5f5f5f5f5f	intel	cli
+fb|11223344556677885f5f5f5f5f5f5f	gnu	sti
+fb|11223344556677885f5f5f5f5f5f5f	intel	sti
+fc|11223344556677885f5f5f5f5f5f5f	gnu	cld
+fc|11223344556677885f5f5f5f5f5f5f	intel	cld
+fd|11223344556677885f5f5f5f5f5f5f	gnu	std
+fd|11223344556677885f5f5f5f5f5f5f	intel	std
+fe00|11223344556677885f5f5f5f5f5f	gnu	incb (%eax)
+fe00|11223344556677885f5f5f5f5f5f	intel	inc byte ptr [eax]
+fe08|11223344556677885f5f5f5f5f5f	gnu	decb (%eax)
+fe08|11223344556677885f5f5f5f5f5f	intel	dec byte ptr [eax]
+ff00|11223344556677885f5f5f5f5f5f	gnu	incl (%eax)
+ff00|11223344556677885f5f5f5f5f5f	intel	inc dword ptr [eax]
+ff08|11223344556677885f5f5f5f5f5f	gnu	decl (%eax)
+ff08|11223344556677885f5f5f5f5f5f	intel	dec dword ptr [eax]
+ff11|223344556677885f5f5f5f5f5f5f	gnu	call *(%ecx)
+ff11|223344556677885f5f5f5f5f5f5f	intel	call dword ptr [ecx]
+ff18|11223344556677885f5f5f5f5f5f	gnu	lcall *(%eax)
+ff18|11223344556677885f5f5f5f5f5f	intel	call far ptr [eax]
+ff20|11223344556677885f5f5f5f5f5f	gnu	jmp *(%eax)
+ff20|11223344556677885f5f5f5f5f5f	intel	jmp dword ptr [eax]
+ff28|11223344556677885f5f5f5f5f5f	gnu	ljmp *(%eax)
+ff28|11223344556677885f5f5f5f5f5f	intel	jmp far ptr [eax]
+ff30|11223344556677885f5f5f5f5f5f	gnu	pushl (%eax)
+ff30|11223344556677885f5f5f5f5f5f	intel	push dword ptr [eax]

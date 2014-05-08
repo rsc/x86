@@ -118,8 +118,6 @@ func (op Op) String() string {
 	return opNames[i]
 }
 
-var opNames []string // TODO REMOVE
-
 // An Args holds the instruction arguments.
 // If an instruction does has fewer than 4 arguments,
 // the final elements in the array are nil.
@@ -400,6 +398,54 @@ func (i Inst) String() string {
 		sep = ", "
 	}
 	return buf.String()
+}
+
+func isReg(a Arg) bool {
+	_, ok := a.(Reg)
+	return ok
+}
+
+func isSegReg(a Arg) bool {
+	r, ok := a.(Reg)
+	return ok && ES <= r && r <= GS
+}
+
+func isMem(a Arg) bool {
+	_, ok := a.(Mem)
+	return ok
+}
+
+func isImm(a Arg) bool {
+	_, ok := a.(Imm)
+	return ok
+}
+
+func regBytes(a Arg) int {
+	r, ok := a.(Reg)
+	if !ok {
+		return 0
+	}
+	if AL <= r && r <= R15B {
+		return 1
+	}
+	if AX <= r && r <= R15W {
+		return 2
+	}
+	if EAX <= r && r <= R15L {
+		return 4
+	}
+	if RAX <= r && r <= R15 {
+		return 8
+	}
+	return 0
+}
+
+func isSegment(p Prefix) bool {
+	switch p {
+	case PrefixCS, PrefixDS, PrefixES, PrefixFS, PrefixGS, PrefixSS:
+		return true
+	}
+	return false
 }
 
 // The Op definitions and string list are in tables.go.
