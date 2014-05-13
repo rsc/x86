@@ -20,7 +20,15 @@ import (
 // Apologies for the proprietary path, but we need objdump 2.24 + some committed patches that will land in 2.25.
 const objdumpPath = "/Users/rsc/bin/objdump2"
 
-func testObjdump(t *testing.T, generate func(func([]byte))) {
+func testObjdump32(t *testing.T, generate func(func([]byte))) {
+	testObjdumpArch(t, generate, 32)
+}
+
+func testObjdump64(t *testing.T, generate func(func([]byte))) {
+	testObjdumpArch(t, generate, 64)
+}
+
+func testObjdumpArch(t *testing.T, generate func(func([]byte)), arch int) {
 	if _, err := os.Stat(objdumpPath); err != nil {
 		if !testing.Short() {
 			t.Fatal(err)
@@ -28,7 +36,7 @@ func testObjdump(t *testing.T, generate func(func([]byte))) {
 		t.Skip(err)
 	}
 
-	testExtDis(t, "gnu", 32, objdump, generate, allowedMismatchObjdump)
+	testExtDis(t, "gnu", arch, objdump, generate, allowedMismatchObjdump)
 }
 
 func objdump(ext *ExtDis) error {
@@ -147,6 +155,9 @@ func parseLine(line []byte, encstart []byte) (addr uint32, enc []byte, text stri
 		log.Fatalf("cannot parse disassembly: %q", oline)
 	}
 	line = trimSpace(line[i:])
+	if i := bytes.IndexByte(line, '#'); i >= 0 {
+		line = trimSpace(line[:i])
+	}
 	text = string(fixSpace(line))
 	return
 }

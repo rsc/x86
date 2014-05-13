@@ -10,21 +10,41 @@ import (
 	"testing"
 )
 
-func TestObjdumpManual(t *testing.T)   { testObjdump(t, hexCases(t, objdumpManualTests)) }
-func TestObjdumpTestdata(t *testing.T) { testObjdump(t, concat(basicPrefixes, testdataCases(t))) }
-func TestObjdumpModRM(t *testing.T)    { testObjdump(t, concat(basicPrefixes, enumModRM)) }
-func TestObjdumpOneByte(t *testing.T)  { testBasic(t, testObjdump) }
-func TestObjdump0F(t *testing.T)       { testBasic(t, testObjdump, 0x0F) }
-func TestObjdump0F38(t *testing.T)     { testBasic(t, testObjdump, 0x0F, 0x38) }
-func TestObjdump0F3A(t *testing.T)     { testBasic(t, testObjdump, 0x0F, 0x3A) }
-func TestObjdumpPrefix(t *testing.T)   { testPrefix(t, testObjdump) }
+func TestObjdump32Manual(t *testing.T)   { testObjdump32(t, hexCases(t, objdumpManualTests)) }
+func TestObjdump32Testdata(t *testing.T) { testObjdump32(t, concat(basicPrefixes, testdataCases(t))) }
+func TestObjdump32ModRM(t *testing.T)    { testObjdump32(t, concat(basicPrefixes, enumModRM)) }
+func TestObjdump32OneByte(t *testing.T)  { testBasic(t, testObjdump32) }
+func TestObjdump320F(t *testing.T)       { testBasic(t, testObjdump32, 0x0F) }
+func TestObjdump320F38(t *testing.T)     { testBasic(t, testObjdump32, 0x0F, 0x38) }
+func TestObjdump320F3A(t *testing.T)     { testBasic(t, testObjdump32, 0x0F, 0x3A) }
+func TestObjdump32Prefix(t *testing.T)   { testPrefix(t, testObjdump32) }
+
+func TestObjdump64Manual(t *testing.T)   { testObjdump64(t, hexCases(t, objdumpManualTests)) }
+func TestObjdump64Testdata(t *testing.T) { testObjdump64(t, concat(basicPrefixes, testdataCases(t))) }
+func TestObjdump64ModRM(t *testing.T)    { testObjdump64(t, concat(basicPrefixes, enumModRM)) }
+func TestObjdump64OneByte(t *testing.T)  { testBasic(t, testObjdump64) }
+func TestObjdump640F(t *testing.T)       { testBasic(t, testObjdump64, 0x0F) }
+func TestObjdump640F38(t *testing.T)     { testBasic(t, testObjdump64, 0x0F, 0x38) }
+func TestObjdump640F3A(t *testing.T)     { testBasic(t, testObjdump64, 0x0F, 0x3A) }
+func TestObjdump64Prefix(t *testing.T)   { testPrefix(t, testObjdump64) }
+
+func TestObjdump64REXTestdata(t *testing.T) {
+	testObjdump64(t, filter(concat3(basicPrefixes, rexPrefixes, testdataCases(t)), isValidREX))
+}
+func TestObjdump64REXModRM(t *testing.T) {
+	testObjdump64(t, concat3(basicPrefixes, rexPrefixes, enumModRM))
+}
+func TestObjdump64REXOneByte(t *testing.T) { testBasicREX(t, testObjdump64) }
+func TestObjdump64REX0F(t *testing.T)      { testBasicREX(t, testObjdump64, 0x0F) }
+func TestObjdump64REX0F38(t *testing.T)    { testBasicREX(t, testObjdump64, 0x0F, 0x38) }
+func TestObjdump64REX0F3A(t *testing.T)    { testBasicREX(t, testObjdump64, 0x0F, 0x3A) }
+func TestObjdump64REXPrefix(t *testing.T)  { testPrefixREX(t, testObjdump64) }
 
 // objdumpManualTests holds test cases that will be run by TestObjdumpManual.
 // If you are debugging a few cases that turned up in a longer run, it can be useful
 // to list them here and then use -run=ObjdumpManual, particularly with tracing enabled.
 var objdumpManualTests = `
-90
-6690
+F390
 `
 
 // allowedMismatchObjdump reports whether the mismatch between text and dec

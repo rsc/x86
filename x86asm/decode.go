@@ -184,13 +184,16 @@ func instPrefix(b byte, mode int) (Inst, int, error) {
 			p = PrefixData16
 		}
 	case PrefixAddrSize:
-		if mode == 16 {
-			p = PrefixAddr32
-		} else {
+		if mode == 32 {
 			p = PrefixAddr16
+		} else {
+			p = PrefixAddr32
 		}
 	}
-	return Inst{Prefix: Prefixes{p}}, 1, nil
+	// Note: using composite literal here confuses 'bundle' tool.
+	inst := Inst{}
+	inst.Prefix = Prefixes{p}
+	return inst, 1, nil
 }
 
 // truncated reports a truncated instruction.
@@ -255,6 +258,7 @@ func decode1(src []byte, mode int, gnuCompat bool) (Inst, int, error) {
 		addrSizeIndex = -1   // index of Group 4 prefix in src and inst.Prefix
 		rex           Prefix // rex byte if present (or 0)
 		rexUsed       Prefix // bits used in rex byte
+		rexIndex      = -1   // index of rex byte
 
 		addrMode = mode // address mode (width in bits)
 		dataMode = mode // operand mode (width in bits)
@@ -287,6 +291,10 @@ func decode1(src []byte, mode int, gnuCompat bool) (Inst, int, error) {
 		inst    Inst
 		narg    int // number of arguments written to inst
 	)
+
+	if mode == 64 {
+		dataMode = 32
+	}
 
 	// Prefixes are certainly the most complex and underspecified part of
 	// decoding x86 instructions. Although the manuals say things like
@@ -377,13 +385,10 @@ ReadPrefixes:
 
 		// Group 4 - address size override
 		case 0x67:
-			if mode == 16 {
-				addrMode = 32
-				p = PrefixAddr32
-			} else if mode == 32 {
+			if mode == 32 {
 				addrMode = 16
 				p = PrefixAddr16
-			} else if mode == 64 {
+			} else {
 				addrMode = 32
 				p = PrefixAddr32
 			}
@@ -403,9 +408,17 @@ ReadPrefixes:
 	// Read REX prefix.
 	if pos < len(src) && mode == 64 && Prefix(src[pos]).IsREX() {
 		rex = Prefix(src[pos])
+		rexIndex = pos
+		if pos >= len(inst.Prefix) {
+			return instPrefix(src[0], mode) // too long
+		}
+		inst.Prefix[pos] = rex
 		pos++
 		if rex&PrefixREXW != 0 {
 			dataMode = 64
+			if dataSizeIndex >= 0 {
+				inst.Prefix[dataSizeIndex] |= PrefixIgnored
+			}
 		}
 	}
 
@@ -467,7 +480,7 @@ Decode:
 						if pos+2 > len(src) {
 							return truncated(src, mode)
 						}
-						mem.Disp = int32(binary.LittleEndian.Uint16(src[pos:]))
+						mem.Disp = int64(binary.LittleEndian.Uint16(src[pos:]))
 						pos += 2
 					}
 
@@ -476,7 +489,7 @@ Decode:
 						if pos >= len(src) {
 							return truncated(src, mode)
 						}
-						mem.Disp = int32(int8(src[pos]))
+						mem.Disp = int64(int8(src[pos]))
 						pos++
 					}
 				}
@@ -514,7 +527,7 @@ Decode:
 					} else {
 						mem.Index = baseRegForBits(addrMode) + Reg(index)
 					}
-					if base == 5 && mod == 0 {
+					if base&7 == 5 && mod == 0 {
 						// no mem.Base
 					} else {
 						mem.Base = baseRegForBits(addrMode) + Reg(base)
@@ -524,8 +537,7 @@ Decode:
 						rexUsed |= PrefixREXB
 						rm |= 8
 					}
-
-					if mod == 0 && rm == 5 || rm == 4 {
+					if mod == 0 && rm&7 == 5 || rm&7 == 4 {
 						// base omitted
 					} else if mod != 3 {
 						mem.Base = baseRegForBits(addrMode) + Reg(rm)
@@ -533,11 +545,11 @@ Decode:
 				}
 
 				// Consume disp32 if present.
-				if mod == 0 && (rm == 5 || haveSIB && base == 5) || mod == 2 {
+				if mod == 0 && (rm&7 == 5 || haveSIB && base&7 == 5) || mod == 2 {
 					if pos+4 > len(src) {
 						return truncated(src, mode)
 					}
-					mem.Disp = int32(binary.LittleEndian.Uint32(src[pos:]))
+					mem.Disp = int64(binary.LittleEndian.Uint32(src[pos:]))
 					pos += 4
 				}
 
@@ -546,8 +558,18 @@ Decode:
 					if pos >= len(src) {
 						return truncated(src, mode)
 					}
-					mem.Disp = int32(int8(src[pos]))
+					mem.Disp = int64(int8(src[pos]))
 					pos++
+				}
+
+				// In 64-bit, mod=0 rm=5 is PC-relative instead of just disp.
+				// See Vol 2A. Table 2-7.
+				if mode == 64 && mod == 0 && rm&7 == 5 {
+					if addrMode == 32 {
+						mem.Base = EIP
+					} else {
+						mem.Base = RIP
+					}
 				}
 			}
 
@@ -640,6 +662,7 @@ Decode:
 				}
 				pc = int(decoder[pc+1])
 			case 64:
+				rexUsed |= PrefixREXW
 				pc = int(decoder[pc+2])
 			}
 
@@ -877,12 +900,18 @@ Decode:
 				}
 				immc = int64(binary.LittleEndian.Uint16(src[pos:]))
 				pos += 2
-			} else {
+			} else if addrMode == 32 {
 				if pos+4 > len(src) {
 					return truncated(src, mode)
 				}
 				immc = int64(binary.LittleEndian.Uint32(src[pos:]))
 				pos += 4
+			} else {
+				if pos+8 > len(src) {
+					return truncated(src, mode)
+				}
+				immc = int64(binary.LittleEndian.Uint64(src[pos:]))
+				pos += 8
 			}
 		case xReadCd:
 			if pos+4 > len(src) {
@@ -997,7 +1026,7 @@ Decode:
 
 		case xArgMoffs8, xArgMoffs16, xArgMoffs32, xArgMoffs64:
 			// TODO(rsc): Can address be 64 bits?
-			mem = Mem{Disp: int32(immc)}
+			mem = Mem{Disp: int64(immc)}
 			if segIndex >= 0 {
 				mem.Segment = prefixToSegment(inst.Prefix[segIndex])
 				inst.Prefix[segIndex] |= PrefixImplicit
@@ -1006,8 +1035,19 @@ Decode:
 			inst.MemBytes = int(memBytes[decodeOp(x)])
 			narg++
 
-		case xArgR8, xArgR16, xArgR32, xArgR64, xArgXmm, xArgXmm1, xArgMm, xArgMm1, xArgDR0dashDR7, xArgTR0dashTR7:
-			inst.Args[narg] = baseReg[x] + Reg(regop)
+		case xArgR8, xArgR16, xArgR32, xArgR64, xArgXmm, xArgXmm1, xArgDR0dashDR7:
+			base := baseReg[x]
+			index := Reg(regop)
+			if rex != 0 && base == AL && index >= 4 {
+				rexUsed |= PrefixREX
+				index -= 4
+				base = SPB
+			}
+			inst.Args[narg] = base + index
+			narg++
+
+		case xArgMm, xArgMm1, xArgTR0dashTR7:
+			inst.Args[narg] = baseReg[x] + Reg(regop&7)
 			narg++
 
 		case xArgCR0dashCR7:
@@ -1023,6 +1063,7 @@ Decode:
 			narg++
 
 		case xArgSreg:
+			regop &= 7
 			if regop >= 6 {
 				inst.Op = 0
 				break Decode
@@ -1031,12 +1072,29 @@ Decode:
 			narg++
 
 		case xArgRmf16, xArgRmf32, xArgRmf64:
-			inst.Args[narg] = baseReg[x] + Reg(modrm&07)
+			base := baseReg[x]
+			index := Reg(modrm & 07)
+			if rex&PrefixREXB != 0 {
+				rexUsed |= PrefixREXB
+				index += 8
+			}
+			inst.Args[narg] = base + index
 			narg++
 
 		case xArgR8op, xArgR16op, xArgR32op, xArgR64op, xArgSTi:
 			n := inst.Opcode >> uint(opshift+8) & 07
-			inst.Args[narg] = baseReg[x] + Reg(n)
+			base := baseReg[x]
+			index := Reg(n)
+			if rex&PrefixREXB != 0 && decodeOp(x) != xArgSTi {
+				rexUsed |= PrefixREXB
+				index += 8
+			}
+			if rex != 0 && base == AL && index >= 4 {
+				rexUsed |= PrefixREX
+				index -= 4
+				base = SPB
+			}
+			inst.Args[narg] = base + index
 			narg++
 
 		case xArgRM8, xArgRM16, xArgRM32, xArgRM64, xArgR32M16, xArgR32M8, xArgR64M16,
@@ -1046,11 +1104,32 @@ Decode:
 				inst.Args[narg] = mem
 				inst.MemBytes = int(memBytes[decodeOp(x)])
 			} else {
-				inst.Args[narg] = baseReg[x] + Reg(rm)
+				base := baseReg[x]
+				index := Reg(rm)
+				switch decodeOp(x) {
+				case xArgMmM32, xArgMmM64, xArgMm2M64:
+					// There are only 8 MMX registers, so these ignore the REX.X bit.
+					index &= 7
+				case xArgRM8:
+					if rex != 0 && index >= 4 {
+						rexUsed |= PrefixREX
+						index -= 4
+						base = SPB
+					}
+				}
+				inst.Args[narg] = base + index
 			}
 			narg++
 
-		case xArgMm2, xArgXmm2: // register only; TODO(rsc): Handle with tag modrm_regonly tag
+		case xArgMm2: // register only; TODO(rsc): Handle with tag modrm_regonly tag
+			if haveMem {
+				inst.Op = 0
+				break Decode
+			}
+			inst.Args[narg] = baseReg[x] + Reg(rm&7)
+			narg++
+
+		case xArgXmm2: // register only; TODO(rsc): Handle with tag modrm_regonly tag
 			if haveMem {
 				inst.Op = 0
 				break Decode
@@ -1081,6 +1160,39 @@ Decode:
 	}
 
 	// Matched! Hooray!
+
+	// 90 decodes as XCHG EAX, EAX but is NOP.
+	// 66 90 decodes as XCHG AX, AX and is NOP too.
+	// 48 90 decodes as XCHG RAX, RAX and is NOP too.
+	// 43 90 decodes as XCHG R8D, EAX and is *not* NOP.
+	// F3 90 decodes as REP XCHG EAX, EAX but is PAUSE.
+	// It's all too special to handle in the decoding tables, at least for now.
+	if inst.Op == XCHG && inst.Opcode>>24 == 0x90 {
+		if inst.Args[0] == RAX || inst.Args[0] == EAX || inst.Args[0] == AX {
+			inst.Op = NOP
+			if dataSizeIndex >= 0 {
+				inst.Prefix[dataSizeIndex] &^= PrefixImplicit
+			}
+			inst.Args[0] = nil
+			inst.Args[1] = nil
+		}
+		if repIndex >= 0 && inst.Prefix[repIndex] == 0xF3 {
+			inst.Prefix[repIndex] |= PrefixImplicit
+			inst.Op = PAUSE
+			inst.Args[0] = nil
+			inst.Args[1] = nil
+		} else if gnuCompat {
+			for i := nprefix - 1; i >= 0; i-- {
+				if inst.Prefix[i]&0xFF == 0xF3 {
+					inst.Prefix[i] |= PrefixImplicit
+					inst.Op = PAUSE
+					inst.Args[0] = nil
+					inst.Args[1] = nil
+					break
+				}
+			}
+		}
+	}
 
 	// defaultSeg returns the default segment for an implicit
 	// memory reference: the final override if present, or else DS.
@@ -1196,7 +1308,8 @@ Decode:
 	if isCondJmp[inst.Op] || isLoop[inst.Op] || inst.Op == JCXZ || inst.Op == JECXZ || inst.Op == JRCXZ {
 	PredictLoop:
 		for i := nprefix - 1; i >= 0; i-- {
-			switch inst.Prefix[i] & 0xFF {
+			p := inst.Prefix[i]
+			switch p & 0xFF {
 			case PrefixCS:
 				inst.Prefix[i] = PrefixPN
 				break PredictLoop
@@ -1218,7 +1331,7 @@ Decode:
 		for i := nprefix - 1; i >= 0; i-- {
 			p := inst.Prefix[i]
 			if p&^PrefixIgnored == PrefixREPN {
-				inst.Prefix[i] = p&PrefixIgnored | PrefixBND
+				inst.Prefix[i] = PrefixBND
 				break
 			}
 		}
@@ -1300,6 +1413,16 @@ Decode:
 			default:
 				inst.Prefix[repIndex] |= PrefixIgnored
 			}
+		}
+	}
+
+	// If REX was present, mark implicit if all the 1 bits were consumed.
+	if rexIndex >= 0 {
+		if rexUsed != 0 {
+			rexUsed |= PrefixREX
+		}
+		if rex&^rexUsed == 0 {
+			inst.Prefix[rexIndex] |= PrefixImplicit
 		}
 	}
 

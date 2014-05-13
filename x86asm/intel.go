@@ -39,6 +39,10 @@ func IntelSyntax(inst Inst) string {
 			src -= EAX - AX
 			iargs[1] = src
 		}
+		if ES <= dst && dst <= GS && RAX <= src && src <= R15 {
+			src -= RAX - AX
+			iargs[1] = src
+		}
 
 		if inst.Opcode>>24&^3 == 0xA0 {
 			for i, p := range inst.Prefix {
@@ -77,8 +81,11 @@ func IntelSyntax(inst Inst) string {
 
 	if inst.Op != 0 {
 		for i, p := range inst.Prefix {
-			switch p & 0xFF {
-			case PrefixDataSize, PrefixCS, PrefixDS, PrefixES, PrefixSS:
+			switch p &^ PrefixIgnored {
+			case PrefixData16, PrefixData32, PrefixCS, PrefixDS, PrefixES, PrefixSS:
+				inst.Prefix[i] |= PrefixImplicit
+			}
+			if p.IsREX() {
 				inst.Prefix[i] |= PrefixImplicit
 			}
 		}
@@ -93,7 +100,15 @@ func IntelSyntax(inst Inst) string {
 	}
 
 	switch inst.Op {
-	case CBW, CWD, PUSHF, POPF, INSB, INSD, INSW, OUTSB, OUTSD, OUTSW, IRET, LEAVE, PUSHA, POPA, NOP, XEND, XTEST, RDTSCP, CLTS, SYSRET, INVD, WBINVD, UD2, WRMSR, RDTSC, RDMSR, RDPMC, SYSENTER, SYSEXIT, RSM, DAA, DAS, AAA, AAS, HLT, CMC, CLC, STC, CLI, STI, CLD, STD, FWAIT, SAHF, LAHF, RET, LRET, INT, INTO, XLATB, FNOP, FDECSTP, FINCSTP, FNCLEX, FNINIT, ICEBP, CPUID, MONITOR, MWAIT, PAUSE:
+	case AAA, AAS, CBW, CDQE, CLC, CLD, CLI, CLTS, CMC, CPUID, CQO, CWD, DAA, DAS,
+		FDECSTP, FINCSTP, FNCLEX, FNINIT, FNOP, FWAIT, HLT,
+		ICEBP, INSB, INSD, INSW, INT, INTO, INVD, IRET, IRETQ,
+		LAHF, LEAVE, LRET, MONITOR, MWAIT, NOP, OUTSB, OUTSD, OUTSW,
+		PAUSE, POPA, POPF, POPFQ, PUSHA, PUSHF, PUSHFQ,
+		RDMSR, RDPMC, RDTSC, RDTSCP, RET, RSM,
+		SAHF, STC, STD, STI, SYSENTER, SYSEXIT, SYSRET,
+		UD2, WBINVD, WRMSR, XEND, XLATB, XTEST:
+
 		if inst.Op == NOP && inst.Opcode>>24 != 0x90 {
 			break
 		}
@@ -108,7 +123,7 @@ func IntelSyntax(inst Inst) string {
 		}
 		for i, p := range inst.Prefix {
 			if p&0xFF == PrefixDataSize {
-				inst.Prefix[i] &^= PrefixImplicit
+				inst.Prefix[i] &^= PrefixImplicit | PrefixIgnored
 			}
 		}
 
@@ -120,16 +135,18 @@ func IntelSyntax(inst Inst) string {
 	case INSB, INSD, INSW, OUTSB, OUTSD, OUTSW, MONITOR, MWAIT, XLATB:
 		iargs = nil
 
-	case STOSB, STOSW, STOSD:
+	case STOSB, STOSW, STOSD, STOSQ:
 		iargs = iargs[:1]
 
-	case LODSB, LODSW, LODSD, SCASB, SCASW, SCASD:
+	case LODSB, LODSW, LODSD, LODSQ, SCASB, SCASW, SCASD, SCASQ:
 		iargs = iargs[1:]
 	}
 
 	const (
 		haveData16 = 1 << iota
+		haveData32
 		haveAddr16
+		haveAddr32
 		haveXacquire
 		haveXrelease
 		haveLock
@@ -142,6 +159,9 @@ func IntelSyntax(inst Inst) string {
 	for _, p := range inst.Prefix {
 		if p == 0 {
 			break
+		}
+		if p&0xFF == 0xF3 {
+			prefixBits &^= haveBnd
 		}
 		if p&(PrefixImplicit|PrefixIgnored) != 0 {
 			continue
@@ -159,8 +179,12 @@ func IntelSyntax(inst Inst) string {
 			prefixBits |= haveLock
 		case PrefixData16, PrefixDataSize:
 			prefixBits |= haveData16
+		case PrefixData32:
+			prefixBits |= haveData32
 		case PrefixAddrSize, PrefixAddr16:
 			prefixBits |= haveAddr16
+		case PrefixAddr32:
+			prefixBits |= haveAddr32
 		case PrefixXACQUIRE:
 			prefixBits |= haveXacquire
 		case PrefixXRELEASE:
@@ -173,9 +197,15 @@ func IntelSyntax(inst Inst) string {
 			prefixBits |= haveBnd
 		}
 	}
-	if inst.Op == JMP && inst.Opcode>>24 == 0xEB {
-		prefixBits &^= haveBnd
+	switch inst.Op {
+	case JMP:
+		if inst.Opcode>>24 == 0xEB {
+			prefixBits &^= haveBnd
+		}
+	case RET, LRET:
+		prefixBits &^= haveData16 | haveData32
 	}
+
 	if prefixBits&haveXacquire != 0 {
 		prefix += "xacquire "
 	}
@@ -197,8 +227,14 @@ func IntelSyntax(inst Inst) string {
 	if prefixBits&haveAddr16 != 0 {
 		prefix += "addr16 "
 	}
+	if prefixBits&haveAddr32 != 0 {
+		prefix += "addr32 "
+	}
 	if prefixBits&haveData16 != 0 {
 		prefix += "data16 "
+	}
+	if prefixBits&haveData32 != 0 {
+		prefix += "data32 "
 	}
 
 	if inst.Op == 0 {
@@ -264,12 +300,17 @@ func IntelSyntax(inst Inst) string {
 	case MASKMOVDQU, MASKMOVQ, XLATB, OUTSB, OUTSW, OUTSD:
 	FixSegment:
 		for i := len(inst.Prefix) - 1; i >= 0; i-- {
-			switch inst.Prefix[i] & 0xFF {
+			p := inst.Prefix[i] & 0xFF
+			switch p {
 			case PrefixCS, PrefixES, PrefixFS, PrefixGS, PrefixSS:
-				args = append(args, strings.ToLower((inst.Prefix[i] & 0xFF).String()))
-				break FixSegment
+				if inst.Mode != 64 || p == PrefixFS || p == PrefixGS {
+					args = append(args, strings.ToLower((inst.Prefix[i] & 0xFF).String()))
+					break FixSegment
+				}
 			case PrefixDS:
-				break FixSegment
+				if inst.Mode != 64 {
+					break FixSegment
+				}
 			}
 		}
 	}
@@ -292,8 +333,14 @@ func intelArg(inst *Inst, arg Arg) string {
 		if inst.Mode == 32 {
 			return fmt.Sprintf("%#x", uint32(a))
 		}
-		return fmt.Sprintf("%#x", int64(a))
+		if Imm(int32(a)) == a {
+			return fmt.Sprintf("%#x", int64(a))
+		}
+		return fmt.Sprintf("%#x", uint64(a))
 	case Mem:
+		if a.Base == EIP {
+			a.Base = RIP
+		}
 		prefix := ""
 		switch inst.MemBytes {
 		case 1:
@@ -316,6 +363,8 @@ func intelArg(inst *Inst, arg Arg) string {
 			prefix = "word "
 		case STOSD, MOVSD, CMPSD, LODSD, SCASD:
 			prefix = "dword "
+		case STOSQ, MOVSQ, CMPSQ, LODSQ, SCASQ:
+			prefix = "qword "
 		case LAR:
 			prefix = "word "
 		case BOUND:
@@ -328,7 +377,7 @@ func intelArg(inst *Inst, arg Arg) string {
 			prefix = "zmmword "
 		}
 		switch inst.Op {
-		case MOVSB, MOVSW, MOVSD, CMPSB, CMPSW, CMPSD, STOSB, STOSW, STOSD, SCASB, SCASW, SCASD, LODSB, LODSW, LODSD:
+		case MOVSB, MOVSW, MOVSD, MOVSQ, CMPSB, CMPSW, CMPSD, CMPSQ, STOSB, STOSW, STOSD, STOSQ, SCASB, SCASW, SCASD, SCASQ, LODSB, LODSW, LODSD, LODSQ:
 			switch a.Base {
 			case DI, EDI, RDI:
 				if a.Segment == ES {
@@ -354,23 +403,27 @@ func intelArg(inst *Inst, arg Arg) string {
 			}
 		}
 
+		if inst.Mode == 64 && a.Segment != FS && a.Segment != GS {
+			a.Segment = 0
+		}
+
 		prefix += "ptr "
 		if a.Segment != 0 {
 			prefix += strings.ToLower(a.Segment.String()) + ":"
 		}
 		prefix += "["
 		if a.Base != 0 {
-			prefix += strings.ToLower(a.Base.String())
+			prefix += intelArg(inst, a.Base)
 		}
 		if a.Scale != 0 && a.Index != 0 {
 			if a.Base != 0 {
 				prefix += "+"
 			}
-			prefix += fmt.Sprintf("%s*%d", strings.ToLower(a.Index.String()), a.Scale)
+			prefix += fmt.Sprintf("%s*%d", intelArg(inst, a.Index), a.Scale)
 		}
 		if a.Disp != 0 {
-			if a.Disp >= 0 && prefix[len(prefix)-1] == '[' {
-				prefix += fmt.Sprintf("%#x", a.Disp)
+			if prefix[len(prefix)-1] == '[' && (a.Disp >= 0 || int64(int32(a.Disp)) != a.Disp) {
+				prefix += fmt.Sprintf("%#x", uint64(a.Disp))
 			} else {
 				prefix += fmt.Sprintf("%+#x", a.Disp)
 			}
@@ -447,4 +500,19 @@ var intelReg = [...]string{
 	X13: "xmm13",
 	X14: "xmm14",
 	X15: "xmm15",
+
+	// TODO: Maybe the constants are named wrong.
+	SPB: "spl",
+	BPB: "bpl",
+	SIB: "sil",
+	DIB: "dil",
+
+	R8L:  "r8d",
+	R9L:  "r9d",
+	R10L: "r10d",
+	R11L: "r11d",
+	R12L: "r12d",
+	R13L: "r13d",
+	R14L: "r14d",
+	R15L: "r15d",
 }

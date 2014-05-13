@@ -27,6 +27,7 @@ import (
 var (
 	printTests = flag.Bool("printtests", false, "print test cases that exercise new code paths")
 	dumpTest   = flag.Bool("dump", false, "dump all encodings")
+	mismatch   = flag.Bool("mismatch", false, "log allowed mismatches")
 	longTest   = flag.Bool("long", false, "long test")
 	keep       = flag.Bool("keep", false, "keep object files around")
 	debug      = false
@@ -125,7 +126,7 @@ func testExtDis(
 		totalSkips  = 0
 		totalErrors = 0
 
-		errors = make([]string, 0, 256) // sampled errors, at most cap
+		errors = make([]string, 0, 100) // sampled errors, at most cap
 	)
 	go func() {
 		errc <- extdis(ext)
@@ -142,9 +143,13 @@ func testExtDis(
 			fmt.Printf("%x -> %s [%d]\n", enc[:len(enc)], dec.text, dec.nenc)
 		}
 		if text != dec.text || size != dec.nenc {
+			suffix := ""
 			if allowedMismatch(text, size, &inst, dec) {
 				totalSkips++
-				return
+				if !*mismatch {
+					return
+				}
+				suffix += " (allowed mismatch)"
 			}
 			totalErrors++
 			if len(errors) >= cap(errors) {
@@ -154,14 +159,19 @@ func testExtDis(
 				}
 				errors = append(errors[:j], errors[j+1:]...)
 			}
-			errors = append(errors, fmt.Sprintf("decode(%x) = %q, %d, want %q, %d", enc, text, size, dec.text, dec.nenc))
+			errors = append(errors, fmt.Sprintf("decode(%x) = %q, %d, want %q, %d%s", enc, text, size, dec.text, dec.nenc, suffix))
 		}
 	})
 
+	if *mismatch {
+		totalErrors -= totalSkips
+	}
+
+	for _, b := range errors {
+		t.Log(b)
+	}
+
 	if totalErrors > 0 {
-		for _, b := range errors {
-			t.Log(b)
-		}
 		t.Fail()
 	}
 	t.Logf("%d test cases, %d expected mismatches, %d failures; %.0f cases/second", totalTests, totalSkips, totalErrors, float64(totalTests)/time.Since(start).Seconds())
@@ -238,10 +248,10 @@ func disasm(syntax string, mode int, src []byte) (inst Inst, text string, size i
 		text = "error: " + err.Error()
 	} else {
 		switch syntax {
-		case "intel":
-			text = IntelSyntax(inst)
 		case "gnu":
 			text = GNUSyntax(inst)
+		case "intel":
+			text = IntelSyntax(inst)
 		default:
 			text = "error: unknown syntax " + syntax
 		}
@@ -479,7 +489,7 @@ func trimSpace(s []byte) []byte {
 
 // pcrel and pcrelw match instructions using relative addressing mode.
 var (
-	pcrel  = regexp.MustCompile(`^((?:.* )?(?:j[a-z]+|call|ljmp|loopn?e?w?|xbegin)(?:,p[nt])?) 0x([0-9a-f]+)$`)
+	pcrel  = regexp.MustCompile(`^((?:.* )?(?:j[a-z]+|call|ljmp|loopn?e?w?|xbegin)q?(?:,p[nt])?) 0x([0-9a-f]+)$`)
 	pcrelw = regexp.MustCompile(`^((?:.* )?(?:callw|jmpw|xbeginw|ljmpw)(?:,p[nt])?) 0x([0-9a-f]+)$`)
 )
 
@@ -569,6 +579,13 @@ func basicPrefixes(try func([]byte)) {
 	}
 }
 
+func rexPrefixes(try func([]byte)) {
+	try(nil)
+	for _, b := range []byte{0x40, 0x48, 0x43, 0x4C} {
+		try([]byte{b})
+	}
+}
+
 // concat takes two generators and returns a generator for the
 // cross product of the two, concatenating the results from each.
 func concat(gen1, gen2 func(func([]byte))) func(func([]byte)) {
@@ -591,6 +608,33 @@ func concat3(gen1, gen2, gen3 func(func([]byte))) func(func([]byte)) {
 					try(append(append(enc1[:len(enc1):len(enc1)], enc2...), enc3...))
 				})
 			})
+		})
+	}
+}
+
+// concat4 takes four generators and returns a generator for the
+// cross product of the four, concatenating the results from each.
+func concat4(gen1, gen2, gen3, gen4 func(func([]byte))) func(func([]byte)) {
+	return func(try func([]byte)) {
+		gen1(func(enc1 []byte) {
+			gen2(func(enc2 []byte) {
+				gen3(func(enc3 []byte) {
+					gen4(func(enc4 []byte) {
+						try(append(append(append(enc1[:len(enc1):len(enc1)], enc2...), enc3...), enc4...))
+					})
+				})
+			})
+		})
+	}
+}
+
+// filter generates the sequences from gen that satisfy ok.
+func filter(gen func(func([]byte)), ok func([]byte) bool) func(func([]byte)) {
+	return func(try func([]byte)) {
+		gen(func(enc []byte) {
+			if ok(enc) {
+				try(enc)
+			}
 		})
 	}
 }
@@ -674,6 +718,28 @@ func testBasic(t *testing.T, testfn func(*testing.T, func(func([]byte))), opcode
 	}
 }
 
+func testBasicREX(t *testing.T, testfn func(*testing.T, func(func([]byte))), opcode ...byte) {
+	testfn(t, filter(concat4(basicPrefixes, rexPrefixes, fixed(opcode...), enum8bit), isValidREX))
+	if testing.Short() {
+		return
+	}
+
+	t.Parallel()
+	testfn(t, filter(concat4(basicPrefixes, rexPrefixes, fixed(opcode...), enum16bit), isValidREX))
+	if !*longTest {
+		return
+	}
+
+	name := caller(2)
+	op1 := make([]byte, len(opcode)+1)
+	copy(op1, opcode)
+	for i := 0; i < 256; i++ {
+		log.Printf("%s 24-bit: %d/256\n", name, i)
+		op1[len(opcode)] = byte(i)
+		testfn(t, filter(concat3(rexPrefixes, fixed(op1...), enum16bit), isValidREX))
+	}
+}
+
 // testPrefix runs the given test function for all many prefix possibilities
 // followed by all possible 1-byte sequences.
 //
@@ -693,6 +759,20 @@ func testPrefix(t *testing.T, testfn func(*testing.T, func(func([]byte)))) {
 	}
 }
 
+func testPrefixREX(t *testing.T, testfn func(*testing.T, func(func([]byte)))) {
+	t.Parallel()
+	testfn(t, filter(concat3(manyPrefixes, rexPrefixes, enum8bit), isValidREX))
+	if testing.Short() || !*longTest {
+		return
+	}
+
+	name := caller(2)
+	for i := 0; i < 256; i++ {
+		log.Printf("%s 16-bit: %d/256\n", name, i)
+		testfn(t, filter(concat4(manyPrefixes, rexPrefixes, fixed(byte(i)), enum8bit), isValidREX))
+	}
+}
+
 func caller(skip int) string {
 	pc, _, _, _ := runtime.Caller(skip)
 	f := runtime.FuncForPC(pc)
@@ -704,4 +784,26 @@ func caller(skip int) string {
 		}
 	}
 	return name
+}
+
+func isValidREX(x []byte) bool {
+	i := 0
+	for i < len(x) && isPrefixByte(x[i]) {
+		i++
+	}
+	if i < len(x) && Prefix(x[i]).IsREX() {
+		i++
+		if i < len(x) {
+			return !isPrefixByte(x[i]) && !Prefix(x[i]).IsREX()
+		}
+	}
+	return true
+}
+
+func isPrefixByte(b byte) bool {
+	switch b {
+	case 0x26, 0x2E, 0x36, 0x3E, 0x64, 0x65, 0x66, 0x67, 0xF0, 0xF2, 0xF3:
+		return true
+	}
+	return false
 }

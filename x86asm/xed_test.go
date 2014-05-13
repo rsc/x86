@@ -2,10 +2,6 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// TODO: Download xed from
-// https://software.intel.com/en-us/articles/pin-a-binary-instrumentation-tool-downloads
-// and test against it too.
-
 package x86asm
 
 import (
@@ -32,22 +28,26 @@ func TestXed640F38(t *testing.T)     { testBasic(t, testXed64, 0x0F, 0x38) }
 func TestXed640F3A(t *testing.T)     { testBasic(t, testXed64, 0x0F, 0x3A) }
 func TestXed64Prefix(t *testing.T)   { testPrefix(t, testXed64) }
 
-// xedManualTests holds test cases that will be run by TestObjdumpManual.
+func TestXed64REXTestdata(t *testing.T) {
+	testXed64(t, filter(concat3(basicPrefixes, rexPrefixes, testdataCases(t)), isValidREX))
+}
+func TestXed64REXModRM(t *testing.T)   { testXed64(t, concat3(basicPrefixes, rexPrefixes, enumModRM)) }
+func TestXed64REXOneByte(t *testing.T) { testBasicREX(t, testXed64) }
+func TestXed64REX0F(t *testing.T)      { testBasicREX(t, testXed64, 0x0F) }
+func TestXed64REX0F38(t *testing.T)    { testBasicREX(t, testXed64, 0x0F, 0x38) }
+func TestXed64REX0F3A(t *testing.T)    { testBasicREX(t, testXed64, 0x0F, 0x3A) }
+func TestXed64REXPrefix(t *testing.T)  { testPrefixREX(t, testXed64) }
+
+// xedManualTests holds test cases that will be run by TestXedManual32 and TestXedManual64.
 // If you are debugging a few cases that turned up in a longer run, it can be useful
-// to list them here and then use -run=ObjdumpManual, particularly with tracing enabled.
+// to list them here and then use -run=XedManual, particularly with tracing enabled.
 var xedManualTests = `
-90
-6690
 `
 
 // allowedMismatchXed reports whether the mismatch between text and dec
 // should be allowed by the test.
 func allowedMismatchXed(text string, size int, inst *Inst, dec ExtInst) bool {
-	if contains(text, "error: unrecognized instruction") && contains(dec.text, "GENERAL_ERROR") {
-		return true
-	}
-
-	if isPrefix(text) && size == 1 && contains(dec.text, "GENERAL_ERROR", "INSTR_TOO_LONG", "BAD_LOCK_PREFIX") {
+	if (contains(text, "error:") || isPrefix(text) && size == 1) && contains(dec.text, "GENERAL_ERROR", "INSTR_TOO_LONG", "BAD_LOCK_PREFIX") {
 		return true
 	}
 
@@ -206,4 +206,5 @@ var xedUnsupported = strings.Fields(`
 	rdrand
 	movbe
 	movlpd
+	sysret
 `)

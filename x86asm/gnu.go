@@ -83,8 +83,13 @@ func GNUSyntax(inst Inst) string {
 		}
 
 	case MWAIT:
-		inst.Args[0] = ECX
-		inst.Args[1] = EAX
+		if inst.Mode == 64 {
+			inst.Args[0] = RCX
+			inst.Args[1] = RAX
+		} else {
+			inst.Args[0] = ECX
+			inst.Args[1] = EAX
+		}
 	}
 
 	// Adjust which prefixes will be displayed.
@@ -149,10 +154,13 @@ func GNUSyntax(inst Inst) string {
 	case MOVQ2DQ:
 		markLastImplicit(&inst, PrefixDataSize)
 
-	case SLDT, SMSW, STR:
+	case SLDT, SMSW, STR, FXRSTOR, XRSTOR, XSAVE, XSAVEOPT, CMPXCHG8B:
 		if isMem(inst.Args[0]) {
 			unmarkImplicit(&inst, PrefixDataSize)
 		}
+
+	case SYSEXIT:
+		unmarkImplicit(&inst, PrefixDataSize)
 	}
 
 	if isCondJmp[inst.Op] || isLoop[inst.Op] || inst.Op == JCXZ || inst.Op == JECXZ || inst.Op == JRCXZ {
@@ -292,8 +300,11 @@ SuffixLoop:
 			if inst.Opcode>>24 == 0xEB {
 				break
 			}
-			if inst.DataSize == 16 && inst.Mode == 32 {
+			if inst.DataSize == 16 && inst.Mode != 16 {
+				markLastImplicit(&inst, PrefixDataSize)
 				op += "w"
+			} else if inst.Mode == 64 {
+				op += "q"
 			}
 
 		case FRSTOR, FNSAVE, FNSTENV, FLDENV:
@@ -305,6 +316,8 @@ SuffixLoop:
 		case PUSH, POP:
 			if markLastImplicit(&inst, PrefixDataSize) {
 				op += byteSizeSuffix(inst.DataSize / 8)
+			} else if inst.Mode == 64 {
+				op += "q"
 			} else {
 				op += byteSizeSuffix(inst.MemBytes)
 			}
@@ -427,6 +440,14 @@ SuffixLoop:
 		}
 		switch p &^ (PrefixIgnored | PrefixInvalid) {
 		default:
+			if p.IsREX() {
+				if p&0xFF == PrefixREX {
+					prefix += "rex "
+				} else {
+					prefix += "rex." + p.String()[4:] + " "
+				}
+				break
+			}
 			prefix += strings.ToLower(p.String()) + " "
 
 		case PrefixPN:
@@ -442,13 +463,13 @@ SuffixLoop:
 			// libopcodes displays all but the last as addr32, even though
 			// the addressing form used in a memory reference is clearly
 			// still 16-bit.
-			n := 16
-			if inst.Mode == 16 {
-				n = 32
+			n := 32
+			if inst.Mode == 32 {
+				n = 16
 			}
 			numAddr++
 			if countPrefix(&inst, PrefixAddrSize) > numAddr {
-				n = 32
+				n = inst.Mode
 			}
 			prefix += fmt.Sprintf("addr%d ", n)
 			continue
@@ -463,12 +484,15 @@ SuffixLoop:
 				}
 				numData++
 				if countPrefix(&inst, PrefixDataSize) > numData {
-					n = 32
+					if inst.Mode == 16 {
+						n = 16
+					} else {
+						n = 32
+					}
 				}
 				prefix += fmt.Sprintf("data%d ", n)
 				continue
 			}
-
 			prefix += strings.ToLower(p.String()) + " "
 		}
 	}
@@ -594,7 +618,7 @@ func gnuArg(inst *Inst, x Arg, usedPrefixes *bool) string {
 		if x.Disp != 0 {
 			disp = fmt.Sprintf("%#x", x.Disp)
 		}
-		if x.Scale == 0 || x.Index == 0 && x.Scale == 1 && (x.Base == ESP || x.Base == RSP) {
+		if x.Scale == 0 || x.Index == 0 && x.Scale == 1 && (x.Base == ESP || x.Base == RSP || x.Base == 0 && inst.Mode == 64) {
 			if x.Base == 0 {
 				return seg + disp
 			}
@@ -604,11 +628,19 @@ func gnuArg(inst *Inst, x Arg, usedPrefixes *bool) string {
 		if x.Base == 0 {
 			base = ""
 		}
+		index := gccRegName[x.Index]
+		if x.Index == 0 {
+			if inst.AddrSize == 64 {
+				index = "%riz"
+			} else {
+				index = "%eiz"
+			}
+		}
 		if AX <= x.Base && x.Base <= DI {
 			// 16-bit addressing - no scale
-			return fmt.Sprintf("%s%s(%s,%s)", seg, disp, base, gccRegName[x.Index])
+			return fmt.Sprintf("%s%s(%s,%s)", seg, disp, base, index)
 		}
-		return fmt.Sprintf("%s%s(%s,%s,%d)", seg, disp, base, gccRegName[x.Index], x.Scale)
+		return fmt.Sprintf("%s%s(%s,%s,%d)", seg, disp, base, index, x.Scale)
 	case Rel:
 		return fmt.Sprintf(".%+#x", int32(x))
 	case Imm:
@@ -621,7 +653,7 @@ func gnuArg(inst *Inst, x Arg, usedPrefixes *bool) string {
 }
 
 var gccRegName = [...]string{
-	0:    "%eiz",
+	0:    "REG0",
 	AL:   "%al",
 	CL:   "%cl",
 	BL:   "%bl",
@@ -630,10 +662,10 @@ var gccRegName = [...]string{
 	CH:   "%ch",
 	BH:   "%bh",
 	DH:   "%dh",
-	SPB:  "%spb",
-	BPB:  "%bpb",
-	SIB:  "%sib",
-	DIB:  "%dib",
+	SPB:  "%spl",
+	BPB:  "%bpl",
+	SIB:  "%sil",
+	DIB:  "%dil",
 	R8B:  "%r8b",
 	R9B:  "%r9b",
 	R10B: "%r10b",
@@ -666,14 +698,14 @@ var gccRegName = [...]string{
 	EBP:  "%ebp",
 	ESI:  "%esi",
 	EDI:  "%edi",
-	R8L:  "%r8l",
-	R9L:  "%r9l",
-	R10L: "%r10l",
-	R11L: "%r11l",
-	R12L: "%r12l",
-	R13L: "%r13l",
-	R14L: "%r14l",
-	R15L: "%r15l",
+	R8L:  "%r8d",
+	R9L:  "%r9d",
+	R10L: "%r10d",
+	R11L: "%r11d",
+	R12L: "%r12d",
+	R13L: "%r13d",
+	R14L: "%r14d",
+	R15L: "%r15d",
 	RAX:  "%rax",
 	RCX:  "%rcx",
 	RDX:  "%rdx",
@@ -777,6 +809,7 @@ var gnuOp = map[Op]string{
 	CMPSD_XMM: "cmpsd",
 	CWD:       "cwtd",
 	CWDE:      "cwtl",
+	CQO:       "cqto",
 	INSD:      "insl",
 	IRET:      "iretw",
 	IRETD:     "iret",

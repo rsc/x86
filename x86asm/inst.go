@@ -78,7 +78,7 @@ const (
 
 // IsREX reports whether p is a REX prefix byte.
 func (p Prefix) IsREX() bool {
-	return p&^0x0F == PrefixREX
+	return p&0xF0 == PrefixREX
 }
 
 func (p Prefix) String() string {
@@ -302,6 +302,14 @@ const (
 	DR5
 	DR6
 	DR7
+	DR8
+	DR9
+	DR10
+	DR11
+	DR12
+	DR13
+	DR14
+	DR15
 
 	// Task registers.
 	TR0
@@ -333,7 +341,7 @@ type Mem struct {
 	Base    Reg
 	Scale   uint8
 	Index   Reg
-	Disp    int32
+	Disp    int64
 }
 
 func (Mem) isArg() {}
@@ -613,6 +621,14 @@ var regNames = [...]string{
 	DR5:  "DR5",
 	DR6:  "DR6",
 	DR7:  "DR7",
+	DR8:  "DR8",
+	DR9:  "DR9",
+	DR10: "DR10",
+	DR11: "DR11",
+	DR12: "DR12",
+	DR13: "DR13",
+	DR14: "DR14",
+	DR15: "DR15",
 	TR0:  "TR0",
 	TR1:  "TR1",
 	TR2:  "TR2",
