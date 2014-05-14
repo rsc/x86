@@ -42,6 +42,7 @@ func TestXed64REXPrefix(t *testing.T)  { testPrefixREX(t, testXed64) }
 // If you are debugging a few cases that turned up in a longer run, it can be useful
 // to list them here and then use -run=XedManual, particularly with tracing enabled.
 var xedManualTests = `
+6690
 `
 
 // allowedMismatchXed reports whether the mismatch between text and dec

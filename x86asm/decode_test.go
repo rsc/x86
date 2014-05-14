@@ -7,6 +7,7 @@ package x86asm
 import (
 	"encoding/hex"
 	"io/ioutil"
+	"strconv"
 	"strings"
 	"testing"
 )
@@ -25,7 +26,7 @@ func TestDecode(t *testing.T) {
 		if line == "" || strings.HasPrefix(line, "#") {
 			continue
 		}
-		f := strings.SplitN(line, "\t", 3)
+		f := strings.SplitN(line, "\t", 4)
 		i := strings.Index(f[0], "|")
 		if i < 0 {
 			t.Errorf("parsing %q: missing | separator", f[0])
@@ -40,8 +41,13 @@ func TestDecode(t *testing.T) {
 			t.Errorf("parsing %q: %v", f[0], err)
 			continue
 		}
-		syntax, asm := f[1], f[2]
-		inst, instSize, err := Decode(code, 32)
+		mode, err := strconv.Atoi(f[1])
+		if err != nil {
+			t.Errorf("invalid mode %q in: %s", f[1], line)
+			continue
+		}
+		syntax, asm := f[2], f[3]
+		inst, err := Decode(code, mode)
 		var out string
 		if err != nil {
 			out = "error: " + err.Error()
@@ -51,13 +57,15 @@ func TestDecode(t *testing.T) {
 				out = GNUSyntax(inst)
 			case "intel":
 				out = IntelSyntax(inst)
+			case "plan9":
+				out = plan9Syntax(inst, 0, nil)
 			default:
 				t.Errorf("unknown syntax %q", syntax)
 				continue
 			}
 		}
-		if out != asm || instSize != size {
-			t.Errorf("Decode(%s) [%s] = %s, %d, want %s, %d", f[0], syntax, out, instSize, asm, size)
+		if out != asm || inst.Len != size {
+			t.Errorf("Decode(%s) [%s] = %s, %d, want %s, %d", f[0], syntax, out, inst.Len, asm, size)
 		}
 	}
 }

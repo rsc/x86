@@ -169,7 +169,7 @@ const (
 // instPrefix returns an Inst describing just one prefix byte.
 // It is only used if there is a prefix followed by an unintelligible
 // or invalid instruction byte sequence.
-func instPrefix(b byte, mode int) (Inst, int, error) {
+func instPrefix(b byte, mode int) (Inst, error) {
 	// When tracing it is useful to see what called instPrefix to report an error.
 	if trace {
 		_, file, line, _ := runtime.Caller(1)
@@ -190,16 +190,16 @@ func instPrefix(b byte, mode int) (Inst, int, error) {
 			p = PrefixAddr32
 		}
 	}
-	// Note: using composite literal here confuses 'bundle' tool.
-	inst := Inst{}
+	// Note: using composite literal with Prefix key confuses 'bundle' tool.
+	inst := Inst{Len: 1}
 	inst.Prefix = Prefixes{p}
-	return inst, 1, nil
+	return inst, nil
 }
 
 // truncated reports a truncated instruction.
 // For now we use instPrefix but perhaps later we will return
 // a specific error here.
-func truncated(src []byte, mode int) (Inst, int, error) {
+func truncated(src []byte, mode int) (Inst, error) {
 	//	return Inst{}, len(src), ErrTruncated
 	return instPrefix(src[0], mode) // too long
 }
@@ -216,11 +216,10 @@ var (
 // TODO(rsc): This is for testing. Only use this if a flag is given.
 var decoderCover []bool
 
-// Decode decodes the leading bytes in src as a single instruction
-// returned as inst, along with the number of bytes decoded.
+// Decode decodes the leading bytes in src as a single instruction.
 // The mode arguments specifies the assumed processor mode:
 // 16, 32, or 64 for 16-, 32-, and 64-bit execution modes.
-func Decode(src []byte, mode int) (inst Inst, size int, err error) {
+func Decode(src []byte, mode int) (inst Inst, err error) {
 	return decode1(src, mode, false)
 }
 
@@ -232,13 +231,13 @@ func Decode(src []byte, mode int) (inst Inst, size int, err error) {
 // comparison if we adjust a few small pieces of logic.
 // The affected logic is in the conditional branch for "mandatory" prefixes,
 // case xCondPrefix.
-func decode1(src []byte, mode int, gnuCompat bool) (Inst, int, error) {
+func decode1(src []byte, mode int, gnuCompat bool) (Inst, error) {
 	switch mode {
 	case 16, 32, 64:
 		// ok
 		// TODO(rsc): 64-bit mode not tested, probably not working.
 	default:
-		return Inst{}, 0, ErrInvalidMode
+		return Inst{}, ErrInvalidMode
 	}
 
 	// Maximum instruction size is 15 bytes.
@@ -447,7 +446,7 @@ Decode:
 		switch decodeOp(x) {
 		case xCondSlashR, xReadSlashR:
 			if haveModrm {
-				return inst, pos, errInternal
+				return Inst{Len: pos}, errInternal
 			}
 			haveModrm = true
 			if pos >= len(src) {
@@ -582,7 +581,7 @@ Decode:
 		switch decodeOp(x) {
 		default:
 			println("bad op", x, "at", pc-1, "from", oldPC)
-			return inst, pos, errInternal
+			return Inst{Len: pos}, errInternal
 
 		case xFail:
 			inst.Op = 0
@@ -1156,7 +1155,7 @@ Decode:
 		if nprefix > 0 {
 			return instPrefix(src[0], mode) // invalid instruction
 		}
-		return Inst{}, pos, ErrUnrecognized
+		return Inst{Len: pos}, ErrUnrecognized
 	}
 
 	// Matched! Hooray!
@@ -1429,7 +1428,8 @@ Decode:
 	inst.DataSize = dataMode
 	inst.AddrSize = addrMode
 	inst.Mode = mode
-	return inst, pos, nil
+	inst.Len = pos
+	return inst, nil
 }
 
 var errInternal = errors.New("internal error")

@@ -137,12 +137,12 @@ func testExtDis(
 			t.Errorf("decoding stream ended early")
 			return
 		}
-		inst, text, size := disasm(syntax, arch, pad(enc))
+		inst, text := disasm(syntax, arch, pad(enc))
 		totalTests++
 		if *dumpTest {
 			fmt.Printf("%x -> %s [%d]\n", enc[:len(enc)], dec.text, dec.nenc)
 		}
-		if text != dec.text || size != dec.nenc {
+		if text != dec.text || inst.Len != dec.nenc {
 			suffix := ""
 			if allowedMismatch(text, size, &inst, dec) {
 				totalSkips++
@@ -159,7 +159,7 @@ func testExtDis(
 				}
 				errors = append(errors[:j], errors[j+1:]...)
 			}
-			errors = append(errors, fmt.Sprintf("decode(%x) = %q, %d, want %q, %d%s", enc, text, size, dec.text, dec.nenc, suffix))
+			errors = append(errors, fmt.Sprintf("decode(%x) = %q, %d, want %q, %d%s", enc, text, inst.Len, dec.text, dec.nenc, suffix))
 		}
 	})
 
@@ -232,7 +232,7 @@ func pad(enc []byte) []byte {
 
 // disasm returns the decoded instruction and text
 // for the given source bytes, using the given syntax and mode.
-func disasm(syntax string, mode int, src []byte) (inst Inst, text string, size int) {
+func disasm(syntax string, mode int, src []byte) (inst Inst, text string) {
 	// If printTests is set, we record the coverage value
 	// before and after, and we write out the inputs for which
 	// coverage went up, in the format expected in testdata/decode.text.
@@ -243,7 +243,7 @@ func disasm(syntax string, mode int, src []byte) (inst Inst, text string, size i
 		cover -= coverage()
 	}
 
-	inst, size, err := decode1(src, mode, syntax == "gnu")
+	inst, err := decode1(src, mode, syntax == "gnu")
 	if err != nil {
 		text = "error: " + err.Error()
 	} else {
@@ -252,6 +252,8 @@ func disasm(syntax string, mode int, src []byte) (inst Inst, text string, size i
 			text = GNUSyntax(inst)
 		case "intel":
 			text = IntelSyntax(inst)
+		case "plan9":
+			text = plan9Syntax(inst, 0, nil)
 		default:
 			text = "error: unknown syntax " + syntax
 		}
@@ -261,10 +263,10 @@ func disasm(syntax string, mode int, src []byte) (inst Inst, text string, size i
 		cover += coverage()
 		if cover > 0 {
 			max := len(src)
-			if max > 16 && size <= 16 {
+			if max > 16 && inst.Len <= 16 {
 				max = 16
 			}
-			fmt.Printf("%x|%x\t%s\t%s\n", src[:size], src[size:max], syntax, text)
+			fmt.Printf("%x|%x\t%d\t%s\t%s\n", src[:inst.Len], src[inst.Len:max], mode, syntax, text)
 		}
 	}
 

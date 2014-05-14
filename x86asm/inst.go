@@ -20,6 +20,7 @@ type Inst struct {
 	AddrSize int      // address size in bits: 16, 32, or 64
 	DataSize int      // operand size in bits: 16, 32, or 64
 	MemBytes int      // size of memory argument in bytes: 1, 2, 4, 8, 16, and so on.
+	Len      int      // length of encoded instruction in bytes
 }
 
 // Prefixes is an array of prefixes associated with a single instruction.

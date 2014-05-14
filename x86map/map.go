@@ -67,7 +67,7 @@ func main() {
 	print(p)
 }
 
-// readCSV reads the CSV file and returns the corresponding Map.
+// readCSV reads the CSV file and returns the corresponding Prog.
 // It may print details about problems to standard error using the log package.
 func readCSV(file string) (*Prog, error) {
 	// Read input.
