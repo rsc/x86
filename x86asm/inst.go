@@ -120,7 +120,7 @@ func (op Op) String() string {
 }
 
 // An Args holds the instruction arguments.
-// If an instruction does has fewer than 4 arguments,
+// If an instruction has fewer than 4 arguments,
 // the final elements in the array are nil.
 type Args [4]Arg
 
