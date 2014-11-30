@@ -11,6 +11,7 @@
 //
 //  text (default) - print decoding tree in text form
 //  decoder - print decoding tables for the x86asm package
+//  scanner - print scanning tables for x86scan package
 package main
 
 import (
@@ -19,6 +20,7 @@ import (
 	"encoding/csv"
 	"flag"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"sort"
@@ -55,6 +57,8 @@ func main() {
 		print = printText
 	case "decoder":
 		print = printDecoder
+	case "scanner":
+		print = printScanner
 	}
 
 	p, err := readCSV(flag.Arg(0))
@@ -588,16 +592,27 @@ func mergeTail(p *Prog, emitted map[string]*Prog) *Prog {
 
 // printText prints the tree in textual form.
 func printText(p *Prog) {
-	printTree(p, 0)
+	printTree(os.Stdout, p, 0, false)
 }
 
 var tabs = strings.Repeat("    ", 100)
 
-func printTree(p *Prog, depth int) {
-	fmt.Printf("%.*s%s\n", 4*depth, tabs, p.Action)
+func printTree(w io.Writer, p *Prog, depth int, compact bool) {
+	if compact && len(p.Child) == 1 {
+		fmt.Fprintf(w, "%.*s%s", 4*depth, tabs, p.Action)
+		for len(p.Child) == 1 {
+			key := p.keys()[0]
+			child := p.Child[key]
+			fmt.Fprintf(w, " %s %s", key, child.Action)
+			p = child
+		}
+		fmt.Fprintf(w, "\n")
+	} else {
+		fmt.Fprintf(w, "%.*s%s\n", 4*depth, tabs, p.Action)
+	}
 	for _, key := range p.keys() {
-		fmt.Printf("%.*s%s\n", 4*(depth+1), tabs, key)
-		printTree(p.Child[key], depth+2)
+		fmt.Fprintf(w, "%.*s%s\n", 4*(depth+1), tabs, key)
+		printTree(w, p.Child[key], depth+2, compact)
 	}
 }
 
@@ -642,6 +657,426 @@ func printDecoder(p *Prog) {
 	fmt.Printf("}\n")
 }
 
+// printScanner prints the decoding table for a scanner.
+// The scanner can identify instruction boundaries but does not do
+// full decoding. It is meant to be lighter weight than the x86asm
+// decoder tables.
+func printScanner(p *Prog) {
+	walkScanTree(p, -1)
+	var out []uint16
+	out = append(out, 0)
+	emitScanFunc(p, &out)
+	fmt.Printf("var scanProg = []uint16{\n")
+	fmt.Printf("\t/*0*/ 0, // dead\n")
+	for i := 1; i < len(out); i++ {
+		fmt.Printf("\t/*%d*/ ", i)
+		switch out[i] {
+		default:
+			log.Fatalf("malformed program %#x", out[i])
+		case scanMatch:
+			fmt.Printf("scanMatch,\n")
+			continue
+		case scanJump:
+			fmt.Printf("scanJump, %d,\n", out[i+1])
+			i++
+			continue
+		case scanSwitchByte:
+			fmt.Printf("scanSwitchByte,\n")
+			for j := 0; j < 256/8; j++ {
+				fmt.Printf("\t")
+				fmt.Printf("/* %#02x-%#02x */", j*8, j*8+7)
+				for k := 0; k < 8; k++ {
+					fmt.Printf(" %d,", out[i+1+j*8+k])
+				}
+				fmt.Printf("\n")
+			}
+			i += 256
+			continue
+		case scanSwitchSlash:
+			fmt.Printf("scanSwitchSlash, %d,\n", out[i+1])
+			n := int(out[i+1])
+			for j := 0; j < n; j++ {
+				fmt.Printf("\t/* byte */ %#x, %d,\n", out[i+2+2*j], out[i+2+2*j+1])
+			}
+			for j := 0; j < 8; j++ {
+				fmt.Printf("\t/* /%d */ %d,\n", j, out[i+2+2*n+j])
+			}
+			i += 1+2*n+8
+			continue
+		case scanSwitchPrefix:
+			fmt.Printf("scanSwitchPrefix, %d,\n", out[i+1])
+			n := int(out[i+1])
+			for j := 0; j < n; j++ {
+				fmt.Printf("\t/* prefix */ %#x, %d,\n", out[i+2+2*j], out[i+2+2*j+1])
+			}
+			i += 1+2*n
+			continue
+		case scanSwitchIs64:
+			fmt.Printf("scanSwitchIs64, %d, %d\n", out[i+1], out[i+2])
+			i += 2
+			continue
+		case scanSwitchDatasize:
+			fmt.Printf("scanSwitchDatasize, %d, %d, %d\n", out[i+1], out[i+2], out[i+3])
+			i += 3
+			continue
+		case scanSwitchIsMem:
+			fmt.Printf("scanSwitchIsMem, %d, %d\n", out[i+1], out[i+2])
+			i += 2
+			continue
+		case scanReadModRM:
+			fmt.Printf("scanReadModRM,\n")
+			continue
+		case scanReadIB:
+			fmt.Printf("scanReadIB,\n")
+			continue
+		case scanReadIW:
+			fmt.Printf("scanReadIW,\n")
+			continue
+		case scanReadIWD:
+			fmt.Printf("scanReadIWD,\n")
+			continue
+		case scanReadIWDO:
+			fmt.Printf("scanReadIWDO,\n")
+			continue
+		case scanReadCWD:
+			fmt.Printf("scanReadCWD,\n")
+			continue
+		case scanReadCB:
+			fmt.Printf("scanReadCB,\n")
+			continue
+		case scanReadCDP:
+			fmt.Printf("scanReadCDP,\n")
+			continue
+		case scanReadCM:
+			fmt.Printf("scanReadCM,\n")
+			continue
+		}
+	}
+	fmt.Printf("}\n")
+}
+
+func walkScanTree(p *Prog, is64 int) {
+	keys := p.keys()
+	for _, key := range keys {
+		if p.Action == "is64" {
+			switch key {
+			case "0":
+				is64 = 0
+			case "1":
+				is64 = 1
+			}
+		}
+		walkScanTree(p.Child[key], is64)
+	}
+	
+	switch p.Action {
+	case "read", "match":
+		// keep
+		return
+	case "decode":
+		if len(keys) >= 8 && keys[0] == "/0" && keys[7] == "/7" && allSame(p, keys) {
+			p.Action = "read"
+			p.Child = map[string]*Prog{"/r": p.Child[keys[0]]}
+			return
+		}
+	case "op", "arg":
+		// drop
+		*p = *p.Child[keys[0]]
+		return
+	case "prefix":
+		if len(keys) >= 1 && keys[0] == "0" && allSame(p, keys) {
+			*p = *p.Child[keys[0]]
+			return
+		}
+	case "is64", "addrsize", "datasize", "ismem":
+		if len(keys) == 1 && keys[0] == "any" {
+			*p = *p.Child[keys[0]]
+			return
+		}
+		nkey := len(allKeys[p.Action])
+		if p.Action == "addrsize" {
+			nkey = 2
+		}
+		if p.Action == "datasize" && is64 == 0 {
+			nkey = 2
+		}
+		if len(keys) == nkey && allSame(p, keys) {
+			*p = *p.Child[keys[0]]
+			return
+		}
+	}
+	
+	switch p.Action {
+	case "datasize":
+		if len(keys) == 2 && is64 == 0 || len(keys) == 3 {
+			if treeText(p.Child["16"]) == "read iw match ! \n" && treeText(p.Child["32"]) == "read id match ! \n" && (len(keys) == 2 ||treeText(p.Child["64"]) == "read id match ! \n" ) {
+				p.Action = "read"
+				p.Child = map[string]*Prog{"iwd/d": p.Child["16"].Child["iw"]}
+				return
+			}
+			if len(keys) == 3 && treeText(p.Child["16"]) == "read iw match ! \n" && treeText(p.Child["32"]) == "read id match ! \n" && treeText(p.Child["64"]) == "read io match ! \n" {
+				p.Action = "read"
+				p.Child = map[string]*Prog{"iwdo/d": p.Child["16"].Child["iw"]}
+				return
+			}
+			if treeText(p.Child["16"]) == "read /r read iw match ! \n" && treeText(p.Child["32"]) == "read /r read id match ! \n" && (len(keys) == 2 ||treeText(p.Child["64"]) == "read /r read id match ! \n" ) {
+				p.Action = "read"
+				p.Child = map[string]*Prog{"/r": {Action: "read", Child: map[string]*Prog{"iwd/d": p.Child["16"].Child["/r"].Child["iw"]}}}
+				return
+			}
+			if treeText(p.Child["16"]) == "read cw match ! \n" && treeText(p.Child["32"]) == "read cd match ! \n" && (len(keys) == 2 ||treeText(p.Child["64"]) == "read cd match ! \n" ) {
+				p.Action = "read"
+				p.Child = map[string]*Prog{"cwd/d": p.Child["16"].Child["cw"]}
+				return
+			}
+			if treeText(p.Child["16"]) == "read cd match ! \n" && treeText(p.Child["32"]) == "read cp match ! \n" && (len(keys) == 2 ||treeText(p.Child["64"]) == "read cp match ! \n" ) {
+				p.Action = "read"
+				p.Child = map[string]*Prog{"cdp/d": p.Child["16"].Child["cd"]}
+				return
+			}
+			fmt.Printf("!! %q\n", treeText(p.Child["16"]))
+		}
+	
+	case "is64":
+		if len(keys) == 2 && treeText(p.Child["0"]) == "read cwd/d match ! \n" && treeText(p.Child["1"]) == "read cd match ! \n" {
+			*p = *p.Child["0"]
+			return
+		}
+		if len(keys) == 2 && treeText(p.Child["0"]) == "read iwd/d match ! \n" && treeText(p.Child["1"]) == "read iwdo/d match ! \n" {
+			*p = *p.Child["1"]
+			return
+		}
+	}
+	
+	/*
+	match := make(map[string][]string)
+	for _, key := range keys {
+		text := treeText(p.Child[key])
+		match[text] = append(match[text], key)
+	}
+	child := make(map[string]*Prog)
+	for _, keys := range match {
+		child[strings.Join(keys, ",")] = p.Child[keys[0]]
+	}
+	p.Child = child	
+	*/		
+}
+
+func treeText(p *Prog) string {
+	var buf bytes.Buffer
+	printTree(&buf, p, 0, true)
+	return buf.String()
+}
+
+func allSame(p *Prog, keys []string) bool {
+	var tree string
+	for i, key := range keys {
+		if i == 0 {
+			tree = treeText(p.Child[key])
+			continue
+		}
+		if treeText(p.Child[key]) != tree {
+			return false
+		}
+	}
+	return true
+}
+
+var scanCache = map[string]uint16{}
+
+const (
+	_ uint16 = iota
+	scanMatch
+	scanJump
+	scanSwitchByte
+	scanSwitchSlash
+	scanSwitchIs64
+	scanSwitchDatasize
+	scanSwitchIsMem
+	scanSwitchPrefix
+	scanReadModRM
+	scanReadIB
+	scanReadIW
+	scanReadIWD
+	scanReadIWDO
+	scanReadCWD
+	scanReadCB
+	scanReadCDP
+	scanReadCM
+)
+
+func decodeKeyPlus(key string) (val, n int) {
+	n = 1
+	if strings.HasSuffix(key, "+") {
+		n = 8
+		key = key[:len(key)-1]
+	}
+	v, err := strconv.ParseUint(key, 16, 8)
+	if err != nil {
+		log.Fatalf("unexpected decode key %q", key)
+	}
+	return int(v), n
+}
+
+func decodeKey(key string) int {
+	val, n := decodeKeyPlus(key)
+	if n != 1 {
+		log.Panicf("unexpected decode key+ %q", key)
+	}
+	return val
+}
+
+func emitScanFunc(p *Prog, out *[]uint16) uint16 {
+	keys := p.keys()
+	text := treeText(p)
+	if off, ok := scanCache[text]; ok {
+		return off
+	}
+	start := uint16(len(*out))
+	scanCache[text] = start
+	switch p.Action {
+	case "decode":
+		if keys[0][0] != '/' {
+			*out = append(*out, scanSwitchByte)
+			off := len(*out)
+			for i := 0; i < 256; i++ {
+				*out = append(*out, 0)
+			}
+			for _, key := range keys {
+				val, n := decodeKeyPlus(key)
+				dst := emitScanFunc(p.Child[key], out)
+				for j := 0; j < n; j++ {
+					(*out)[off+val+j] = dst
+				}
+			}
+			return start
+		}
+
+		n := len(keys)
+		for n > 0 && keys[n-1][0] != '/' {
+			n--
+		}
+		total := 0
+		for i := n; i < len(keys); i++ {
+			key := keys[i]
+			_, n := decodeKeyPlus(key)
+			total += n
+		}
+		*out = append(*out, scanSwitchSlash, uint16(total))
+		off := len(*out)
+		for i := 0; i < total; i++ {
+			*out = append(*out, 0, 0)
+		}
+		for i := 0; i < 8; i++ {
+			*out = append(*out, 0)
+		}
+		for i := n; i < len(keys); i++ {
+			key := keys[i]
+			val, valn := decodeKeyPlus(key)
+			targ := emitScanFunc(p.Child[key], out)
+			for j := 0; j < valn; j++ {
+				(*out)[off] = uint16(val+j)
+				off++
+				(*out)[off] = targ
+				off++
+			}
+		}
+		for i := 0; i < n; i++ {
+			key := keys[i]
+			if len(key) != 2 || key[0] != '/' || key[1] < '0' || '8' <= key[1] {
+				log.Fatalf("unexpected decode key %q", key)
+			}
+			(*out)[off+int(key[1]-'0')] = emitScanFunc(p.Child[key], out)
+		}
+		return start
+	
+	case "read":
+		switch keys[0] {
+		default:
+			log.Fatalf("unexpected read %q", keys[0])
+		case "/r":
+			*out = append(*out, scanReadModRM)
+		case "ib":
+			*out = append(*out, scanReadIB)
+		case "iw":
+			*out= append(*out, scanReadIW)
+		case "cb":
+			*out = append(*out, scanReadCB)
+		case "cm":
+			*out = append(*out, scanReadCM)
+		case "iwd/d":
+			*out = append(*out, scanReadIWD)
+		case "iwdo/d":
+			*out = append(*out, scanReadIWDO)
+		case "cwd/d":
+			*out = append(*out, scanReadCWD)
+		case "cdp/d":
+			*out = append(*out, scanReadCDP)
+		}
+		next := p.Child[keys[0]]
+		if next.Action == "match" {
+			*out = append(*out, scanMatch)
+		} else {
+			*out = append(*out, scanJump, 0)
+			off := len(*out)
+			(*out)[off-1] = emitScanFunc(next, out)
+		}
+		return start
+	
+	case "match":
+		*out = append(*out, scanMatch)
+		return start
+	
+	case "is64":
+		*out = append(*out, scanSwitchIs64, 0, 0)
+		if next := p.Child["0"]; next != nil {
+			(*out)[start+1] = emitScanFunc(next, out)
+		}
+		if next := p.Child["1"]; next != nil {
+			(*out)[start+2] = emitScanFunc(next, out)
+		}
+		return start
+	
+	case "ismem":
+		*out = append(*out, scanSwitchIsMem, 0, 0)
+		if next := p.Child["0"]; next != nil {
+			(*out)[start+1] = emitScanFunc(next, out)
+		}
+		if next := p.Child["1"]; next != nil {
+			(*out)[start+2] = emitScanFunc(next, out)
+		}
+		return start
+	
+	case "datasize":
+		*out = append(*out, scanSwitchDatasize, 0, 0, 0)
+		if next := p.Child["16"]; next != nil {
+			(*out)[start+1] = emitScanFunc(next, out)
+		}
+		if next := p.Child["32"]; next != nil {
+			(*out)[start+2] = emitScanFunc(next, out)
+		}
+		if next := p.Child["64"]; next != nil {
+			(*out)[start+3] = emitScanFunc(next, out)
+		}
+		return start
+	case "prefix":
+		*out = append(*out, scanSwitchPrefix, uint16(len(keys)))
+		n := len(keys)
+		for i := 0; i < n; i++ {
+			*out = append(*out, uint16(decodeKey(keys[i])), 0)
+		}
+		for i := 0; i < n; i++ {
+			(*out)[int(start)+2+2*i+1] = emitScanFunc(p.Child[keys[i]], out)
+		}
+		return start
+		
+	}
+	
+	log.Fatalf("unexpected action %q", p.Action)
+	return start
+}
+		
+		
 // printDecoderPass prints the decoding table program for p,
 // assuming that we are emitting code at the given program counter.
 // It returns the new current program counter, that is, the program
