@@ -279,11 +279,14 @@ func decode1(src []byte, mode int, gnuCompat bool) (Inst, error) {
 		scale   int
 		index   int
 		base    int
+		displen int
+		dispoff int
 
 		// decoded immediate values
 		imm  int64
 		imm8 int8
 		immc int64
+		immcpos int
 
 		// output
 		opshift int
@@ -548,6 +551,8 @@ Decode:
 					if pos+4 > len(src) {
 						return truncated(src, mode)
 					}
+					dispoff = pos
+					displen = 4
 					mem.Disp = int64(binary.LittleEndian.Uint32(src[pos:]))
 					pos += 4
 				}
@@ -557,6 +562,8 @@ Decode:
 					if pos >= len(src) {
 						return truncated(src, mode)
 					}
+					dispoff = pos
+					displen = 1
 					mem.Disp = int64(int8(src[pos]))
 					pos++
 				}
@@ -882,6 +889,7 @@ Decode:
 			if pos >= len(src) {
 				return truncated(src, mode)
 			}
+			immcpos = pos
 			immc = int64(src[pos])
 			pos++
 
@@ -889,10 +897,12 @@ Decode:
 			if pos+2 > len(src) {
 				return truncated(src, mode)
 			}
+			immcpos = pos
 			immc = int64(binary.LittleEndian.Uint16(src[pos:]))
 			pos += 2
 
 		case xReadCm:
+			immcpos = pos
 			if addrMode == 16 {
 				if pos+2 > len(src) {
 					return truncated(src, mode)
@@ -913,6 +923,7 @@ Decode:
 				pos += 8
 			}
 		case xReadCd:
+			immcpos = pos
 			if pos+4 > len(src) {
 				return truncated(src, mode)
 			}
@@ -920,6 +931,7 @@ Decode:
 			pos += 4
 
 		case xReadCp:
+			immcpos = pos
 			if pos+6 > len(src) {
 				return truncated(src, mode)
 			}
@@ -1011,6 +1023,10 @@ Decode:
 			}
 			inst.Args[narg] = mem
 			inst.MemBytes = int(memBytes[decodeOp(x)])
+			if mem.Base == RIP {
+				inst.PCRel = displen
+				inst.PCRelOff = dispoff
+			}
 			narg++
 
 		case xArgPtr16colon16:
@@ -1032,6 +1048,10 @@ Decode:
 			}
 			inst.Args[narg] = mem
 			inst.MemBytes = int(memBytes[decodeOp(x)])
+			if mem.Base == RIP {
+				inst.PCRel = displen
+				inst.PCRelOff = dispoff
+			}
 			narg++
 
 		case xArgR8, xArgR16, xArgR32, xArgR64, xArgXmm, xArgXmm1, xArgDR0dashDR7:
@@ -1102,6 +1122,10 @@ Decode:
 			if haveMem {
 				inst.Args[narg] = mem
 				inst.MemBytes = int(memBytes[decodeOp(x)])
+				if mem.Base == RIP {
+					inst.PCRel = displen
+					inst.PCRelOff = dispoff
+				}
 			} else {
 				base := baseReg[x]
 				index := Reg(rm)
@@ -1137,14 +1161,20 @@ Decode:
 			narg++
 
 		case xArgRel8:
+			inst.PCRelOff = immcpos
+			inst.PCRel = 1
 			inst.Args[narg] = Rel(int8(immc))
 			narg++
 
 		case xArgRel16:
+			inst.PCRelOff = immcpos
+			inst.PCRel = 2
 			inst.Args[narg] = Rel(int16(immc))
 			narg++
 
 		case xArgRel32:
+			inst.PCRelOff = immcpos
+			inst.PCRel = 4
 			inst.Args[narg] = Rel(int32(immc))
 			narg++
 		}
