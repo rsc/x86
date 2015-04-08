@@ -3,7 +3,7 @@ libmach8db: libmach8db.c
 
 newdecode.txt:
 	cd ..; go test -cover -run 'Objdump.*32' -v -timeout 10h -printtests 2>&1 | tee log
-	cd ..; go test -cover -run 'Objdump.*64' -v -timeout 10h -printtests 2>&1 | tee log
+	cd ..; go test -cover -run 'Objdump.*64' -v -timeout 10h -printtests 2>&1 | tee -a log
 	cd ..; go test -cover -run 'Xed.*32' -v -timeout 10h -printtests 2>&1 | tee -a log
 	cd ..; go test -cover -run 'Xed.*64' -v -timeout 10h -printtests 2>&1 | tee -a log
 	cd ..; go test -cover -run 'Plan9.*32' -v -timeout 10h -printtests 2>&1 | tee -a log

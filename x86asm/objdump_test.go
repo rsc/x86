@@ -44,7 +44,9 @@ func TestObjdump64REXPrefix(t *testing.T)  { testPrefixREX(t, testObjdump64) }
 // If you are debugging a few cases that turned up in a longer run, it can be useful
 // to list them here and then use -run=ObjdumpManual, particularly with tracing enabled.
 var objdumpManualTests = `
-F390
+4883FE017413
+488DFC2500000000
+488D3D00000000
 `
 
 // allowedMismatchObjdump reports whether the mismatch between text and dec
