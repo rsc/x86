@@ -283,9 +283,9 @@ func decode1(src []byte, mode int, gnuCompat bool) (Inst, error) {
 		dispoff int
 
 		// decoded immediate values
-		imm  int64
-		imm8 int8
-		immc int64
+		imm     int64
+		imm8    int8
+		immc    int64
 		immcpos int
 
 		// output
